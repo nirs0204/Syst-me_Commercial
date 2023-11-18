@@ -18,6 +18,13 @@ SELECT * FROM poste;
 --------------
 ----SELECT----
 --------------
+-- Liste des besoin_achat approuvés mais ne sont pas dans besoin_achat_final
+SELECT ba.*
+FROM besoin_achat ba
+LEFT JOIN besoin_achat_final baf ON ba.idbesoin_achat = baf.idbesoin_achat
+WHERE baf.id_besoin_achat_final IS NULL;
+
+
 
 -------------------
 ----DELETE FROM----
