@@ -13,11 +13,11 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="d-flex flex-wrap justify-content-between">
-                      <h4 class="card-title mb-3">Data of article :</h4>
+                      <h4 class="card-title mb-3">Envoi détail article:</h4>
                     </div>
-                    <p>Name:</p>
-                    <p>Category:</p>
-                    <p>Quantity :</p>
+                    <p>Nom:</p>
+                    <p>Categorie:</p>
+                    <p>Quantité :</p>
                   
                   </div>
                 </div>
@@ -28,7 +28,7 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <p class="card-description">Check the<code>.provider</code> for your article (max 3)</p>
+                            <p class="card-description">Cocher <code>.fournisseur(s)</code> pour votre article (max 3)</p>
                             <form>
                                 <div class="row">
                                     <div class="col-md-6">

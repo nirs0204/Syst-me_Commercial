@@ -28,6 +28,26 @@ class MD_Article extends CI_Model {
         $query = $this->db->get('article'); 
         return $query->row(); 
     }
+    public function list_with_category($c) {
+        $this->db->select("*");
+        $this->db->from('article  a');
+        $this->db->join('categorie c', 'a.id_categorie = c.id_categorie');
+        $this->db->where('a.id_categorie', $c);
+        $query = $this->db->get();
+        return $query->result();  
+    }
+    //ACHAT
+    public function listAchat_article($id) {
+        $this->db->where('id_article', $id);
+        $query = $this->db->get('get_Achat'); 
+        return $query->row(); 
+    }
+    public function listAchat($idservice,$val) {
+        $this->db->select("*");
+        $this->db->from('get_Achat;');
+        $query = $this->db->get();
+        return $query->result(); 
+    }
     //UPDATE
     public function update($id,$id_categorie, $nom, $type) {
         $sql = "update article set id_categorie = %s ,nom = %s , type = %s   where id_article =%s";

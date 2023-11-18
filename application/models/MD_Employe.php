@@ -25,12 +25,12 @@ class MD_Employe extends CI_Model {
     }
     public function listOne($id) {
         $this->db->where('id_employe', $id);
-        $query = $this->db->get('utilisateur'); 
+        $query = $this->db->get('employe'); 
         return $query->row(); 
     }
     //UPDATE
     public function update($id,$id_poste,$id_manager,$nom,$prenom,$adresse,$contact){
-        $sql = "update utilisateur set id_poste = %s, id_manager = %s, nom = %s, prenom = %s, adresse = %s, contact= %s  where id_employe =%s";
+        $sql = "update employe set id_poste = %s, id_manager = %s, nom = %s, prenom = %s, adresse = %s, contact= %s  where id_employe =%s";
         $sql = sprintf($sql,$this->db->escape($id_poste),$this->db->escape($id_manager),$this->db->escape($nom),$this->db->escape($prenom),$this->db->escape($contact),$this->db->escape($adresse),$this->db->escape($id));
         $this->db->query($sql);
     }
