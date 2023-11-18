@@ -1,3 +1,4 @@
+<?php if(!isset($besoinAchat)) $besoinAchat = array(); ?>
 <!DOCTYPE html>
 <html lang="en">
  
@@ -27,15 +28,17 @@
                         </tr>
                       </thead>
                       <tbody>
+                      <?php foreach ($besoinAchat as $besoin) { ?>
                         <tr>
-                          <td>Jacob</td>
-                          <td>53275531</td>
-                          <td>12 May 2017</td>
-                          <td>payement payement payement payement</td>
-                          <td></td>
-                          <td><a href="<?php echo site_url('CT_BesoinAchatFinal/approuvedBesoinAchat'); ?>?idbesoinachat=" class="btn btn-inverse-success btn-sm">Approuvé</a></td>
-                          <td><a href="<?php echo site_url('CT_BesoinAchatFinal/rejectedBesoinAchat'); ?>?idbesoinachat=" class="btn btn-inverse-primary btn-sm">Rejeté</a></td>
+                          <td><?php echo isset($besoin->id_employe) ? $besoin->id_employe : '';?></td>
+                          <td><?php echo isset($besoin->id_article) ? $besoin->id_article : '';?></td>
+                          <td><?php echo isset($besoin->quantite) ? $besoin->quantite : '';?></td>
+                          <td><?php echo isset($besoin->raison) ? $besoin->raison : '';?></td>
+                          <td><?php echo isset($besoin->date_limite) ? $besoin->date_limite : '';?></td>
+                          <td><a href="<?php echo site_url('CT_BesoinAchatFinal/approuvedBesoinAchat'); ?>?idbesoinachat=<?php echo isset($besoin->idbesoin_achat) ? $besoin->idbesoin_achat : '';?>" class="btn btn-inverse-success btn-sm">Approuvé</a></td>
+                          <td><a href="<?php echo site_url('CT_BesoinAchatFinal/rejectedBesoinAchat'); ?>?idbesoinachat=<?php echo isset($besoin->idbesoin_achat) ? $besoin->idbesoin_achat : '';?>" class="btn btn-inverse-primary btn-sm">Rejeté</a></td>
                         </tr>
+                    <?php } ?>
                       </tbody>
                     </table>
                   </div>

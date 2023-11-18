@@ -1,3 +1,22 @@
+--------------
+----SELECT----
+--------------
+
+SELECT * FROM company;
+SELECT * FROM employe;
+SELECT * FROM proforma;
+SELECT * FROM departement;
+SELECT * FROM article;
+SELECT * FROM besoin_achat;
+SELECT * FROM proforma_final;
+SELECT * FROM condition_achat;
+SELECT * FROM bon_commande;
+SELECT * FROM poste;
+
+
+--------------
+----SELECT----
+--------------
 
 -------------------
 ----DELETE FROM----
@@ -92,6 +111,19 @@ GROUP BY a.id_article,c.id_categorie );
 
 SELECT * FROM get_Achat  WHERE id_article = 1;
 SELECT * FROM fournisseur where id_categorie = (SELECT id_categorie FROM get_Achat  WHERE id_article = 1);
+
+-- Liste des besoin_achat approuvés mais ne sont pas dans besoin_achat_final
+SELECT ba.*
+FROM besoin_achat ba
+LEFT JOIN besoin_achat_final baf ON ba.idbesoin_achat = baf.idbesoin_achat
+WHERE baf.id_besoin_achat_final IS NULL;
+
+SELECT d.id_departement
+FROM utilisateur u
+JOIN employe e ON u.id_employe = e.id_employe
+JOIN poste p ON e.id_poste = p.id_poste
+JOIN departement d ON p.id_departement = d.id_departement
+WHERE u.id_utilisateur = 1;
 
 
 --------------
