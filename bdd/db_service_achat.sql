@@ -1,4 +1,12 @@
+
+CREATE USER commerce WITH PASSWORD 'systcom';
 CREATE DATABASE commercial;
+GRANT ALL PRIVILEGES ON DATABASE commercial TO commerce;
+
+psql -U commerce -d commercial
+
+
+psql -U commerce -d commercial
 \c commercial
 
 --------------
@@ -43,7 +51,7 @@ create table article(
      id_utilisateur serial primary key ,
      id_employe int references employe(id_employe),
      pseudo varchar(255),
-     mdp date
+     mdp varchar(100)
  );
 
 create table fournisseur (
