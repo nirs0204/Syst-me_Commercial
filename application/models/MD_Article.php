@@ -39,12 +39,12 @@ class MD_Article extends CI_Model {
     //ACHAT
     public function listAchat_article($id) {
         $this->db->where('id_article', $id);
-        $query = $this->db->get('get_Achat'); 
-        return $query->row(); 
+        $query = $this->db->get('get_achat'); 
+        return $query->row_array(); 
     }
-    public function listAchat($idservice,$val) {
+    public function listAchat() {
         $this->db->select("*");
-        $this->db->from('get_Achat;');
+        $this->db->from('get_achat');
         $query = $this->db->get();
         return $query->result(); 
     }
