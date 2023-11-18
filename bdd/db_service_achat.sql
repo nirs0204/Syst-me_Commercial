@@ -54,7 +54,7 @@ create table fournisseur (
     adresse varchar(255)
 );
 
-
+-- etat : 1 (en attente), 3 (approuvé), 5 (rejeté)
 create table besoin_achat(
     idbesoin_achat serial primary key,
     id_employe int references employe(id_employe),
@@ -84,6 +84,13 @@ create table proforma (
     ht double precision,
     tva double precision,
     remise double precision
+);
+
+create table besoin_achat_final(
+    id_besoin_achat_final serial primary key,
+    idbesoin_achat int references besoin_achat(idbesoin_achat),
+    id_employe int references employe(id_employe),
+    date_finale date
 );
 
 create table proforma_final(
