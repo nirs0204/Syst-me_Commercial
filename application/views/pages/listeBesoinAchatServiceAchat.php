@@ -18,6 +18,7 @@
                     <table class="table">
                       <thead>
                         <tr>
+                          <th>Département</th>
                           <th>Employe</th>
                           <th>Article</th>
                           <th>Quantité</th>
@@ -30,13 +31,14 @@
                       <tbody>
                       <?php foreach ($besoinAchat as $besoin) { ?>
                         <tr>
-                          <td><?php echo isset($besoin->id_employe) ? $besoin->id_employe : '';?></td>
-                          <td><?php echo isset($besoin->id_article) ? $besoin->id_article : '';?></td>
+                          <td><?php echo isset($besoin->nom_departement) ? $besoin->nom_departement : '';?></td>
+                          <td><?php echo isset($besoin->nom_employe) ? $besoin->nom_employe : '';?></td>
+                          <td><?php echo isset($besoin->nom_article) ? $besoin->nom_article : '';?></td>
                           <td><?php echo isset($besoin->quantite) ? $besoin->quantite : '';?></td>
                           <td><?php echo isset($besoin->raison) ? $besoin->raison : '';?></td>
                           <td><?php echo isset($besoin->date_limite) ? $besoin->date_limite : '';?></td>
-                          <td><a href="<?php echo site_url('CT_BesoinAchatFinal/besoinAchatApprouve'); ?>" class="btn btn-inverse-success btn-sm">Approuvé</a></td>
-                          <td><a href="<?php echo site_url('CT_BesoinAchatFinal/besoinAchatRejete'); ?>" class="btn btn-inverse-primary btn-sm">Rejeté</a></td>
+                          <td><a href="<?php echo site_url('CT_BesoinAchatFinal/besoinAchatApprouve'); ?>?idbesoinachat=<?php echo isset($besoin->idbesoin_achat) ? $besoin->idbesoin_achat : '';?>" class="btn btn-inverse-success btn-sm">Approuvé</a></td>
+                          <td><a href="<?php echo site_url('CT_BesoinAchatFinal/besoinAchatRejete'); ?>?idbesoinachat=<?php echo isset($besoin->idbesoin_achat) ? $besoin->idbesoin_achat : '';?>" class="btn btn-inverse-primary btn-sm">Rejeté</a></td>
                         </tr>
                         <?php } ?>
                       </tbody>

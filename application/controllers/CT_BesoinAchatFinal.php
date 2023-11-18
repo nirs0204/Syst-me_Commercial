@@ -50,16 +50,21 @@ class CT_BesoinAchatFinal extends CI_Controller {
     // Service Achat
     public function listAllBesoinAchatParServiceAchat(){
         $user = $_SESSION['user'];
-        $data['besoinAchat'] = $this->MD_BesoinAchatFinal->getAllNeedBuyNotFinalized();
+        $data['besoinAchat'] = $this->MD_BesoinAchatFinal->getAllNeedBuyNotFinalized(3);
 		$this->viewer('/listeBesoinAchatServiceAchat', $data);
     }
 
     public function besoinAchatApprouve(){
-
+        $user = $_SESSION['user'];
+        $idBesoinAchat = $this->input->get('idbesoinachat');
+        $this->MD_BesoinAchatFinal->saveNeedBuyFinal($idBesoinAchat, $user['id_employe']);
+        redirect('CT_BesoinAchatFinal/listAllBesoinAchatParServiceAchat');
     }
 
     public function besoinAchatRejete(){
-
+        $idBesoinAchat = $this->input->get('idbesoinachat');
+        $this->MD_BesoinAchatFinal->updateStatusNeedBuy($idBesoinAchat, 5);
+        redirect('CT_BesoinAchatFinal/listAllBesoinAchatParServiceAchat');
     }
     //After purchase validation
     public function get_Achat(){
