@@ -56,3 +56,4 @@ VALUES
 (3, 1, 2, 5, 'Besoin pour le département Finance', 3, '2023-11-24', 1),
 (4, 3, 4, 8, 'Besoin pour le département Marketing', 3, '2023-11-30', 3),
 (1, 4, 1, 3, 'Besoin pour le département HR', 3, '2023-12-10', 4);
+
