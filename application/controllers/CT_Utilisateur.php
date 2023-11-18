@@ -35,7 +35,7 @@ class CT_Utilisateur extends CI_Controller {
         echo $pseudo; echo '<br>'; echo $mdp;
         echo $user['id_employe'];
         if ($user){
-            $this->session->set_userdata('user', $users);
+            $this->session->set_userdata('user', $user);
             redirect('CT_Utilisateur/welcome');
             return;
         }
@@ -46,6 +46,7 @@ class CT_Utilisateur extends CI_Controller {
     }
     //ACCUEIL
     public function welcome(){
+        $user = $_SESSION['user'];
         $this->viewer('/index',array());
     }
 }
