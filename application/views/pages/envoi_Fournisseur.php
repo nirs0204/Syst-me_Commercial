@@ -31,7 +31,9 @@
                     <div class="card">
                         <div class="card-body">
                             <p class="card-description">Cocher <code>.fournisseur(s)</code> pour votre article (max 3)</p>
-                            <form >
+                            <form action="<?php echo site_url("CT_Demande/index"); ?>"  method="POST">
+                                <input type="hidden" name="article" value="<?php echo $article['id_article']; ?>">
+                                <input type="hidden" name="qtt" value="<?php echo $article['sum']; ?>">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -39,7 +41,7 @@
                                         <?php foreach ($fournisseur as $val) { ?>
                                             <div class="form-check form-check-info">
                                                 <label class="form-check-label">
-                                                    <input  name="frns[]" type="checkbox" class="form-check-input" name="ExampleCheckbox1" id="ExampleCheckbox1" >
+                                                    <input  name="frns[]" type="checkbox" class="form-check-input" name="ExampleCheckbox1" id="ExampleCheckbox1" value= <?php echo $val->id_fournisseur; ?>>
                                                     <?php echo $val->email; ?> ( <?php echo $val->nom; ?>)
                                                 </label>
                                             </div>

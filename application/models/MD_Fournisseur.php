@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class MD_Fournisseur extends CI_Model {
     // CREATE
     function save($id_categorie,$nom, $email, $contact, $adresse) {
-        $sql = "insert into article (id_categorie,nom, email, contact, adresse)  values ( %s, %s, %s , %s , %s) ";
+        $sql = "insert into fournisseur (id_categorie,nom, email, contact, adresse)  values ( %s, %s, %s , %s , %s) ";
         $sql = sprintf($sql,$this->db->escape($id_categorie),$this->db->escape($nom),$this->db->escape($email),$this->db->escape($contact),$this->db->escape($adresse));
         $this->db->query($sql);
 

@@ -91,6 +91,14 @@ CREATE TABLE condition_achat (
     id_fournisseur INTEGER REFERENCES fournisseur(id_fournisseur)
 );
 
+CREATE TABLE demande_proforma(
+    id_demande serial primary key,
+    id_article int references article(id_article),
+    id_fournisseur int references fournisseur(id_fournisseur),
+    quantite int,
+    date_actuel date default CURRENT_DATE
+);
+
 create table proforma (
     id_proforma serial primary key ,
     id_fournisseur int references fournisseur(id_fournisseur),
