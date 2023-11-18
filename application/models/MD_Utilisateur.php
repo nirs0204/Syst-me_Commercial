@@ -40,6 +40,12 @@ class MD_Utilisateur extends CI_Model {
         $sql = sprintf($sql,$this->db->escape($id));
         $this->db->query($sql);
     }
+    //LOGIN
+    function verify($pseudo, $mdp) {
+        $query = $this->db->get_where('utilisateur', array('pseudo' => $pseudo, 'mdp' => $mdp));
+        $client = $query->row_array();
+        return $client;
+    }
 
 }
 ?>

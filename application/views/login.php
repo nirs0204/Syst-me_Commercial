@@ -30,6 +30,16 @@
               </div>
               <h4>Hello! let's get started</h4>
               <h6 class="font-weight-light">Sign in to continue.</h6>
+
+              <?php if(isset($error)){ ?>
+                  <div class="alert alert-danger alert-dismissible fade show"  role="alert">
+                    <strong>Error!</strong> <?php echo $error ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+              <?php } ?>
+
               <form class="pt-3" action="<?php echo site_url("CT_Utilisateur/tosignIn"); ?>" method="POST">
                 <div class="form-group">
                   <input type="text" name="pseudo" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username">
