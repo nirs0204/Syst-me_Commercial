@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class MD_Utilisateur extends CI_Model {
     // CREATE
     function save($id_employe, $pseudo, $mdp) {
-        $sql = "insert into admin (id_employe, pseudo, mdp)  values ( %s, %s, %s) ";
+        $sql = "insert into utilisateur (id_employe, pseudo, mdp)  values ( %s, %s, %s) ";
         $sql = sprintf($sql,$this->db->escape($id_employe),$this->db->escape($pseudo),$this->db->escape($mdp));
         $this->db->query($sql);
 
@@ -25,18 +25,18 @@ class MD_Utilisateur extends CI_Model {
     }
     public function listOne($id) {
         $this->db->where('id_employe', $id);
-        $query = $this->db->get('employe'); 
+        $query = $this->db->get('utilisateur'); 
         return $query->row(); 
     }
     //UPDATE
     public function update($id,$pseudo,$mdp){
-        $sql = "update employe set pseudo = %s, mdp = %s  where id_employe =%s";
+        $sql = "update utilisateur set pseudo = %s, mdp = %s  where id_employe =%s";
         $sql = sprintf($sql,$this->db->escape($pseudo),$this->db->escape($mdp),$this->db->escape($id));
         $this->db->query($sql);
     }
     //DELETE
     public function delete($id){
-        $sql = "delete from employe where id_employe =%s";
+        $sql = "delete from utilisateur where id_employe =%s";
         $sql = sprintf($sql,$this->db->escape($id));
         $this->db->query($sql);
     }

@@ -8,7 +8,8 @@ class CT_BesoinAchatFinal extends CI_Controller {
         $this->load->model('MD_Employe');
         $this->load->model('MD_Utilisateur');
         $this->load->model('MD_BesoinAchatFinal');
-        // $this->load->helper('main_helper');
+        $this->load->model('MD_Article');
+        $this->load->model('MD_Fournisseur');
         $this->load->library('session');
 
     }
@@ -59,5 +60,16 @@ class CT_BesoinAchatFinal extends CI_Controller {
 
     public function besoinAchatRejete(){
 
+    }
+    //After purchase validation
+    public function get_Achat(){
+        $data['achat'] = $this->MD_Article->listAchat();
+        $this->viewer('/choix_Fournisseur',$data);
+    }
+    public function send_Achat(){
+        $id = $_GET['article'];
+        $data['article'] = $this->MD_Article->listAchat_article($id);
+        $data['fournisseur'] = $this->MD_Fournisseur->list_with_category($id);
+        $this->viewer('/envoi_Fournisseur',$data);
     }
 }
