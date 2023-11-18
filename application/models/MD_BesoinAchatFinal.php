@@ -43,7 +43,7 @@ class MD_BesoinAchatFinal extends CI_Model {
         $this->db->select('ba.*');
         $this->db->from('besoin_achat ba');
         $this->db->join('besoin_achat_final baf', 'ba.idbesoin_achat = baf.idbesoin_achat', 'left');
-        $this->db->where('baf.idbesoin_achat_final IS NULL');
+        $this->db->where('baf.id_besoin_achat_final IS NULL');
 
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
