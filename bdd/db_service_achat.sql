@@ -1,4 +1,12 @@
+
+CREATE USER commerce WITH PASSWORD 'systcom';
 CREATE DATABASE commercial;
+GRANT ALL PRIVILEGES ON DATABASE commercial TO commerce;
+
+psql -U commerce -d commercial
+
+
+psql -U commerce -d commercial
 \c commercial
 
 --------------
