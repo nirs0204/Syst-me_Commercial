@@ -11,6 +11,7 @@ class CT_BesoinAchatFinal extends CI_Controller {
         $this->load->library('session');
 
     }
+
 	private function viewer($page, $data){
 		$v = array(
 			'page' => $page,
@@ -23,7 +24,7 @@ class CT_BesoinAchatFinal extends CI_Controller {
 		$this->load->view('welcome_message');
 		
 	}	
-
+  
     // Responsable
 	public function listAllBesoinAchatParResp(){
 		$_SESSION['hello'] = "Hola!";
