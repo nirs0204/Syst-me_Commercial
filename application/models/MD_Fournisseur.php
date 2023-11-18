@@ -29,10 +29,16 @@ class MD_Fournisseur extends CI_Model {
         return $query->row(); 
     }
     public function list_with_category($id) {
-        $this->db->where('id_fournisseur', '(SELECT id_categorie FROM get_Achat  WHERE id_article ='.$id.')');
+        $subquery = $this->db->select('id_categorie')
+                             ->from('get_achat')
+                             ->where('id_article', $id)
+                             ->get_compiled_select();
+    
+        $this->db->where_in('id_categorie', $subquery, false);
         $query = $this->db->get('fournisseur'); 
         return $query->result();  
     }
+    
     //UPDATE
     public function update($id,$id_categorie,$nom, $email, $contact, $adresse) {
         $sql = "update fournisseur set id_categorie = %s ,nom = %s , email = %s, contact = %s, adresse = %s  where id_fournisseur = %s";
