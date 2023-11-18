@@ -1,8 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
- 
-  <body>
-   
+
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
@@ -386,7 +382,7 @@
                           <tr>
                             <td>
                               <div class="d-flex">
-                                <img class="img-sm rounded-circle mb-md-0 mr-2" src=<?php echo base_url("assets/images/faces/face30.png"); ?> alt="profile image">
+                                <img class="img-sm rounded-circle mb-md-0 mr-2" src="images/faces/face30.png" alt="profile image">
                                 <div>
                                   <div> Company</div>
                                   <div class="font-weight-bold mt-1">volkswagen</div>
@@ -412,7 +408,7 @@
                           <tr>
                             <td>
                               <div class="d-flex">
-                                <img class="img-sm rounded-circle mb-md-0 mr-2" src=<?php echo base_url("assets/images/faces/face31.png"); ?> alt="profile image">
+                                <img class="img-sm rounded-circle mb-md-0 mr-2" src="images/faces/face31.png" alt="profile image">
                                 <div>
                                   <div> Company</div>
                                   <div class="font-weight-bold  mt-1">Land Rover</div>
@@ -438,7 +434,7 @@
                           <tr>
                             <td>
                               <div class="d-flex">
-                                <img class="img-sm rounded-circle mb-md-0 mr-2" src=<?php echo base_url("assets/images/faces/face32.png"); ?> alt="profile image">
+                                <img class="img-sm rounded-circle mb-md-0 mr-2" src="images/faces/face32.png" alt="profile image">
                                 <div>
                                   <div> Company</div>
                                   <div class="font-weight-bold  mt-1">Bentley </div>
@@ -464,7 +460,7 @@
                           <tr>
                             <td>
                               <div class="d-flex">
-                                <img class="img-sm rounded-circle mb-md-0 mr-2" src=<?php echo base_url("assets/images/faces/face33.png"); ?> alt="profile image">
+                                <img class="img-sm rounded-circle mb-md-0 mr-2" src="images/faces/face33.png" alt="profile image">
                                 <div>
                                   <div> Company</div>
                                   <div class="font-weight-bold  mt-1">Morgan </div>
@@ -490,7 +486,7 @@
                           <tr>
                             <td>
                               <div class="d-flex">
-                                <img class="img-sm rounded-circle mb-md-0 mr-2" src=<?php echo base_url("assets/images/faces/face34.png"); ?> alt="profile image">
+                                <img class="img-sm rounded-circle mb-md-0 mr-2" src="images/faces/face34.png" alt="profile image">
                                 <div>
                                   <div> Company</div>
                                   <div class="font-weight-bold  mt-1">volkswagen</div>
@@ -521,8 +517,4 @@
               </div>
             </div>
           </div>
-          <!-- content-wrapper ends -->
-          <!-- partial:partials/_footer.html -->
-         
-  </body>
-</html>
+          

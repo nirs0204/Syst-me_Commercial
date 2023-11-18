@@ -10,42 +10,65 @@ INSERT INTO departement (nom) VALUES
 ('HR Department'),
 ('Finance Department'),
 ('IT Department'),
-('Marketing Department');
+('Marketing Department')
+('supply department');
 
 -- Insert poste
 INSERT INTO poste (intitule_poste, id_departement) VALUES
 ('HR Manager', 1),
 ('Accountant', 2),
 ('Software Developer', 3),
-('Marketing Specialist', 4);
+('Marketing Specialist', 4)
+('supply Manager', 5);
+
+-- Insertion de données dans la table categorie
+INSERT INTO categorie (categorie) VALUES
+('fourniture de bureau'),
+('produit chimique'),
+('fourniture immobilier'),
+('produit sanitaire'),
+('grossiste'),
+('service');
+
 
 -- Insert article
-INSERT INTO article (nom, type) VALUES
-('Laptop', 1),
-('Printer', 2),
-('Desk Chair', 3),
-('Whiteboard', 1);
+INSERT INTO article (id_categorie,nom, type) VALUES
+(1,'Laptop', 1),
+(1,'Printer', 1),
+(3,'Desk Chair', 1),
+(1,'Whiteboard', 1),
+(4,'mouth cover', 1),
+(4,'hydroalcoholic gel', 1),
+(1,'500w bulb', 1),
+(2,'acetic acid', 1),
+(2,'sodium hydroxide', 1),
+(2,'hydrogen peroxide', 1),
+(3,'Office cabinet', 1);
 
 -- Insert employe
 INSERT INTO employe (id_poste, id_manager, nom, prenom, adresse, contact) VALUES
 (1, NULL, 'Smith', 'John', '123 Main St', '555-1234'),
 (3, 1, 'Johnson', 'Alice', '456 Oak St', '555-5678'),
 (2, 1, 'Brown', 'Bob', '789 Pine St', '555-9012'),
-(4, 3, 'Davis', 'Eva', '101 Elm St', '555-3456');
+(4, 3, 'Davis', 'Eva', '101 Elm St', '555-3456')
+(5, 1, 'Alice', 'Ruller', '13 Fiu St', '555-1293');
 
 -- Insert utilisateur
 INSERT INTO utilisateur (id_employe, pseudo, mdp) VALUES
 (1, 'jsmith', '123'),
 (2, 'ajohnson', '345'),
 (3, 'bbrown', '567'),
-(4, 'edavis', '789');
+(4, 'edavis', '789')
+(5, 'ralice', '102');;
 
 -- Insert fournisseur
-INSERT INTO fournisseur (nom, email, contact, adresse) VALUES
-('Supplier A', 'supplierA@example.com', 'Supplier A Contact', '123 Supplier St'),
-('Supplier B', 'supplierB@example.com', 'Supplier B Contact', '456 Supplier St'),
-('Supplier C', 'supplierC@example.com', 'Supplier C Contact', '789 Supplier St'),
-('Supplier D', 'supplierD@example.com', 'Supplier D Contact', '101 Supplier St');
+INSERT INTO fournisseur (id_categorie,nom, email, contact, adresse) VALUES
+(1,'FRNS A', 'supplierA@example.com', 'Supplier A Contact', '123 Supplier St'),
+(2,'FRNS B', 'supplierB@example.com', 'Supplier B Contact', '456 Supplier St'),
+(3,'FRNS C', 'supplierC@example.com', 'Supplier C Contact', '789 Supplier St'),
+(4,'FRNS D', 'supplierD@example.com', 'Supplier D Contact', '101 Supplier St'),
+(5,'FRNS E', 'supplierC@example.com', 'Supplier E Contact', '734 Supplier St'),
+(6,'FRNS F', 'supplierD@example.com', 'Supplier F Contact', '203 Supplier St');
 
 
 -- Insert besoin_achat ::: 1 ATTENTE , 3 APPROUVES , 5 REJETES , 
@@ -56,4 +79,16 @@ VALUES
 (3, 1, 2, 5, 'Besoin pour le département Finance', 3, '2023-11-24', 1),
 (4, 3, 4, 8, 'Besoin pour le département Marketing', 3, '2023-11-30', 3),
 (1, 4, 1, 3, 'Besoin pour le département HR', 3, '2023-12-10', 4);
+
+
+-- Insert besoin_achat_final
+INSERT INTO besoin_achat_final (idbesoin_achat, id_employe, date_finale)
+VALUES
+(1, 5, CURRENT_DATE),
+(2, 5, CURRENT_DATE),
+(3, 5, CURRENT_DATE),
+(4, 5, CURRENT_DATE),
+(5, 5, CURRENT_DATE);
+
+
 

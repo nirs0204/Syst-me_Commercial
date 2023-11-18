@@ -42,10 +42,10 @@
 
               <form class="pt-3" action="<?php echo site_url("CT_Utilisateur/tosignIn"); ?>" method="POST">
                 <div class="form-group">
-                  <input type="text" name="pseudo" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username">
+                  <input type="text" name="pseudo" class="form-control form-control-lg" id="exampleInputEmail1" value="ralice" placeholder="Username">
                 </div>
                 <div class="form-group">
-                  <input type="password" name="mdp" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+                  <input type="password" name="mdp" class="form-control form-control-lg" id="exampleInputPassword1" value="102" placeholder="Password">
                 </div>
                 <div class="mt-3">
                   <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" >SIGN IN</button>

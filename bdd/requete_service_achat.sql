@@ -28,8 +28,8 @@ DELETE FROM  bon_commande;
 -------------------
 
 DROP TABLE  company;
-DROP TABLE  departement;
 DROP TABLE  poste;
+DROP TABLE  departement;
 DROP TABLE  article;
 DROP TABLE  employe;
 DROP TABLE  utilisateur;
@@ -73,11 +73,16 @@ FROM besoin_achat ba
 JOIN article a ON ba.id_article = a.id_article
 WHERE ba.etat = 3 AND ba.date_limite >= CURRENT_DATE;
 
-SELECT  a.nom, sum(ba.quantite), min(ba.date_limite) , max(date_limite)
-FROM besoin_achat ba
+SELECT  a.nom, a.id_categorie , c.categorie, sum(ba.quantite), min(ba.date_limite) , max(date_limite)
+FROM besoin_achat_final baf
+JOIN besoin_achat ba ON baf.idbesoin_achat = ba.idbesoin_achat
 JOIN article a ON ba.id_article = a.id_article
+JOIN categorie c ON a.id_categorie = c.id_categorie
 WHERE ba.etat = 3 AND ba.date_limite >= CURRENT_DATE
-GROUP BY a.id_article;
+GROUP BY a.id_article ,c.id_categorie;
+
+
+SELECT * FROM fournisseur  where id_categorie =1;
 
 --------------
 ----SELECT----
