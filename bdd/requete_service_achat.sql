@@ -38,3 +38,26 @@ DELETE FROM poste;
 ----DELETE FROM----
 -------------------
 
+
+-------------------
+----DROP TABLE ----
+-------------------
+
+DROP TABLE  company;
+DROP TABLE  departement;
+DROP TABLE  poste;
+DROP TABLE  article;
+DROP TABLE  employe;
+DROP TABLE  utilisateur;
+DROP TABLE  fournisseur;
+DROP TABLE  besoin_achat;
+DROP TABLE  condition_achat;
+DROP TABLE  proforma;
+DROP TABLE  proforma_final;
+DROP TABLE  bon_commande;
+
+
+-------------------
+----DROP TABLE ----
+-------------------
+
