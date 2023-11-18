@@ -18,10 +18,22 @@ class MD_BesoinAchatFinal extends CI_Model {
 
     // Liste de besoin_achat par état par département
     public function getAllNeedBuyByDeptByStatus($id_dept, $etat){
-        $this->db->select('*');
-        $this->db->from('besoin_achat');
-        $this->db->where('id_departement', $id_dept);
-        $this->db->where('etat', $etat);
+        $this->db->select('
+            ba.idbesoin_achat,
+            e.nom AS nom_employe,
+            a.nom AS nom_article,
+            ba.id_departement,
+            ba.quantite,
+            ba.raison,
+            ba.etat,
+            ba.date_limite,
+            ba.priorite
+        ');
+        $this->db->from('besoin_achat ba');
+        $this->db->join('employe e', 'ba.id_employe = e.id_employe');
+        $this->db->join('article a', 'ba.id_article = a.id_article');
+        $this->db->where('ba.id_departement', $id_dept);
+        $this->db->where('ba.etat', $etat);
 
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
@@ -39,10 +51,24 @@ class MD_BesoinAchatFinal extends CI_Model {
     }
 
     // Liste de besoin_achat non finalisé 
-    public function getAllNeedBuyNotFinalized(){
-        $this->db->select('ba.*');
+    public function getAllNeedBuyNotFinalized($etat){
+        $this->db->select('
+            ba.idbesoin_achat,
+            e.nom AS nom_employe,
+            a.nom AS nom_article,
+            d.nom AS nom_departement,
+            ba.quantite,
+            ba.raison,
+            ba.etat,
+            ba.date_limite,
+            ba.priorite
+        ');
         $this->db->from('besoin_achat ba');
         $this->db->join('besoin_achat_final baf', 'ba.idbesoin_achat = baf.idbesoin_achat', 'left');
+        $this->db->join('employe e', 'ba.id_employe = e.id_employe');
+        $this->db->join('article a', 'ba.id_article = a.id_article');
+        $this->db->join('departement d', 'ba.id_departement = d.id_departement');
+        $this->db->where('ba.etat', $etat);
         $this->db->where('baf.id_besoin_achat_final IS NULL');
 
         $query = $this->db->get();
@@ -54,9 +80,9 @@ class MD_BesoinAchatFinal extends CI_Model {
     }
 
     // Insertion de besoin_achat_final
-    public function saveNeedBuyFinal($id_besoin_achat, $id_employe, $date_finale){
-        $sql = "insert into besoin_achat_final(idbesoin_achat, id_employe, date_finale) values ( %s, %s, %s) ";
-        $sql = sprintf($sql,$this->db->escape($id_besoin_achat),$this->db->escape($id_employe),$this->db->escape($date_finale));
+    public function saveNeedBuyFinal($id_besoin_achat, $id_employe){
+        $sql = "insert into besoin_achat_final(idbesoin_achat, id_employe, date_finale) values ( %s, %s, current_date) ";
+        $sql = sprintf($sql,$this->db->escape($id_besoin_achat),$this->db->escape($id_employe));
         $this->db->query($sql);
     }
 
