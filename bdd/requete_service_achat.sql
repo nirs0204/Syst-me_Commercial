@@ -26,7 +26,7 @@ DELETE FROM  bon_commande;
 -------------------
 ----DROP TABLE ----
 -------------------
-
+DROP VIEW get_Achat;
 DROP TABLE  company;
 DROP TABLE  departement;
 DROP TABLE  poste;
@@ -67,17 +67,33 @@ SELECT * FROM  proforma_final;
 SELECT * FROM  bon_commande;
 
 
+SELECT * FROM article a 
+JOIN categorie c ON a.id_categorie = c.id_categorie
+where a.id_categorie = 1;
 
 SELECT ba.id_employe, a.nom, ba.quantite, ba.date_limite
 FROM besoin_achat ba
 JOIN article a ON ba.id_article = a.id_article
 WHERE ba.etat = 3 AND ba.date_limite >= CURRENT_DATE;
 
-SELECT  a.nom, sum(ba.quantite), min(ba.date_limite) , max(date_limite)
+SELECT a.nom, a.id_categorie , c.categorie, sum(ba.quantite), min(ba.date_limite) , max(date_limite)
 FROM besoin_achat ba
 JOIN article a ON ba.id_article = a.id_article
+JOIN categorie c ON a.id_categorie = c.id_categorie
 WHERE ba.etat = 3 AND ba.date_limite >= CURRENT_DATE
-GROUP BY a.id_article;
+GROUP BY a.id_article,c.id_categorie;
+
+create view get_Achat as (SELECT a.id_article, a.nom, a.id_categorie , c.categorie, sum(ba.quantite), min(ba.date_limite) , max(date_limite)
+FROM besoin_achat ba
+JOIN article a ON ba.id_article = a.id_article
+JOIN categorie c ON a.id_categorie = c.id_categorie
+WHERE ba.etat = 3 AND ba.date_limite >= CURRENT_DATE
+GROUP BY a.id_article,c.id_categorie );
+
+SELECT * FROM get_Achat  WHERE id_article = 1;
+SELECT * FROM fournisseur where id_categorie = (SELECT id_categorie FROM get_Achat  WHERE id_article = 1);
+
+
 
 --------------
 ----SELECT----
