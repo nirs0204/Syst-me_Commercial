@@ -47,6 +47,13 @@ INSERT INTO fournisseur (nom, email, contact, adresse) VALUES
 ('Supplier C', 'supplierC@example.com', 'Supplier C Contact', '789 Supplier St'),
 ('Supplier D', 'supplierD@example.com', 'Supplier D Contact', '101 Supplier St');
 
--- données besoin_achat
-insert into besoin_achat(id_employe, id_article, id_departement, quantite, raison, etat, date_limite, priorite) VALUES
-()
+
+-- Insert besoin_achat ::: 1 ATTENTE , 3 APPROUVES , 5 REJETES , 
+INSERT INTO besoin_achat (id_employe, id_article, id_departement, quantite, raison, etat, date_limite, priorite)
+VALUES
+(2, 1, 3, 10, 'Besoin pour le département IT', 3, '2023-12-01', 2),
+(3, 2, 2, 5, 'Besoin pour le département Finance', 3, '2023-11-24', 1),
+(3, 1, 2, 5, 'Besoin pour le département Finance', 3, '2023-11-24', 1),
+(4, 3, 4, 8, 'Besoin pour le département Marketing', 3, '2023-11-30', 3),
+(1, 4, 1, 3, 'Besoin pour le département HR', 3, '2023-12-10', 4);
+
