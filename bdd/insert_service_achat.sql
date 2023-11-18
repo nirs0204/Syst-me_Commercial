@@ -46,3 +46,7 @@ INSERT INTO fournisseur (nom, email, contact, adresse) VALUES
 ('Supplier B', 'supplierB@example.com', 'Supplier B Contact', '456 Supplier St'),
 ('Supplier C', 'supplierC@example.com', 'Supplier C Contact', '789 Supplier St'),
 ('Supplier D', 'supplierD@example.com', 'Supplier D Contact', '101 Supplier St');
+
+-- données besoin_achat
+insert into besoin_achat(id_employe, id_article, id_departement, quantite, raison, etat, date_limite, priorite) VALUES
+()
