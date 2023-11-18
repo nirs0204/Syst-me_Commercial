@@ -24,8 +24,12 @@ FROM besoin_achat ba
 LEFT JOIN besoin_achat_final baf ON ba.idbesoin_achat = baf.idbesoin_achat
 WHERE baf.id_besoin_achat_final IS NULL;
 
-
-
+SELECT d.id_departement
+FROM utilisateur u
+JOIN employe e ON u.id_employe = e.id_employe
+JOIN poste p ON e.id_poste = p.id_poste
+JOIN departement d ON p.id_departement = d.id_departement
+WHERE u.id_utilisateur = 1;
 -------------------
 ----DELETE FROM----
 -------------------

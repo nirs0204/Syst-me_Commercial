@@ -49,4 +49,5 @@ INSERT INTO fournisseur (nom, email, contact, adresse) VALUES
 
 -- données besoin_achat
 insert into besoin_achat(id_employe, id_article, id_departement, quantite, raison, etat, date_limite, priorite) VALUES
-()
+(2, 1, 3, 10, 'Rien', 1, '2023-11-29', 1),
+(3, 1, 1, 2, 'Rien', 1, '2023-11-22', 1);

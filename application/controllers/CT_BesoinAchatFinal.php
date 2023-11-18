@@ -6,6 +6,7 @@ class CT_BesoinAchatFinal extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('MD_Employe');
+        $this->load->model('MD_Utilisateur');
         $this->load->model('MD_BesoinAchatFinal');
         // $this->load->helper('main_helper');
         $this->load->library('session');
@@ -27,24 +28,29 @@ class CT_BesoinAchatFinal extends CI_Controller {
   
     // Responsable
 	public function listAllBesoinAchatParResp(){
-		$_SESSION['hello'] = "Hola!";
-
-		$this->viewer('/listeBesoinAchatResp',array());
+		$user = $_SESSION['user'];
+        $idDept = $this->MD_Utilisateur->getIdDeptByUser($user['id_utilisateur']);
+        $data['besoinAchat'] = $this->MD_BesoinAchatFinal->getAllNeedBuyByDeptByStatus($idDept, 1);
+		$this->viewer('/listeBesoinAchatResp', $data);
 	}		
 
     public function approuvedBesoinAchat(){
-
+        $idBesoinAchat = $this->input->get('idbesoinachat');
+        $this->MD_BesoinAchatFinal->updateStatusNeedBuy($idBesoinAchat, 3);
+        redirect('CT_BesoinAchatFinal/listAllBesoinAchatParResp');
     }
 
     public function rejectedBesoinAchat(){
-
+        $idBesoinAchat = $this->input->get('idbesoinachat');
+        $this->MD_BesoinAchatFinal->updateStatusNeedBuy($idBesoinAchat, 5);
+        redirect('CT_BesoinAchatFinal/listAllBesoinAchatParResp');
     }
 
     // Service Achat
     public function listAllBesoinAchatParServiceAchat(){
-        $_SESSION['hello'] = "Hola!";
-
-		$this->viewer('/listeBesoinAchatServiceAchat',array());
+        $user = $_SESSION['user'];
+        $data['besoinAchat'] = $this->MD_BesoinAchatFinal->getAllNeedBuyNotFinalized();
+		$this->viewer('/listeBesoinAchatServiceAchat', $data);
     }
 
     public function besoinAchatApprouve(){
