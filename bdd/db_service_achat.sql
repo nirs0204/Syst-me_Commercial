@@ -30,8 +30,14 @@ CREATE TABLE poste (
     id_departement INTEGER REFERENCES departement(id_departement)
 );
 
+CREATE TABLE categorie(
+    id_categorie serial primary key,
+    categorie varchar(255)
+);
+
 create table article(
     id_article serial primary key,
+    id_categorie int references categorie(id_categorie),
     nom varchar(100),
     type int
 );
@@ -56,10 +62,11 @@ create table article(
 
 create table fournisseur (
     id_fournisseur serial primary key,
+    id_categorie int references categorie(id_categorie),
     nom varchar(255),
     email varchar(255),
     contact varchar(255),
-    adresse varchar(255)
+    adresse varchar(255)    
 );
 
 -- etat : 1 (en attente), 3 (approuvé), 5 (rejeté)

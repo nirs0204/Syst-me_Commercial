@@ -28,8 +28,8 @@ DELETE FROM  bon_commande;
 -------------------
 DROP VIEW get_Achat;
 DROP TABLE  company;
-DROP TABLE  departement;
 DROP TABLE  poste;
+DROP TABLE  departement;
 DROP TABLE  article;
 DROP TABLE  employe;
 DROP TABLE  utilisateur;
@@ -92,7 +92,6 @@ GROUP BY a.id_article,c.id_categorie );
 
 SELECT * FROM get_Achat  WHERE id_article = 1;
 SELECT * FROM fournisseur where id_categorie = (SELECT id_categorie FROM get_Achat  WHERE id_article = 1);
-
 
 
 --------------

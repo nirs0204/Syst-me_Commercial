@@ -47,5 +47,3 @@
         <!-- partial:../../partials/_footer.html -->
         <!-- partial -->
 
-</body>
-</html>
