@@ -1,3 +1,4 @@
+<?php if(!isset($achat)) $achat=array(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,15 +29,18 @@
                         </tr>
                       </thead>
                       <tbody>
+
+                      <?php foreach ($achat as $val) { ?>
                         <tr>
-                          <td ></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td><a href=""><label class="badge badge-info">list fournisseurs</label></a></td>
+                          <td ><?php echo $val->nom; ?></td>
+                          <td><?php echo $val->categorie; ?></td>
+                          <td><?php echo $val->sum; ?></td>
+                          <td><?php echo $val->min; ?></td>
+                          <td><?php echo $val->max; ?></td>
+                          <td><a href="<?php echo site_url("CT_BesoinAchatFinal/send_Achat"); ?>?article=<?php echo $val->id_article; ?>"><label class="badge badge-info">list fournisseurs</label></a></td>
                         </tr>
-                        
+                      <?php } ?>
+
                       </tbody>
                     </table>
                   </div>
