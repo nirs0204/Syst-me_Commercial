@@ -1,5 +1,6 @@
 <!-- partial -->
         <!-- partial:partials/_sidebar.html -->
+        <?php echo $_SESSION['user']['id_employe']; ?>
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">

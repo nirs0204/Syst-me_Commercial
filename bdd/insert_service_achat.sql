@@ -7,19 +7,29 @@ INSERT INTO company (nom, date_creation, logo) VALUES
 
 -- Insert departement
 INSERT INTO departement (nom) VALUES
-('HR Department'),
-('Finance Department'),
-('IT Department'),
-('Marketing Department'),
-('supply department');
-
+('Départements des ressources humaines'),
+('Département financier'),
+('Département IT'),
+('Département commercial'),
+('département des approvisionnements ');
 -- Insert poste
 INSERT INTO poste (intitule_poste, id_departement) VALUES
-('HR Manager', 1),
-('Accountant', 2),
-('Software Developer', 3),
-('Marketing Specialist', 4),
-('supply Manager', 5);
+('Responsable RH', 1),
+('Comptable', 2),
+('Développeur de logiciels', 3),
+('Responsable informatique', 3),
+('Spécialiste du marketing', 4),
+('responsable approvisionnement', 5),
+('directeur financier', 2) ;
+
+-- Insertion responsable
+INSERT INTO responsable (id_departement, id_poste) VALUES
+(1, 1), -- Responsable RH
+(2, 7), -- Directeur financier
+(3, 4), -- Développeur de logiciels
+(4, 5), -- Spécialiste du marketing
+(5, 6); -- Responsable approvisionnement
+
 
 -- Insertion de données dans la table categorie
 INSERT INTO categorie (categorie) VALUES
@@ -49,9 +59,10 @@ INSERT INTO article (id_categorie,nom, type) VALUES
 INSERT INTO employe (id_poste, id_manager, nom, prenom, adresse, contact) VALUES
 (1, NULL, 'Smith', 'John', '123 Main St', '555-1234'),
 (3, 1, 'Johnson', 'Alice', '456 Oak St', '555-5678'),
-(2, 1, 'Brown', 'Bob', '789 Pine St', '555-9012'),
-(4, 3, 'Davis', 'Eva', '101 Elm St', '555-3456'),
-(5, 1, 'Alice', 'Ruller', '13 Fiu St', '555-1293');
+(7, 1, 'Brown', 'Bob', '789 Pine St', '555-9012'),
+(5, 3, 'Davis', 'Eva', '101 Elm St', '555-3456'),
+(4, 1, 'Alice', 'Ruller', '13 Fiu St', '555-1293'),
+(6, 1, 'Nicolas', 'Dupuis', '13 Fiu St', '555-1293');
 
 -- Insert utilisateur
 INSERT INTO utilisateur (id_employe, pseudo, mdp) VALUES
@@ -59,7 +70,8 @@ INSERT INTO utilisateur (id_employe, pseudo, mdp) VALUES
 (2, 'ajohnson', '345'),
 (3, 'bbrown', '567'),
 (4, 'edavis', '789'),
-(5, 'ralice', '102');
+(5, 'ralice', '102'),
+(6, 'fnicolas', '204');
 
 -- données besoin_achat
 insert into besoin_achat(id_employe, id_article, id_departement, quantite, raison, etat, date_limite, priorite) VALUES

@@ -3,9 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MD_Proforma extends CI_Model {
     // CREATE
-    function save($id_demande,$id_fournisseur,$id_article,$pu,$ht,$tva,$remise ) {
-        $sql = "insert into proforma (id_demande,id_fournisseur,id_article,pu,ht,tva,remise )  values ( %s, %s, %s, %s,%s, %s, %s) ";
-        $sql = sprintf($sql,$this->db->escape($id_demande),$this->db->escape($id_fournisseur),$this->db->escape($id_article),$this->db->escape($pu),$this->db->escape($ht),$this->db->escape($tva),,$this->db->escape($remise));
+    function save($id_fournisseur,$id_article,$dd,$dp,$pu,$ht,$tva,$remise ) {
+        $sql = "insert into proforma(id_fournisseur, id_article,date_demande ,date_proforma,pu, ht, tva, remise)  values ( %s, %s, %s, %s, %s, %s,%s, %s) ";
+        $sql = sprintf($sql,$this->db->escape($id_fournisseur),$this->db->escape($id_article),$this->db->escape($dd),$this->db->escape($dp),$this->db->escape($pu),$this->db->escape($ht),$this->db->escape($tva),$this->db->escape($remise));
         $this->db->query($sql);
 
         $insert_id = $this->db->insert_id();
@@ -29,9 +29,9 @@ class MD_Proforma extends CI_Model {
         return $query->row(); 
     }
     //UPDATE
-    public function update($id,$pseudo,$mdp){
-        $sql = "update proforma set id_demande =%s,id_fournisseur =%s,id_article =%s,pu =%s,ht =%s,tva =%s,remise =%s  where id_proforma =%s";
-        $sql = sprintf($sql,$this->db->escape($id_demande),$this->db->escape($id_fournisseur),$this->db->escape($id_article),$this->db->escape($pu),$this->db->escape($ht),$this->db->escape($tva),,$this->db->escape($remise),$this->db->escape($id));
+    public function update($id_fournisseur,$id_article,$dd,$dp,$pu,$ht,$tva,$remise ) {
+        $sql = "update proforma set id_demande =%s,id_fournisseur =%s,id_article =%s,date_demande=%s ,date_proforma=%s,pu =%s,ht =%s,tva =%s,remise =%s  where id_proforma =%s";
+        $sql = sprintf($sql,$this->db->escape($id_fournisseur),$this->db->escape($id_article),$this->db->escape($dd),$this->db->escape($dp),$this->db->escape($pu),$this->db->escape($ht),$this->db->escape($tva),$this->db->escape($remise),$this->db->escape($id));
         $this->db->query($sql);
     }
     //DELETE

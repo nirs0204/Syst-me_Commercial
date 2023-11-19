@@ -28,6 +28,44 @@ class MD_Employe extends CI_Model {
         $query = $this->db->get('employe'); 
         return $query->row(); 
     }
+    public function getAll_director() {
+        $this->db->select('e.id_employe, d.id_departement,p.id_poste');
+        $this->db->from('employe e');
+        $this->db->join('poste p', 'p.id_poste = e.id_poste');
+        $this->db->join('departement d', 'p.id_departement = d.id_departement');
+        $this->db->where_in('e.id_poste', "(SELECT id_poste FROM responsable)", false);
+
+        $query = $this->db->get();
+        return $query->result();
+    }
+    public function getShop_director($departementId) {
+        $this->db->select('e.id_employe, d.id_departement, p.id_poste');
+        $this->db->from('responsable r');
+        $this->db->join('departement d', 'r.id_departement = d.id_departement');
+        $this->db->join('poste p', 'p.id_poste = r.id_poste');
+        $this->db->join('employe e', 'e.id_poste = p.id_poste');
+        $this->db->where('d.id_departement', $departementId);
+
+        $query = $this->db->get();
+        return $query->result();
+    }
+    public function isUserDirector($directors, $userId) {
+        foreach ($directors as $director) {
+            if ($director->id_employe == $userId) {
+                return 1;
+            }
+        }
+        return 0;
+    }
+    public function get_admin( $userId){
+        $allDirectors = $this->MD_Employe->getAll_director();
+        $shopDirectors = $this->MD_Employe->getShop_director(5);
+        $isAllDirector = $this->MD_Employe->isUserDirector($allDirectors, $userId);
+        $isShopDirector = $this->MD_Employe->isUserDirector($shopDirectors, $userId);
+        $tab[0] = $isAllDirector;
+        $tab[1] = $isShopDirector;
+        return $tab;
+    }
     //UPDATE
     public function update($id,$id_poste,$id_manager,$nom,$prenom,$adresse,$contact){
         $sql = "update employe set id_poste = %s, id_manager = %s, nom = %s, prenom = %s, adresse = %s, contact= %s  where id_employe =%s";

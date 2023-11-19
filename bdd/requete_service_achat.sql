@@ -47,6 +47,10 @@ DELETE FROM  bon_commande;
 -------------------
 DROP VIEW get_Achat;
 DROP TABLE  company;
+DROP TABLE responsable;
+DROP TABLE  condition_achat;
+DROP TABLE  proforma_final;
+DROP TABLE  bon_commande;
 DROP TABLE  utilisateur;
 DROP TABLE demande_proforma;
 DROP TABLE  proforma;
@@ -58,9 +62,7 @@ DROP TABLE categorie;
 DROP TABLE  employe;
 DROP TABLE  poste;
 DROP TABLE  departement;
-DROP TABLE  condition_achat;
-DROP TABLE  proforma_final;
-DROP TABLE  bon_commande;
+
 
 
 -------------------
@@ -173,6 +175,20 @@ FROM demande_proforma dp
 JOIN fournisseur f ON dp.id_fournisseur = f.id_fournisseur
 where dp.etat = 0 AND date_actuel = '2023-11-19' AND dp.id_article =2;
 
+--hierarchie 
+
+SELECT e.id_employe , d.id_departement , p.id_poste FROM responsable r
+JOIN departement d ON r.id_departement = d.id_departement
+JOIN  poste p ON p.id_poste =  r.id_poste
+JOIN employe e ON e.id_poste = p.id_poste
+WHERE d.id_departement = 5;
+
+SELECT e.id_employe , d.id_departement , p.id_poste FROM employe e 
+JOIN  poste p ON p.id_poste =  e.id_poste
+JOIN departement d ON p.id_departement = d.id_departement
+WHERE e.id_poste in (SELECT * FROM responsable r
+JOIN departement d ON r.id_departement = d.id_departement
+JOIN  poste p ON p.id_poste =  r.id_poste); 
 
 --------------
 ----SELECT----
