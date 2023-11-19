@@ -13,7 +13,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">Formulaire de demande de besoin</h4>
-                                    <form class="forms-sample">
+                                    <form class="forms-sample" action="<?php echo base_url('CT_BesoinAchat/createDemandeBesoin') ?>" method="post" >
                                         
                                         <div class="form-group">
                                             <label for="exampleFormControlSelect1">Employé</label>
@@ -83,7 +83,9 @@
                                             <input type="number" class="form-control" id="priorite" placeholder="priorite" name="priorite">
                                         </div>
                                         </div>
+
                                         <button type="submit" class="btn btn-primary mr-2">Envoyer</button>
+
                                     </form>
                                 </div>
                             </div>
