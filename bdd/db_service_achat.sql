@@ -34,6 +34,11 @@ CREATE TABLE categorie(
     id_categorie serial primary key,
     categorie varchar(255)
 );
+CREATE TABLE responsable (
+    id_responsable serial primary key,
+    id_departement int references departement(id_departement),
+    id_poste int references poste(id_poste)
+);
 
 create table article(
     id_article serial primary key,
@@ -41,7 +46,6 @@ create table article(
     nom varchar(100),
     type int
 );
-
   create table employe (
     id_employe serial primary key ,
     id_poste int references poste(id_poste),
@@ -51,8 +55,6 @@ create table article(
     adresse varchar(255),
     contact varchar(255)
 );
-
-
  create table utilisateur (
      id_utilisateur serial primary key ,
      id_employe int references employe(id_employe),
@@ -100,9 +102,10 @@ CREATE TABLE demande_proforma(
 
 create table proforma (
     id_proforma serial primary key ,
-    id_demande int references demande_proforma(id_demande),
     id_fournisseur int references fournisseur(id_fournisseur),
     id_article int references article(id_article),
+    date_demande date,
+    date_proforma date,
     pu double precision,
     ht double precision,
     tva double precision,
