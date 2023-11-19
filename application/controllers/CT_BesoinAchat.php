@@ -30,6 +30,7 @@
             $user = $_SESSION['user'];
             $data['article'] = $this->MD_Article->listAll();
             $data['departement'] = $this->MD_Departement->list_Departements();
+            $data['user'] = $_SESSION['user'];
             redirect('CT_BesoinAchat/formulaire_demande_besoinachat', $data);
 
         }
