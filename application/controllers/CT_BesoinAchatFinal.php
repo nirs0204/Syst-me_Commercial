@@ -11,17 +11,27 @@ class CT_BesoinAchatFinal extends CI_Controller {
         $this->load->model('MD_Article');
         $this->load->model('MD_Fournisseur');
         $this->load->library('session');
-
     }
-
 	private function viewer($page, $data){
-		$v = array(
-			'page' => $page,
-			'data' => $data
-		);
-		$this->load->view('template/basepage', $v);
-	}
+        if(isset($_SESSION['user'])){
+            $userId = $_SESSION['user']['id_employe'];
+            $tab = $this->MD_Employe->get_admin( $userId);
+            $v = array(
+                'page' => $page,
+                'data' => $data
+            );
+            $v['isAllDirector']=$tab[0];
+            $v['isShopDirector']=$tab[1];
+            $this->load->view('template/basepage', $v);
 
+        }else{
+            $v = array(
+                'page' => $page,
+                'data' => $data
+            );
+            $this->load->view('template/basepage', $v);
+        }  
+	}	
 	public function index(){
 		$this->load->view('welcome_message');
 		

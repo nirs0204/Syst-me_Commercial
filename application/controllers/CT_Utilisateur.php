@@ -6,16 +6,30 @@ class CT_Utilisateur extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('MD_Utilisateur');
+        $this->load->model('MD_Employe');
         $this->load->library('session');
 
     }
     
 	private function viewer($page, $data){
-		$v = array(
-			'page' => $page,
-			'data' => $data
-		);
-		$this->load->view('template/basepage', $v);
+        if(isset($_SESSION['user'])){
+            $userId = $_SESSION['user']['id_employe'];
+            $tab = $this->MD_Employe->get_admin( $userId);
+            $v = array(
+                'page' => $page,
+                'data' => $data
+            );
+            $v['isAllDirector']=$tab[0];
+            $v['isShopDirector']=$tab[1];
+            $this->load->view('template/basepage', $v);
+
+        }else{
+            $v = array(
+                'page' => $page,
+                'data' => $data
+            );
+            $this->load->view('template/basepage', $v);
+        }  
 	}	
     //VUE LOGIN
 	public function index(){
@@ -47,6 +61,8 @@ class CT_Utilisateur extends CI_Controller {
     //ACCUEIL
     public function welcome(){
         $user = $_SESSION['user'];
-        $this->viewer('/index',array());
+        $data['user'] = $user;
+        $this->viewer('/index',$data);
     }
+   
 }
