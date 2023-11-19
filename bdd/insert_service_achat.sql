@@ -61,6 +61,11 @@ INSERT INTO utilisateur (id_employe, pseudo, mdp) VALUES
 (4, 'edavis', '789'),
 (5, 'ralice', '102');
 
+-- données besoin_achat
+insert into besoin_achat(id_employe, id_article, id_departement, quantite, raison, etat, date_limite, priorite) VALUES
+(2, 1, 3, 10, 'Rien', 1, '2023-11-29', 1),
+(3, 1, 1, 2, 'Rien', 1, '2023-11-22', 1);
+
 -- Insert fournisseur
 INSERT INTO fournisseur (id_categorie,nom, email, contact, adresse) VALUES
 (1,'FRNS A', 'supplierA@example.com', 'Supplier A Contact', '123 Supplier St'),
@@ -110,6 +115,3 @@ VALUES
 (3, 5, CURRENT_DATE),
 (4, 5, CURRENT_DATE),
 (5, 5, CURRENT_DATE);
-
-
-

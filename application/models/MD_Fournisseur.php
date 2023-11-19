@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class MD_Fournisseur extends CI_Model {
     // CREATE
     function save($id_categorie,$nom, $email, $contact, $adresse) {
-        $sql = "insert into article (id_categorie,nom, email, contact, adresse)  values ( %s, %s, %s , %s , %s) ";
+        $sql = "insert into fournisseur (id_categorie,nom, email, contact, adresse)  values ( %s, %s, %s , %s , %s) ";
         $sql = sprintf($sql,$this->db->escape($id_categorie),$this->db->escape($nom),$this->db->escape($email),$this->db->escape($contact),$this->db->escape($adresse));
         $this->db->query($sql);
 
@@ -37,6 +37,16 @@ class MD_Fournisseur extends CI_Model {
         $this->db->where_in('id_categorie', $subquery, false);
         $query = $this->db->get('fournisseur'); 
         return $query->result();  
+    }
+    public function list_request_providers($state, $date, $art) {
+        $this->db->select("dp.id_fournisseur, f.nom, f.email");
+        $this->db->from('demande_proforma dp');
+        $this->db->join('fournisseur f', 'dp.id_fournisseur = f.id_fournisseur');
+        $this->db->where('dp.etat', $state);
+        $this->db->where('dp.date_actuel', $date);
+        $this->db->where('dp.id_article', $art);
+        $query = $this->db->get();
+        return $query->result();
     }
     
     //UPDATE
