@@ -33,7 +33,7 @@
                             <p class="card-description">Cocher <code>.fournisseur(s)</code> pour votre article (max 3)</p>
                             <form action="<?php echo site_url("CT_Demande/index"); ?>"  method="POST">
                                 <input type="hidden" name="article" value="<?php echo $article['id_article']; ?>">
-                                <input type="hidden" name="qtt" value="<?php echo $article['sum']; ?>">
+                                <input type="hidden" name="qtt" value="<?php echo $article['qtt']; ?>">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">

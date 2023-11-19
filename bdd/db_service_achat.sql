@@ -82,6 +82,13 @@ create table besoin_achat(
     priorite int
 );
 
+create table besoin_achat_final(
+    id_besoin_achat_final serial primary key,
+    idbesoin_achat int references besoin_achat(idbesoin_achat),
+    id_employe int references employe(id_employe),
+    date_finale date
+);
+
 CREATE TABLE condition_achat (
     id_condition_achat SERIAL PRIMARY KEY,
     payement DECIMAL(20,3),
@@ -111,12 +118,7 @@ create table proforma (
     remise double precision
 );
 
-create table besoin_achat_final(
-    id_besoin_achat_final serial primary key,
-    idbesoin_achat int references besoin_achat(idbesoin_achat),
-    id_employe int references employe(id_employe),
-    date_finale date
-);
+
 
 create table proforma_final(
     id_final serial primary key,
