@@ -36,6 +36,18 @@ class MD_Article extends CI_Model {
         $query = $this->db->get();
         return $query->result();  
     }
+    //ARTICLE DEMANDE PROFORMA
+    public function list_request($state, $date) {
+    $this->db->select("dp.id_article, a.nom, dp.quantite");
+    $this->db->from('demande_proforma dp');
+    $this->db->join('article a', 'dp.id_article = a.id_article');
+    $this->db->where('dp.etat', $state);
+    $this->db->where('dp.date_actuel', $date); 
+    $this->db->group_by('dp.id_article, a.nom, dp.quantite');
+    $query = $this->db->get();
+    return $query->result();
+}
+
     //ACHAT
     public function listAchat_article($id) {
         $this->db->where('id_article', $id);

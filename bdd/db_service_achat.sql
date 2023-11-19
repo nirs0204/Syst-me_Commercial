@@ -82,13 +82,20 @@ create table besoin_achat(
     priorite int
 );
 
-CREATE TABLE condition_achat (
-    id_condition_achat SERIAL PRIMARY KEY,
-    payement DECIMAL(20,3),
-    livraison DECIMAL(20,3),
-    payement_livraison DECIMAL(20,3),
-    payement_reste DECIMAL(20,3),
-    id_fournisseur INTEGER REFERENCES fournisseur(id_fournisseur)
+create table besoin_achat_final(
+    id_besoin_achat_final serial primary key,
+    idbesoin_achat int references besoin_achat(idbesoin_achat),
+    id_employe int references employe(id_employe),
+    date_finale date
+);
+
+CREATE TABLE demande_proforma(
+    id_demande serial primary key,
+    id_article int references article(id_article),
+    id_fournisseur int references fournisseur(id_fournisseur),
+    etat int default 0,
+    quantite int,
+    date_actuel date default CURRENT_DATE
 );
 
 CREATE TABLE demande_proforma(
@@ -101,6 +108,7 @@ CREATE TABLE demande_proforma(
 
 create table proforma (
     id_proforma serial primary key ,
+    id_demande int references demande_proforma(id_demande),
     id_fournisseur int references fournisseur(id_fournisseur),
     id_article int references article(id_article),
     pu double precision,
@@ -109,17 +117,21 @@ create table proforma (
     remise double precision
 );
 
-create table besoin_achat_final(
-    id_besoin_achat_final serial primary key,
-    idbesoin_achat int references besoin_achat(idbesoin_achat),
-    id_employe int references employe(id_employe),
-    date_finale date
-);
+
 
 create table proforma_final(
     id_final serial primary key,
     id_proforma int references proforma(id_proforma),
     id_besoin_achat_final int references besoin_achat_final(id_besoin_achat_final)
+);
+
+CREATE TABLE condition_achat (
+    id_condition_achat SERIAL PRIMARY KEY,
+    payement DECIMAL(20,3),
+    livraison DECIMAL(20,3),
+    payement_livraison DECIMAL(20,3),
+    payement_reste DECIMAL(20,3),
+    id_fournisseur INTEGER REFERENCES fournisseur(id_fournisseur)
 );
 
 CREATE TABLE bon_commande (
