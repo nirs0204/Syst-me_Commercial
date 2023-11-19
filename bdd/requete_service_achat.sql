@@ -128,6 +128,21 @@ JOIN poste p ON e.id_poste = p.id_poste
 JOIN departement d ON p.id_departement = d.id_departement
 WHERE u.id_utilisateur = 1;
 
+
+SELECT ba.idbesoin_achat, e.nom AS nom_employe, a.nom AS nom_article, ba.id_departement, ba.quantite, ba.raison, ba.etat, ba.date_limite, ba.priorite
+FROM besoin_achat ba
+JOIN employe e ON ba.id_employe = e.id_employe
+JOIN article a ON ba.id_article = a.id_article;
+
+SELECT ba.idbesoin_achat, e.nom AS nom_employe, a.nom AS nom_article, d.nom as nom_departement, ba.quantite, ba.raison, ba.etat, ba.date_limite, ba.priorite
+FROM besoin_achat ba
+LEFT JOIN besoin_achat_final baf ON ba.idbesoin_achat = baf.idbesoin_achat
+JOIN employe e ON ba.id_employe = e.id_employe
+JOIN article a ON ba.id_article = a.id_article
+Join departement d ON ba.id_departement = d.id_departement
+WHERE baf.id_besoin_achat_final IS NULL AND ba.etat = 3;
+
+
 --
 
 SELECT * FROM proforma p
