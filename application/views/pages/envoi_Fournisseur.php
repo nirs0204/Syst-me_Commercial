@@ -19,7 +19,7 @@
                     </div>
                     <p><strong>Nom:</strong> <?php echo $article['nom']; ?></p>
                     <p><strong>Categorie:</strong> <?php echo $article['categorie']; ?></p>
-                    <p><strong>Quantité : </strong><?php echo $article['sum']; ?></p>
+                    <p><strong>Quantité : </strong><?php echo $article['qtt']; ?></p>
                   
                   </div>
                 </div>

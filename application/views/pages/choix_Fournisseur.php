@@ -34,9 +34,9 @@
                         <tr>
                           <td ><?php echo $val->nom; ?></td>
                           <td><?php echo $val->categorie; ?></td>
-                          <td><?php echo $val->sum; ?></td>
-                          <td><?php echo $val->min; ?></td>
-                          <td><?php echo $val->max; ?></td>
+                          <td><?php echo $val->qtt; ?></td>
+                          <td><?php echo $val->min_date; ?></td>
+                          <td><?php echo $val->max_date; ?></td>
                           <td><a href="<?php echo site_url("CT_BesoinAchatFinal/send_Achat"); ?>?article=<?php echo $val->id_article; ?>"><label class="badge badge-info">list fournisseurs</label></a></td>
                         </tr>
                       <?php } ?>

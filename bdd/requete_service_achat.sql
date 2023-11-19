@@ -102,12 +102,15 @@ JOIN categorie c ON a.id_categorie = c.id_categorie
 WHERE ba.etat = 3 AND ba.date_limite >= CURRENT_DATE
 GROUP BY a.id_article,c.id_categorie;
 
-create view get_Achat as (SELECT a.id_article, a.nom, a.id_categorie , c.categorie, sum(ba.quantite), min(ba.date_limite) , max(date_limite)
+create view get_achat as (SELECT a.id_article, a.nom, a.id_categorie , c.categorie, sum(ba.quantite) as qtt, min(ba.date_limite) as min_date , max(date_limite) as max_date
 FROM besoin_achat ba
 JOIN article a ON ba.id_article = a.id_article
 JOIN categorie c ON a.id_categorie = c.id_categorie
 WHERE ba.etat = 3 AND ba.date_limite >= CURRENT_DATE
 GROUP BY a.id_article,c.id_categorie );
+
+
+ select * from get_achat group by min_date,id_article,nom,id_categorie,categorie,qtt,max_date;
 
 SELECT * FROM get_Achat  WHERE id_article = 1;
 SELECT * FROM fournisseur where id_categorie = (SELECT id_categorie FROM get_Achat  WHERE id_article = 1);
@@ -124,6 +127,16 @@ JOIN employe e ON u.id_employe = e.id_employe
 JOIN poste p ON e.id_poste = p.id_poste
 JOIN departement d ON p.id_departement = d.id_departement
 WHERE u.id_utilisateur = 1;
+
+--
+
+SELECT * FROM proforma p
+JOIN fournisseur ON p.id_fournisseur = f.id_fournisseur
+JOIN demande_proforma dp ON p.id_demande = dp.id_demande
+JOIN article a ON a.id_article = p.id_article
+WHERE dp.etat = 5;
+
+
 
 
 --------------
