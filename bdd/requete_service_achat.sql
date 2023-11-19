@@ -47,12 +47,14 @@ DELETE FROM  bon_commande;
 -------------------
 DROP VIEW get_Achat;
 DROP TABLE  company;
+DROP TABLE  utilisateur;
+DROP TABLE  employe;
 DROP TABLE  poste;
 DROP TABLE  departement;
-DROP TABLE  article;
-DROP TABLE  employe;
-DROP TABLE  utilisateur;
+DROP TABLE demande_proforma;
 DROP TABLE  fournisseur;
+DROP TABLE  article;
+DROP TABLE categorie;
 DROP TABLE  besoin_achat_final;
 DROP TABLE  besoin_achat;
 DROP TABLE  condition_achat;
@@ -102,6 +104,7 @@ JOIN categorie c ON a.id_categorie = c.id_categorie
 WHERE ba.etat = 3 AND ba.date_limite >= CURRENT_DATE
 GROUP BY a.id_article,c.id_categorie;
 
+--VUE DON'T TOUCH
 create view get_achat as (SELECT a.id_article, a.nom, a.id_categorie , c.categorie, sum(ba.quantite) as qtt, min(ba.date_limite) as min_date , max(date_limite) as max_date
 FROM besoin_achat ba
 JOIN article a ON ba.id_article = a.id_article
@@ -150,6 +153,10 @@ JOIN fournisseur ON p.id_fournisseur = f.id_fournisseur
 JOIN demande_proforma dp ON p.id_demande = dp.id_demande
 JOIN article a ON a.id_article = p.id_article
 WHERE dp.etat = 5;
+
+SELECT ba.idbesoin_achat FROM besoin_achat ba
+JOIN besoin_achat_final baf ON ba.idbesoin_achat = baf.idbesoin_achat
+WHERE  ba.id_article = 1 AND ba.etat = 3 AND baf.date_finale = CURRENT_DATE;
 
 
 
