@@ -95,12 +95,14 @@ CREATE TABLE demande_proforma(
     id_demande serial primary key,
     id_article int references article(id_article),
     id_fournisseur int references fournisseur(id_fournisseur),
+    etat int default 0,
     quantite int,
     date_actuel date default CURRENT_DATE
 );
 
 create table proforma (
     id_proforma serial primary key ,
+    id_demande int references demande_proforma(id_demande),
     id_fournisseur int references fournisseur(id_fournisseur),
     id_article int references article(id_article),
     pu double precision,
