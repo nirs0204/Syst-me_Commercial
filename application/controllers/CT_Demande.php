@@ -20,6 +20,14 @@ class CT_Demande extends CI_Controller {
 		);
 		$this->load->view('template/basepage', $v);
 	}	
+    //VUE LOGIN
+	public function index(){
+        foreach ($_POST["frns"] as $value) {
+           $this->MD_Demande_proforma->save( $value, $_POST['article'] , $_POST['qtt']);
+        }
+       redirect('CT_BesoinAchatFinal/get_Achat');
+	}	
+}
     //VUE 
 	public function index(){
         foreach ($_POST["frns"] as $value) {
@@ -56,4 +64,3 @@ class CT_Demande extends CI_Controller {
     }
 }
         
-
