@@ -38,6 +38,16 @@ class MD_Fournisseur extends CI_Model {
         $query = $this->db->get('fournisseur'); 
         return $query->result();  
     }
+    public function list_request_providers($state, $date, $art) {
+        $this->db->select("dp.id_fournisseur, f.nom, f.email");
+        $this->db->from('demande_proforma dp');
+        $this->db->join('fournisseur f', 'dp.id_fournisseur = f.id_fournisseur');
+        $this->db->where('dp.etat', $state);
+        $this->db->where('dp.date_actuel', $date);
+        $this->db->where('dp.id_article', $art);
+        $query = $this->db->get();
+        return $query->result();
+    }
     
     //UPDATE
     public function update($id,$id_categorie,$nom, $email, $contact, $adresse) {

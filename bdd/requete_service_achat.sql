@@ -48,17 +48,17 @@ DELETE FROM  bon_commande;
 DROP VIEW get_Achat;
 DROP TABLE  company;
 DROP TABLE  utilisateur;
+DROP TABLE demande_proforma;
+DROP TABLE  proforma;
+DROP TABLE  fournisseur;
+DROP TABLE  besoin_achat_final;
+DROP TABLE  besoin_achat;
+DROP TABLE  article;
+DROP TABLE categorie;
 DROP TABLE  employe;
 DROP TABLE  poste;
 DROP TABLE  departement;
-DROP TABLE demande_proforma;
-DROP TABLE  fournisseur;
-DROP TABLE  article;
-DROP TABLE categorie;
-DROP TABLE  besoin_achat_final;
-DROP TABLE  besoin_achat;
 DROP TABLE  condition_achat;
-DROP TABLE  proforma;
 DROP TABLE  proforma_final;
 DROP TABLE  bon_commande;
 
@@ -146,7 +146,7 @@ Join departement d ON ba.id_departement = d.id_departement
 WHERE baf.id_besoin_achat_final IS NULL AND ba.etat = 3;
 
 
---
+-- proforma && besoin_achat valid
 
 SELECT * FROM proforma p
 JOIN fournisseur ON p.id_fournisseur = f.id_fournisseur
@@ -158,7 +158,20 @@ SELECT ba.idbesoin_achat FROM besoin_achat ba
 JOIN besoin_achat_final baf ON ba.idbesoin_achat = baf.idbesoin_achat
 WHERE  ba.id_article = 1 AND ba.etat = 3 AND baf.date_finale = CURRENT_DATE;
 
+SELECT dp.date_actuel FROM demande_proforma dp
+where dp.etat = 0
+GROUP BY dp.date_actuel;
 
+SELECT dp.id_article , a.nom , dp.quantite
+FROM demande_proforma dp
+JOIN article a ON dp.id_article = a.id_article
+where dp.etat = 0 AND dp.date_actuel = '2023-11-19'
+GROUP BY dp.id_article,a.nom,dp.quantite;
+
+SELECT dp.id_fournisseur , f.nom , f.email
+FROM demande_proforma dp
+JOIN fournisseur f ON dp.id_fournisseur = f.id_fournisseur
+where dp.etat = 0 AND date_actuel = '2023-11-19' AND dp.id_article =2;
 
 
 --------------
