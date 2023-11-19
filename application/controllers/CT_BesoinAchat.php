@@ -8,6 +8,7 @@
 
             parent::__construct();
             $this->load->model('MD_Article');
+            $this->load->model('MD_Besoin_Achat');
             $this->load->model('MD_Employe');
             $this->load->model('MD_Departement');
             $this->load->model('MD_Utilisateur');
@@ -27,15 +28,14 @@
         // Formulaire de demande de besoin
         public function create() {
 
-            $user = $_SESSION['user'];
             $data['article'] = $this->MD_Article->listAll();
             $data['departement'] = $this->MD_Departement->list_Departements();
-            $data['user'] = $_SESSION['user'];
+            $data['user'] = $this->MD_Utilisateur->listAll();
             $this->viewer('/formulaire_demande_besoinachat', $data);
 
         }
 
-        // Insersion des données de demande de besoin dans la BD
+        // Insertion des données de demande de besoin dans la BD
         public function storeDemandeBesoin() {
 
             $id_emp = $this->input->post('employe');
@@ -47,9 +47,9 @@
             $date_expiration = $this->input->post('date');
             $priorite = $this->input->post('priorite');
 
-            $this->MD_Besoin_Achat->createDemandeBesoin($id_emp, $service, $item, $quantite, $raison, $etat, $date_expiration, $priorite);
+            $this->MD_Besoin_Achat->createDemandeBesoin($id_emp, $item, $service, $quantite, $raison, $etat, $date_expiration, $priorite);
 
-            redirect('CT_BesoinAchat/createDemandeBesoin');
+            redirect('CT_BesoinAchat/create');
 
         }
 

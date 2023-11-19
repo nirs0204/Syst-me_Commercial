@@ -13,13 +13,18 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">Formulaire de demande de besoin</h4>
-                                    <form class="forms-sample" action="<?php echo base_url('CT_BesoinAchat/createDemandeBesoin') ?>" method="post" >
+                                    <form class="forms-sample" action="<?php echo base_url('CT_BesoinAchat/storeDemandeBesoin') ?>" method="post" >
                                         
                                         <div class="form-group">
                                             <label for="exampleFormControlSelect1">Employé</label>
                                             <select class="form-control form-control-lg" id="employe" name="employe">
-                                                <option value="<?= $user; ?>"><?= $user; ?> </option>
+                                            <option> </option>
                                                 
+                                                <?php foreach ($user as $users) { ?>
+
+                                                    <option value="<?php echo $users->id_utilisateur; ?>"><?php echo $users->pseudo; ?></option>
+                                                
+                                                <?php } ?>
                                             </select>
                                         </div>
 
