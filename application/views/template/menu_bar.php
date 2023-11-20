@@ -1,6 +1,5 @@
 <!-- partial -->
         <!-- partial:partials/_sidebar.html -->
-        <?php echo $_SESSION['user']['id_employe']; ?>
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
@@ -39,7 +38,7 @@
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Historique BA</a></li>
+               <li class="nav-item"> <a class="nav-link" href="<?php echo site_url("CT_BesoinAchat/create"); ?>">Création BA</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Demande en attente</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Demande approuvée</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Demande rejetée</a></li>

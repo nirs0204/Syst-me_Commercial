@@ -72,7 +72,10 @@ create table fournisseur (
     adresse varchar(255)    
 );
 
--- etat : 1 (en attente), 3 (approuvé), 5 (rejeté)
+-- etat : 
+--------- 1 (en attente), 3 (approuvé_department), 5 (rejeté)
+--------- 1 (en attente), 3 (approuvé_achat), 5 (rejeté), 6(traitement fournisseur)
+
 create table besoin_achat(
     idbesoin_achat serial primary key,
     id_employe int references employe(id_employe),
@@ -97,14 +100,6 @@ CREATE TABLE demande_proforma(
     id_article int references article(id_article),
     id_fournisseur int references fournisseur(id_fournisseur),
     etat int default 0,
-    quantite int,
-    date_actuel date default CURRENT_DATE
-);
-
-CREATE TABLE demande_proforma(
-    id_demande serial primary key,
-    id_article int references article(id_article),
-    id_fournisseur int references fournisseur(id_fournisseur),
     quantite int,
     date_actuel date default CURRENT_DATE
 );

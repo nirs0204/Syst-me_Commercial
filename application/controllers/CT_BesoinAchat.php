@@ -14,17 +14,26 @@
             $this->load->model('MD_Utilisateur');
             
         }
-
-        private function viewer($page, $data) {
-            
-            $v = array(
-                'page' => $page,
-                'data' => $data
-            );
-            $this->load->view('template/basepage', $v);
-
-        }
-
+        private function viewer($page, $data){
+            if(isset($_SESSION['user'])){
+                $userId = $_SESSION['user']['id_employe'];
+                $tab = $this->MD_Employe->get_admin( $userId);
+                $v = array(
+                    'page' => $page,
+                    'data' => $data
+                );
+                $v['isAllDirector']=$tab[0];
+                $v['isShopDirector']=$tab[1];
+                $this->load->view('template/basepage', $v);
+    
+            }else{
+                $v = array(
+                    'page' => $page,
+                    'data' => $data
+                );
+                $this->load->view('template/basepage', $v);
+            }  
+        }	
         // Formulaire de demande de besoin
         public function create() {
 

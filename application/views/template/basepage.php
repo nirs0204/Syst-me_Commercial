@@ -1,11 +1,6 @@
 <?php 
 if(!isset($isAllDirector)){ $isAllDirector = array();}
-if(!isset($isShopDirector)){ $isShopDirector = array();}
-
-
-
-echo $isAllDirector.'//////'.$isShopDirector ;
-    
+if(!isset($isShopDirector)){ $isShopDirector = array();}   
 
     $this->load->view('template/header');
 
