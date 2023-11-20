@@ -3,13 +3,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MD_Proforma extends CI_Model {
     // CREATE
-    function save($id_fournisseur,$id_article,$dd,$dp,$pu,$ht,$tva,$remise ) {
-        $sql = "insert into proforma(id_fournisseur, id_article,date_demande ,date_proforma,pu, ht, tva, remise)  values ( %s, %s, %s, %s, %s, %s,%s, %s) ";
-        $sql = sprintf($sql,$this->db->escape($id_fournisseur),$this->db->escape($id_article),$this->db->escape($dd),$this->db->escape($dp),$this->db->escape($pu),$this->db->escape($ht),$this->db->escape($tva),$this->db->escape($remise));
+    function save($id_fournisseur,$id_article,$dd,$pu,$tva,$remise, $ttc,$stock ) {
+        $sql = "insert into proforma(id_fournisseur, id_article,date_demande ,date_proforma,pu, tva, remise, ttc,stock)  values ( %s, %s, %s, current_date, %s, %s,%s, %s,%s) ";
+        $sql = sprintf($sql,$this->db->escape($id_fournisseur),$this->db->escape($id_article),$this->db->escape($dd),$this->db->escape($pu),$this->db->escape($tva),$this->db->escape($remise), $this->db->escape($ttc),$this->db->escape($stock));
         $this->db->query($sql);
 
         $insert_id = $this->db->insert_id();
-        return $this->oneAdmin($insert_id);
+        return $this->listOne($insert_id);
     }
 
     function insert($id_proforma ,$qtt , $date , $article ) {
@@ -93,6 +93,14 @@ class MD_Proforma extends CI_Model {
         $sql = "delete from proforma where id_proforma =%s";
         $sql = sprintf($sql,$this->db->escape($id));
         $this->db->query($sql);
+    }
+
+    public function montantTTC($pu, $tva, $remise){
+        $montantTVA = ($pu * $tva)/100;
+        $montantTTC = $pu + $montantTVA;
+        $montantRemise = ($montantTTC * $remise)/100;
+        $montantTTCFinal = $montantTTC - $montantRemise;
+        return $montantTTCFinal;
     }
 }
 ?>
