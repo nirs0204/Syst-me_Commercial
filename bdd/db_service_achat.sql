@@ -100,14 +100,6 @@ CREATE TABLE demande_proforma(
     date_actuel date default CURRENT_DATE
 );
 
-CREATE TABLE demande_proforma(
-    id_demande serial primary key,
-    id_article int references article(id_article),
-    id_fournisseur int references fournisseur(id_fournisseur),
-    quantite int,
-    date_actuel date default CURRENT_DATE
-);
-
 create table proforma (
     id_proforma serial primary key ,
     id_fournisseur int references fournisseur(id_fournisseur),
@@ -115,9 +107,10 @@ create table proforma (
     date_demande date,
     date_proforma date,
     pu double precision,
-    ht double precision,
     tva double precision,
-    remise double precision
+    remise double precision,
+    ttc double precision,
+    stock double precision
 );
 
 
