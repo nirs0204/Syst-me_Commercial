@@ -9,6 +9,7 @@
             parent::__construct();
             $this->load->model('MD_Article');
             $this->load->model('MD_Besoin_Achat');
+            $this->load->model('MD_BesoinAchatFinal');
             $this->load->model('MD_Employe');
             $this->load->model('MD_Departement');
             $this->load->model('MD_Utilisateur');
@@ -60,6 +61,27 @@
 
             redirect('CT_BesoinAchat/create');
 
+        }
+
+        public function listeEnAttente(){
+            $user = $_SESSION['user'];
+            $idDept = $this->MD_Utilisateur->getIdDeptByUser($user['id_utilisateur']);
+            $data['besoinAchat'] = $this->MD_BesoinAchatFinal->getAllNeedBuyByDeptByStatus($idDept, 1);
+            $this->viewer('/listeBesoinAchatEnAttente', $data);
+        }
+
+        public function listeApprouve(){
+            $user = $_SESSION['user'];
+            $idDept = $this->MD_Utilisateur->getIdDeptByUser($user['id_utilisateur']);
+            $data['besoinAchat'] = $this->MD_BesoinAchatFinal->getAllNeedBuyByDeptByStatus($idDept, 3);
+            $this->viewer('/listeBesoinAchatApprouve', $data);
+        }
+
+        public function listRejete(){
+            $user = $_SESSION['user'];
+            $idDept = $this->MD_Utilisateur->getIdDeptByUser($user['id_utilisateur']);
+            $data['besoinAchat'] = $this->MD_BesoinAchatFinal->getAllNeedBuyByDeptByStatus($idDept, 5);
+            $this->viewer('/listeBesoinAchatRejete', $data);
         }
 
     }
