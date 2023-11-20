@@ -183,12 +183,17 @@ JOIN  poste p ON p.id_poste =  r.id_poste
 JOIN employe e ON e.id_poste = p.id_poste
 WHERE d.id_departement = 5;
 
-SELECT e.id_employe , d.id_departement , p.id_poste FROM employe e 
-JOIN  poste p ON p.id_poste =  e.id_poste
+SELECT e.id_employe, d.id_departement, p.id_poste
+FROM employe e
+JOIN poste p ON p.id_poste = e.id_poste
 JOIN departement d ON p.id_departement = d.id_departement
-WHERE e.id_poste in (SELECT * FROM responsable r
-JOIN departement d ON r.id_departement = d.id_departement
-JOIN  poste p ON p.id_poste =  r.id_poste); 
+WHERE e.id_poste IN (
+    SELECT r.id_poste FROM responsable r
+    JOIN departement d ON r.id_departement = d.id_departement
+    JOIN poste p ON p.id_poste = r.id_poste
+    WHERE p.id_poste NOT IN (6)
+);
+
 
 --------------
 ----SELECT----

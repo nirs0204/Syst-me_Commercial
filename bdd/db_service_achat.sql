@@ -39,7 +39,6 @@ CREATE TABLE responsable (
     id_departement int references departement(id_departement),
     id_poste int references poste(id_poste)
 );
-
 create table article(
     id_article serial primary key,
     id_categorie int references categorie(id_categorie),
