@@ -228,6 +228,9 @@ WHERE ba.etat = 3 AND ba.idbesoin_achat in (baf.idbesoin_achat);
 SELECT * FROM besoin_achat;
 SELECT * FROM besoin_achat_final
 
+--PROFORMA
+
+
 --------------
 ----SELECT----
 --------------

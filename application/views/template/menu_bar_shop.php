@@ -51,7 +51,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="<?php echo site_url("CT_Demande/request_progress"); ?>">
               <i class="typcn typcn-document-text menu-icon"></i>
               <span class="menu-title">Demande Proforma</span>
             </a>
