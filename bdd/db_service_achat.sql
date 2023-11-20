@@ -39,7 +39,6 @@ CREATE TABLE responsable (
     id_departement int references departement(id_departement),
     id_poste int references poste(id_poste)
 );
-
 create table article(
     id_article serial primary key,
     id_categorie int references categorie(id_categorie),
@@ -71,7 +70,10 @@ create table fournisseur (
     adresse varchar(255)    
 );
 
--- etat : 1 (en attente), 3 (approuvé), 5 (rejeté)
+-- etat : 
+--------- 1 (en attente), 3 (approuvé_department), 5 (rejeté)
+--------- 1 (en attente), 3 (approuvé_achat), 5 (rejeté), 6(traitement fournisseur)
+
 create table besoin_achat(
     idbesoin_achat serial primary key,
     id_employe int references employe(id_employe),

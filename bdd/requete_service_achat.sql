@@ -111,7 +111,8 @@ create view get_achat as (SELECT a.id_article, a.nom, a.id_categorie , c.categor
 FROM besoin_achat ba
 JOIN article a ON ba.id_article = a.id_article
 JOIN categorie c ON a.id_categorie = c.id_categorie
-WHERE ba.etat = 3 AND ba.date_limite >= CURRENT_DATE
+JOIN besoin_achat_final baf ON ba.idbesoin_achat = baf.idbesoin_achat
+WHERE ba.etat = 3 AND ba.idbesoin_achat in (baf.idbesoin_achat)
 GROUP BY a.id_article,c.id_categorie );
 
 
@@ -148,6 +149,14 @@ Join departement d ON ba.id_departement = d.id_departement
 WHERE baf.id_besoin_achat_final IS NULL AND ba.etat = 3;
 
 
+SELECT ba.idbesoin_achat, e.nom AS nom_employe, a.nom AS nom_article, d.nom as nom_departement, ba.quantite, ba.raison, ba.etat, ba.date_limite, ba.priorite
+FROM besoin_achat ba
+JOIN employe e ON ba.id_employe = e.id_employe
+JOIN article a ON ba.id_article = a.id_article
+Join departement d ON ba.id_departement = d.id_departement
+WHERE ba.etat = 1;
+
+
 -- proforma && besoin_achat valid
 
 SELECT * FROM proforma p
@@ -159,6 +168,12 @@ WHERE dp.etat = 5;
 SELECT ba.idbesoin_achat FROM besoin_achat ba
 JOIN besoin_achat_final baf ON ba.idbesoin_achat = baf.idbesoin_achat
 WHERE  ba.id_article = 1 AND ba.etat = 3 AND baf.date_finale = CURRENT_DATE;
+
+
+SELECT baf.idbesoin_achat FROM get_achat ga
+JOIN besoin_achat_final baf ON ga.id_article = baf.date_finale
+WHERE  ba.id_article = 1 AND ba.etat = 3  AND baf.date_finale = CURRENT_DATE;
+
 
 SELECT dp.date_actuel FROM demande_proforma dp
 where dp.etat = 0
@@ -183,12 +198,35 @@ JOIN  poste p ON p.id_poste =  r.id_poste
 JOIN employe e ON e.id_poste = p.id_poste
 WHERE d.id_departement = 5;
 
-SELECT e.id_employe , d.id_departement , p.id_poste FROM employe e 
-JOIN  poste p ON p.id_poste =  e.id_poste
+
+SELECT e.id_employe, d.id_departement, p.id_poste
+FROM employe e
+JOIN poste p ON p.id_poste = e.id_poste
 JOIN departement d ON p.id_departement = d.id_departement
-WHERE e.id_poste in (SELECT * FROM responsable r
-JOIN departement d ON r.id_departement = d.id_departement
-JOIN  poste p ON p.id_poste =  r.id_poste); 
+WHERE e.id_poste IN (
+    SELECT r.id_poste FROM responsable r
+    JOIN departement d ON r.id_departement = d.id_departement
+    JOIN poste p ON p.id_poste = r.id_poste
+    WHERE p.id_poste NOT IN (6)
+);
+
+--CHANGE GET ACHAT
+SELECT  a.id_categorie , c.categorie, sum(ba.quantite) as qtt, min(ba.date_limite) as min_date , max(date_limite) as max_date
+FROM besoin_achat ba
+JOIN article a ON ba.id_article = a.id_article
+JOIN categorie c ON a.id_categorie = c.id_categorie
+JOIN besoin_achat_final baf ON ba.idbesoin_achat = baf.idbesoin_achat
+WHERE ba.etat = 3 AND ba.idbesoin_achat in (baf.idbesoin_achat)
+GROUP BY c.id_categorie ;
+
+
+SELECT  ba.idbesoin_achat , baf.idbesoin_achat 
+FROM besoin_achat ba
+JOIN besoin_achat_final baf ON ba.idbesoin_achat = baf.idbesoin_achat
+WHERE ba.etat = 3 AND ba.idbesoin_achat in (baf.idbesoin_achat);
+
+SELECT * FROM besoin_achat;
+SELECT * FROM besoin_achat_final
 
 --------------
 ----SELECT----

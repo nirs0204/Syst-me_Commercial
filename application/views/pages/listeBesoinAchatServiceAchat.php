@@ -22,7 +22,6 @@
                           <th>Employe</th>
                           <th>Article</th>
                           <th>Quantité</th>
-                          <th>Raison</th>
                           <th>Date limite</th>
                           <th></th>
                           <th></th>
@@ -35,7 +34,6 @@
                           <td><?php echo isset($besoin->nom_employe) ? $besoin->nom_employe : '';?></td>
                           <td><?php echo isset($besoin->nom_article) ? $besoin->nom_article : '';?></td>
                           <td><?php echo isset($besoin->quantite) ? $besoin->quantite : '';?></td>
-                          <td><?php echo isset($besoin->raison) ? $besoin->raison : '';?></td>
                           <td><?php echo isset($besoin->date_limite) ? $besoin->date_limite : '';?></td>
                           <td><a href="<?php echo site_url('CT_BesoinAchatFinal/besoinAchatApprouve'); ?>?idbesoinachat=<?php echo isset($besoin->idbesoin_achat) ? $besoin->idbesoin_achat : '';?>" class="btn btn-inverse-success btn-sm">Approuvé</a></td>
                           <td><a href="<?php echo site_url('CT_BesoinAchatFinal/besoinAchatRejete'); ?>?idbesoinachat=<?php echo isset($besoin->idbesoin_achat) ? $besoin->idbesoin_achat : '';?>" class="btn btn-inverse-primary btn-sm">Rejeté</a></td>
@@ -43,6 +41,8 @@
                         <?php } ?>
                       </tbody>
                     </table>
+                    <br>
+                    <a type="button" href="<?php echo site_url('CT_BesoinAchatFinal/get_Achat'); ?>" class="btn btn-inverse-info btn-fw">Info</a>
                   </div>
                 </div>
               </div>
