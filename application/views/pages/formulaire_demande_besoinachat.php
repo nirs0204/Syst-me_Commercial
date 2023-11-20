@@ -6,61 +6,99 @@
 
         <body>
 
-            <!-- partial -->
-            <div class="main-panel">
+            <div class="main-panel">        
                 <div class="content-wrapper">
-
-
-                <div class="row">
-                    <div class="col-lg-12 d-flex grid-margin stretch-card">
-                        <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex flex-wrap justify-content-between">
-                            <h4 class="card-title mb-3">Demande de besoin:</h4>
-                            </div>
-                            <p><strong>Nom:</strong> <?php echo $article['nom']; ?></p>
-                            <p><strong>Categorie:</strong> <?php echo $article['categorie']; ?></p>
-                            <p><strong>Quantité : </strong><?php echo $article['qtt']; ?></p>
-                        
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-
                     <div class="row">
                         <div class="col-md-12 grid-margin stretch-card">
                             <div class="card">
                                 <div class="card-body">
-                                    <p class="card-description">Cocher <code>.fournisseur(s)</code> pour votre article (max 3)</p>
-                                    <form action="<?php echo site_url("CT_Demande/index"); ?>"  method="POST">
-                                        <input type="hidden" name="article" value="<?php echo $article['id_article']; ?>">
-                                        <input type="hidden" name="qtt" value="<?php echo $article['qtt']; ?>">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-
-                                                <?php foreach ($fournisseur as $val) { ?>
-                                                    <div class="form-check form-check-info">
-                                                        <label class="form-check-label">
-                                                            <input  name="frns[]" type="checkbox" class="form-check-input" name="ExampleCheckbox1" id="ExampleCheckbox1" value= <?php echo $val->id_fournisseur; ?>>
-                                                            <?php echo $val->email; ?> ( <?php echo $val->nom; ?>)
-                                                        </label>
-                                                    </div>
-                                                <?php } ?>
-                                            
+                                    <h4 class="card-title">Formulaire de demande de besoin</h4>
+                                    <form class="forms-sample" action="<?php echo base_url('CT_BesoinAchat/storeDemandeBesoin') ?>" method="post" >
+                                        
+                                        <div class="form-group">
+                                            <label for="exampleFormControlSelect1">Employé</label>
+                                            <select class="form-control form-control-lg" id="employe" name="employe">
+                                            <option> </option>
                                                 
-                                                </div>
-                                                <button type="submit" class="btn btn-info">Envoyer</button>
+                                                <?php foreach ($user as $users) { ?>
+
+                                                    <option value="<?php echo $users->id_utilisateur; ?>"><?php echo $users->pseudo; ?></option>
+                                                
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="exampleFormControlSelect1">Département</label>
+                                            <select class="form-control form-control-lg" id="departement" name="departement">
+                                                <option> </option>
+                                                
+                                                <?php foreach ($departement as $departements) { ?>
+
+                                                    <option value="<?php echo $departements->id_departement; ?>"><?php echo $departements->nom; ?></option>
+                                                
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="exampleFormControlSelect1">Article</label>
+                                            <select class="form-control form-control-lg" id="article" name="article">
+                                                <option> </option>
+                                                
+                                                <?php foreach ($article as $articles) { ?>
+
+                                                    <option value="<?php echo $articles->id_article; ?>"><?php echo $articles->nom; ?></option>
+                                                
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Quantité</label>
+                                            <div class="col-sm-9">
+                                                <input type="number" class="form-control" id="quantite" placeholder="quantite" name="quantite">
                                             </div>
                                         </div>
+                                        
+                                        <div class="form-group row">
+                                        <label for="exampleInputMobile" class="col-sm-3 col-form-label">Raison</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="raison" placeholder="raison" name="raison">
+                                        </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                        <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Etat</label>
+                                        <div class="col-sm-9">
+                                            <input type="number" class="form-control" id="etat" placeholder="etat" name="etat">
+                                        </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                        <label for="exampleInputMobile" class="col-sm-3 col-form-label">Date d'expiration</label>
+                                        <div class="col-sm-9">
+                                            <input type="date" class="form-control" id="date" placeholder="date" name="date">
+                                        </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                        <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Priorité</label>
+                                        <div class="col-sm-9">
+                                            <input type="number" class="form-control" id="priorite" placeholder="priorite" name="priorite">
+                                        </div>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary mr-2">Envoyer</button>
+
                                     </form>
                                 </div>
                             </div>
                         </div>
-                        <h3> <a href="<?php echo site_url("CT_BesoinAchatFinal/get_Achat"); ?>"><<=Return</a></h3>
                     </div>
                     
-
                 </div>
+            </div>    
+
         </body>
     </html>

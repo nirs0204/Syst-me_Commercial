@@ -27,8 +27,8 @@
         // CREATE demande besoin
         public function createDemandeBesoin($id_emp, $id_item, $id_service, $quantite, $raison, $etat, $date_expiration, $priorite) {
 
-            $sql = "INSERT INTO besoin_achat (id_employe, id_article, id_departement, quantite, raison, etat, date_limite, priorite) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)";
-            $sql = sprintf( $sql, $this->db->escape($id_emp), $this->db->escape($id_item), $this->db->escape($id_service), $this->db->escape($quantite), $this->db->escape($raison), $this->db->escape($etat), $this->db->escape($date_expiration), $this->db->escape($priorite) );
+            $sql = "INSERT INTO besoin_achat (id_employe, id_departement, id_article, quantite, raison, etat, date_limite, priorite) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)";
+            $sql = sprintf( $sql, $this->db->escape($id_emp), $this->db->escape($id_service), $this->db->escape($id_item), $this->db->escape($quantite), $this->db->escape($raison), $this->db->escape($etat), $this->db->escape($date_expiration), $this->db->escape($priorite) );
             $this->db->query($sql);
 
         }

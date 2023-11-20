@@ -29,6 +29,7 @@ class MD_Employe extends CI_Model {
         return $query->row(); 
     }
     public function getAll_director() {
+
         $sql = "SELECT e.id_employe, d.id_departement, p.id_poste
                 FROM employe e
                 JOIN poste p ON p.id_poste = e.id_poste
@@ -42,7 +43,7 @@ class MD_Employe extends CI_Model {
     
         $query = $this->db->query($sql);
         return $query->result();
-    }    
+    }  
     public function getShop_director($departementId) {
         $this->db->select('e.id_employe, d.id_departement, p.id_poste');
         $this->db->from('responsable r');

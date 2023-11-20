@@ -39,10 +39,11 @@ class CT_Demande extends CI_Controller {
            $this->MD_Demande_proforma->save( $value, $_POST['article'] , $_POST['qtt']);
         }
        redirect('CT_BesoinAchatFinal/get_Achat');
-	}	
-}
+	}
+
     //VUE 
-	public function index(){
+	public function index2() {
+
         foreach ($_POST["frns"] as $value) {
           $this->MD_Demande_proforma->save( $value, $_POST['article'] , $_POST['qtt']);
         }
@@ -52,7 +53,9 @@ class CT_Demande extends CI_Controller {
             $this->MD_Besoin_achat->update_state($value->idbesoin_achat,6);
         }
        redirect('CT_BesoinAchatFinal/get_Achat');
-	}	
+    
+	}
+
     public function request_progress() {
         $data['demande'] = $this->MD_Demande_proforma->list_request_wait(0) ;
         $this->viewer('demande_proforma_envoyes',$data);
@@ -75,5 +78,6 @@ class CT_Demande extends CI_Controller {
        
         $this->viewer('detail_demande_envoyes', $data);   
     }
+
 }
         

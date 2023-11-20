@@ -183,6 +183,7 @@ JOIN  poste p ON p.id_poste =  r.id_poste
 JOIN employe e ON e.id_poste = p.id_poste
 WHERE d.id_departement = 5;
 
+
 SELECT e.id_employe, d.id_departement, p.id_poste
 FROM employe e
 JOIN poste p ON p.id_poste = e.id_poste
@@ -193,6 +194,7 @@ WHERE e.id_poste IN (
     JOIN poste p ON p.id_poste = r.id_poste
     WHERE p.id_poste NOT IN (6)
 );
+
 
 
 --------------
