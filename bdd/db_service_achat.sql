@@ -34,11 +34,13 @@ CREATE TABLE categorie(
     id_categorie serial primary key,
     categorie varchar(255)
 );
+
 CREATE TABLE responsable (
     id_responsable serial primary key,
     id_departement int references departement(id_departement),
     id_poste int references poste(id_poste)
 );
+
 create table article(
     id_article serial primary key,
     id_categorie int references categorie(id_categorie),

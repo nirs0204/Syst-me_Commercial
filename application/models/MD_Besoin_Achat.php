@@ -11,7 +11,6 @@
             $this->db->where('ba.etat', $val);
             $this->db->where('baf.date_finale', 'CURRENT_DATE',  false); 
             $query = $this->db->get();
-            echo $this->db->last_query();
             return $query->result();
         }  
 
@@ -22,7 +21,6 @@
         public function update_state($id,$state) {
             $sql = "update besoin_achat set etat = %s  where idbesoin_achat =%s";
             $sql = sprintf($sql,$this->db->escape($state),$this->db->escape($id));
-            echo $this->db->last_query();
             $this->db->query($sql);
         }
         
