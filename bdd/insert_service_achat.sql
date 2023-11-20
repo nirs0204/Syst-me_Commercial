@@ -127,3 +127,12 @@ VALUES
 (3, 5, CURRENT_DATE),
 (4, 5, CURRENT_DATE),
 (5, 5, CURRENT_DATE);
+
+-- Insert Proforma
+INSERT INTO proforma (id_fournisseur, id_article, date_demande, date_proforma, stock, pu, tva, remise)
+VALUES
+  (1, 101, '2023-11-20', '2023-11-22', 50, 25.5, 0.2, 5.0),
+  (2, 102, '2023-11-21', '2023-11-23', 30, 30.0, 0.15, 3.0),
+  (3, 103, '2023-11-22', '2023-11-24', 40, 15.75, 0.18, 7.5),
+  (1, 104, '2023-11-23', '2023-11-25', 20, 40.2, 0.2, 4.0),
+  (2, 105, '2023-11-24', '2023-11-26', 60, 18.6, 0.15, 6.0);
