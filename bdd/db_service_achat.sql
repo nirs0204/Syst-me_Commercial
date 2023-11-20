@@ -109,7 +109,7 @@ create table proforma (
     date_demande date,
     date_proforma date,
     pu double precision,
-    ht double precision,
+    stock double precision,
     tva double precision,
     remise double precision
 );
