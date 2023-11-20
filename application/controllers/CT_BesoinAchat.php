@@ -30,7 +30,7 @@
 
             $data['article'] = $this->MD_Article->listAll();
             $data['departement'] = $this->MD_Departement->list_Departements();
-            $data['user'] = $this->MD_Utilisateur->listAll();
+            $data['employe'] = $this->MD_Employe->listAll();
             $this->viewer('/formulaire_demande_besoinachat', $data);
 
         }
@@ -38,12 +38,9 @@
         // Insertion des données de demande de besoin dans la BD
         public function storeDemandeBesoin() {
 
-            $id_emp = $this->input->post('employe');
-            $service = $this->input->post('departement');
             $item = $this->input->post('article');
             $quantite = $this->input->post('quantite');
             $raison = $this->input->post('raison');
-            $etat = $this->input->post('etat');
             $date_expiration = $this->input->post('date');
             $priorite = $this->input->post('priorite');
 

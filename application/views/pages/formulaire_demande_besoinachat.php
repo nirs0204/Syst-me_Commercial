@@ -13,33 +13,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">Formulaire de demande de besoin</h4>
-                                    <form class="forms-sample" action="<?php echo base_url('CT_BesoinAchat/storeDemandeBesoin') ?>" method="post" >
-                                        
-                                        <div class="form-group">
-                                            <label for="exampleFormControlSelect1">Employé</label>
-                                            <select class="form-control form-control-lg" id="employe" name="employe">
-                                            <option> </option>
-                                                
-                                                <?php foreach ($user as $users) { ?>
-
-                                                    <option value="<?php echo $users->id_utilisateur; ?>"><?php echo $users->pseudo; ?></option>
-                                                
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="exampleFormControlSelect1">Département</label>
-                                            <select class="form-control form-control-lg" id="departement" name="departement">
-                                                <option> </option>
-                                                
-                                                <?php foreach ($departement as $departements) { ?>
-
-                                                    <option value="<?php echo $departements->id_departement; ?>"><?php echo $departements->nom; ?></option>
-                                                
-                                                <?php } ?>
-                                            </select>
-                                        </div>
+                                    <form class="forms-sample" action="<?php echo base_url('CT_BesoinAchat/storeDemandeBesoin') ?>" method="post" > 
 
                                         <div class="form-group">
                                             <label for="exampleFormControlSelect1">Article</label>
@@ -65,13 +39,6 @@
                                         <label for="exampleInputMobile" class="col-sm-3 col-form-label">Raison</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="raison" placeholder="raison" name="raison">
-                                        </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                        <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Etat</label>
-                                        <div class="col-sm-9">
-                                            <input type="number" class="form-control" id="etat" placeholder="etat" name="etat">
                                         </div>
                                         </div>
 
