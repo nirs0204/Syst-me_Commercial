@@ -37,9 +37,10 @@ class MD_Demande_proforma extends CI_Model {
         return $query->row(); 
     }
     //UPDATE
-    public function update($id,$id_fournisseur,$id_article, $qtt) {
-        $sql = "update demande_proforma set id_fournisseur = %s ,id_article = %s, quantite = %s, adresse = %s  where id_demande = %s";
-        $sql = sprintf($sql,$this->db->escape($id_fournisseur),$this->db->escape($id_article),$this->db->escape($qtt),$this->db->escape($id));
+    public function update($date,$qtt,$art,$etat) {
+        $sql = "update demande_proforma set etat= %s  where date_actuel = %s and id_article= %s and quantite = %s";
+        $sql = sprintf($sql,$this->db->escape($etat),$this->db->escape($date),$this->db->escape($art),$this->db->escape($qtt));
+        echo $this->db->last_query();
         $this->db->query($sql);
     }
     //DELETE

@@ -82,6 +82,11 @@ class CT_BesoinAchatFinal extends CI_Controller {
         $this->viewer('/choix_Fournisseur',$data);
     }
     public function send_Achat(){
+        $data = array();
+        if($this->input->get('error') != null  )
+        {
+            $data['error'] = $this->input->get('error');
+        }
         $id = $_GET['article'];
         $data['article'] = $this->MD_Article->listAchat_article($id);
         $data['fournisseur'] = $this->MD_Fournisseur->list_with_category($id);

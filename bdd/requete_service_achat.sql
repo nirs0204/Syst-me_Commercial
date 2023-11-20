@@ -188,7 +188,12 @@ GROUP BY dp.id_article,a.nom,dp.quantite;
 SELECT dp.id_fournisseur , f.nom , f.email
 FROM demande_proforma dp
 JOIN fournisseur f ON dp.id_fournisseur = f.id_fournisseur
-where dp.etat = 0 AND date_actuel = '2023-11-19' AND dp.id_article =2;
+where dp.etat = 0 AND date_actuel = '2023-11-20' AND dp.id_article =1;
+
+SELECT dp.id_fournisseur
+FROM demande_proforma dp
+JOIN fournisseur f ON dp.id_fournisseur = f.id_fournisseur
+where dp.etat = 0 AND date_actuel = '2023-11-20' AND dp.id_article =1;
 
 --hierarchie 
 
@@ -222,11 +227,38 @@ GROUP BY c.id_categorie ;
 
 SELECT  ba.idbesoin_achat , baf.idbesoin_achat 
 FROM besoin_achat ba
-JOIN besoin_achat_final baf ON ba.idbesoin_achat = baf.idbesoin_achat
+JOIN besoin_achat_final baf ON ba.idbesoin_achat = baf.idbesoin_ac hat
 WHERE ba.etat = 3 AND ba.idbesoin_achat in (baf.idbesoin_achat);
 
 SELECT * FROM besoin_achat;
 SELECT * FROM besoin_achat_final
+
+ select * from demande_proforma
+where dp. ;
+
+ -----
+ SELECT p.* FROM Proforma p 
+ where p.id_article = 1 AND p.date_demande = '2023-11-20'
+ ORDER BY p.ttc ASC ;
+
+ 
+ SELECT p.* FROM Proforma p 
+ where p.id_article = 2 AND p.date_demande = '2023-11-20'
+ ORDER BY p.ttc ASC ;
+
+
+ SELECT p.* FROM Proforma p 
+ where p.id_article = 4 AND p.date_demande = '2023-11-20'
+ ORDER BY p.ttc ASC ;
+
+ ----SELECT PROFOMA EMPLOYE
+
+ SELECT * FROM Proforma p 
+ where id_fournisseur in (SELECT dp.id_fournisseur
+FROM demande_proforma dp
+JOIN fournisseur f ON dp.id_fournisseur = f.id_fournisseur
+where dp.etat = 0 AND date_actuel = '2023-11-20' AND dp.id_article =2)
+AND p.id_article = 2;
 
 --PROFORMA
 

@@ -32,6 +32,16 @@
                         <div class="card-body">
                             <p class="card-description">Cocher <code>.fournisseur(s)</code> pour votre article (max 3)</p>
                             <form action="<?php echo site_url("CT_Demande/index"); ?>"  method="POST">
+
+                            <?php if(isset($error)){ ?>
+                                <div class="alert alert-danger alert-dismissible fade show"  role="alert">
+                                    <strong>Error!</strong> <?php echo $error ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            <?php } ?>
+
                                 <input type="hidden" name="article" value="<?php echo $article['id_article']; ?>">
                                 <input type="hidden" name="qtt" value="<?php echo $article['qtt']; ?>">
                                 <div class="row">

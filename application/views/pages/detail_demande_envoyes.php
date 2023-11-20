@@ -1,4 +1,5 @@
 <?php if(!isset($fpa)) $fpa=array(); ?>
+<?php if(!isset($date_actuel)) $date_actuel=array(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +14,7 @@
                   <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                       <div class="card-body">
-                        <h4 class="card-title">Detail Demande envoyées: </h4>
+                        <h4 class="card-title">Detail Demande envoyées: (<?php echo $date_actuel; ?>)</h4>
                         <p class="card-description">
                           Liste des <code>.détails d'article + fournisseur</code>
                         </p>
@@ -33,6 +34,7 @@
                             </ul>
                          <?php  } ?>
                       </div>
+                       <?php echo $article_info['button']; ?>
                     </div>
                   </div>
                 </div>
