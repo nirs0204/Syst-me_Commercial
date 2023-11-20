@@ -11,7 +11,6 @@
             $this->db->where('ba.etat', $val);
             $this->db->where('baf.date_finale', 'CURRENT_DATE',  false); 
             $query = $this->db->get();
-            echo $this->db->last_query();
             return $query->result();
         }  
 
@@ -22,15 +21,14 @@
         public function update_state($id,$state) {
             $sql = "update besoin_achat set etat = %s  where idbesoin_achat =%s";
             $sql = sprintf($sql,$this->db->escape($state),$this->db->escape($id));
-            echo $this->db->last_query();
             $this->db->query($sql);
         }
         
         // CREATE demande besoin
-        public function createDemandeBesoin( $id_item, $quantite, $raison, $date_expiration, $priorite) {
+        public function createDemandeBesoin($id_emp, $id_item, $id_service, $quantite, $raison, $etat, $date_expiration, $priorite) {
 
-            $sql = "INSERT INTO besoin_achat (id_article, quantite, raison, date_limite, priorite) VALUES (%s, %s, %s, %s, %s)";
-            $sql = sprintf( $sql, $this->db->escape($id_item), $this->db->escape($quantite), $this->db->escape($raison), $this->db->escape($date_expiration), $this->db->escape($priorite) );
+            $sql = "INSERT INTO besoin_achat (id_employe, id_departement, id_article, quantite, raison, etat, date_limite, priorite) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)";
+            $sql = sprintf( $sql, $this->db->escape($id_emp), $this->db->escape($id_service), $this->db->escape($id_item), $this->db->escape($quantite), $this->db->escape($raison), $this->db->escape($etat), $this->db->escape($date_expiration), $this->db->escape($priorite) );
             $this->db->query($sql);
 
         }

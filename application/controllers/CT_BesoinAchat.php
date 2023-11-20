@@ -14,6 +14,7 @@
             $this->load->model('MD_Utilisateur');
             
         }
+
         private function viewer($page, $data){
             if(isset($_SESSION['user'])){
                 $userId = $_SESSION['user']['id_employe'];
@@ -33,13 +34,15 @@
                 );
                 $this->load->view('template/basepage', $v);
             }  
-        }	
+        }
+
         // Formulaire de demande de besoin
         public function create() {
 
+            $employe = $_SESSION['user']['id_utilisateur'];
             $data['article'] = $this->MD_Article->listAll();
-            $data['departement'] = $this->MD_Departement->list_Departements();
-            $data['employe'] = $this->MD_Employe->listAll();
+            $dept = $this->MD_Utilisateur->getIdDeptByUser($employe);
+    
             $this->viewer('/formulaire_demande_besoinachat', $data);
 
         }
@@ -47,13 +50,20 @@
         // Insertion des données de demande de besoin dans la BD
         public function storeDemandeBesoin() {
 
+            $employe = $_SESSION['user']['id_employe'];
+            $dept = $this->MD_Utilisateur->getIdDeptByUser($employe);
+            //$departement = $_SESSION['user']['id_departement'];
+
+            //$id_emp = $this->input->post('employe');
+            //$service = $this->input->post('departement');
             $item = $this->input->post('article');
             $quantite = $this->input->post('quantite');
             $raison = $this->input->post('raison');
+            $etat = $this->input->post('etat');
             $date_expiration = $this->input->post('date');
             $priorite = $this->input->post('priorite');
 
-            $this->MD_Besoin_Achat->createDemandeBesoin($id_emp, $item, $service, $quantite, $raison, $etat, $date_expiration, $priorite);
+            $this->MD_Besoin_Achat->createDemandeBesoin($employe, $item, $dept, $quantite, $raison, $etat, $date_expiration, $priorite);
 
             redirect('CT_BesoinAchat/create');
 

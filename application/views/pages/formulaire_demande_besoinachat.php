@@ -13,20 +13,22 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">Formulaire de demande de besoin</h4>
-                                    <form class="forms-sample" action="<?php echo base_url('CT_BesoinAchat/storeDemandeBesoin') ?>" method="post" > 
+                                    <form class="forms-sample" action="<?php echo base_url('CT_BesoinAchat/storeDemandeBesoin') ?>" method="post" >
+                                    <div class="form-group row">
+                                            <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Article</label>
+                                            <div class="col-sm-9">
+                                            <select class="form-control form-control-lg" id="exampleFormControlSelect1" name="article">
+                                                    <option> </option>
+                                                    
+                                                    <?php foreach ($article as $articles) { ?>
 
-                                        <div class="form-group">
-                                            <label for="exampleFormControlSelect1">Article</label>
-                                            <select class="form-control form-control-lg" id="article" name="article">
-                                                <option> </option>
-                                                
-                                                <?php foreach ($article as $articles) { ?>
-
-                                                    <option value="<?php echo $articles->id_article; ?>"><?php echo $articles->nom; ?></option>
-                                                
-                                                <?php } ?>
-                                            </select>
+                                                        <option value="<?php echo $articles->id_article; ?>"><?php echo $articles->nom; ?></option>
+                                                    
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
                                         </div>
+                                        
 
                                         <div class="form-group row">
                                             <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Quantité</label>
