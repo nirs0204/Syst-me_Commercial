@@ -129,10 +129,28 @@ VALUES
 (5, 5, CURRENT_DATE);
 
 -- Insert Proforma
-INSERT INTO proforma (id_fournisseur, id_article, date_demande, date_proforma, stock, pu, tva, remise)
+INSERT INTO proforma (id_fournisseur, id_article, date_demande, date_proforma, pu, tva, remise , ttc , stock)
 VALUES
-  (1, 101, '2023-11-20', '2023-11-22', 50, 25.5, 0.2, 5.0),
-  (2, 102, '2023-11-21', '2023-11-23', 30, 30.0, 0.15, 3.0),
-  (3, 103, '2023-11-22', '2023-11-24', 40, 15.75, 0.18, 7.5),
-  (1, 104, '2023-11-23', '2023-11-25', 20, 40.2, 0.2, 4.0),
-  (2, 105, '2023-11-24', '2023-11-26', 60, 18.6, 0.15, 6.0);
+  (1, 2, ' 2023-11-20', '2023-11-22', 25000, 20, 0, 30000, 5 ),
+  (7, 2, ' 2023-11-20', '2023-11-23', 30000,20, 0 , 36000,10 ),
+  (13, 2, ' 2023-11-20', '2023-11-24', 20000, 20, 0 , 24000, 20 );
+
+INSERT INTO proforma (id_fournisseur, id_article, date_demande, date_proforma, pu, tva, remise , ttc , stock)
+VALUES
+  (1, 1, ' 2023-11-20', '2023-11-22', 25000, 20, 0, 30000, 20 ),
+  (7, 1, ' 2023-11-20', '2023-11-23', 20000, 20, 0 , 24000, 10 ),
+  (13, 1, ' 2023-11-20', '2023-11-24', 30000,20, 0 , 36000,5 );
+
+INSERT INTO proforma (id_fournisseur, id_article, date_demande, date_proforma, pu, tva, remise , ttc , stock)
+VALUES
+  (1, 4, ' 2023-11-20', '2023-11-22', 30000,20, 0 , 36000,10 ),
+  (7, 4, ' 2023-11-20', '2023-11-23', 20000, 20, 0 , 24000, 20 ),
+  (13, 4, ' 2023-11-20', '2023-11-24', 25000, 20, 0, 30000, 20 );
+  
+INSERT INTO proforma (id_fournisseur, id_article, date_demande, date_proforma, pu, tva, remise , ttc , stock)
+VALUES  
+  (3, 3, ' 2023-11-20', '2023-11-22', 25000, 20, 0, 30000, 20 ),
+  (9, 3, ' 2023-11-20', '2023-11-23', 30000,20, 0 , 36000,30 ),
+  (15, 3, ' 2023-11-20', '2023-11-24', 20000, 20, 0 , 24000, 10 );  
+
+

@@ -1,4 +1,5 @@
 <?php if(!isset($demande)) $demande=array(); ?>
+<?php if(!isset($date_actuel)) $date_actuel="Aucune Demande en attente de proforma"; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +8,7 @@
     <!-- partial -->
     <div class="main-panel">
         <div class="content-wrapper">
+          <h1><?php echo $date_actuel; ?></h1>
 
         <?php foreach ($demande as $val) { ?>
             <div class="row">
@@ -15,7 +17,7 @@
                   <div class="card-body">
                     <h4 class="card-title">Demande de Proforma du : <?php echo $val->date_actuel; ?></h4>
                     <p class="card-description">
-                      Liste des <a href="<?php echo site_url("CT_Demande/request_detail"); ?>?date_actuel=<?php echo $val->date_actuel; ?>" style="color:red">.détails d'article</a>
+                      Liste des <a href="<?php echo site_url("CT_Demande/request_detail/{$val->date_actuel}"); ?>" style="color:red">.détails d'article</a>
                     </p>
                   </div>
                 </div>
