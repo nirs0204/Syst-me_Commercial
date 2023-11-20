@@ -210,7 +210,7 @@ WHERE e.id_poste IN (
     WHERE p.id_poste NOT IN (6)
 );
 
-
+--CHANGE GET ACHAT
 SELECT  a.id_categorie , c.categorie, sum(ba.quantite) as qtt, min(ba.date_limite) as min_date , max(date_limite) as max_date
 FROM besoin_achat ba
 JOIN article a ON ba.id_article = a.id_article
