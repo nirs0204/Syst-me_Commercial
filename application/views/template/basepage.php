@@ -17,7 +17,8 @@ echo $isAllDirector.'//////'.$isShopDirector ;
     if($isShopDirector ==1 ){
         $this->load->view('template/menu_bar_shop');
     }
-    if($isAllDirector == 0 && $isShopDirecto ==0){
+
+    if($isAllDirector == 0 && $isShopDirector ==0){
         $this->load->view('template/menu_bar');
     }
 
