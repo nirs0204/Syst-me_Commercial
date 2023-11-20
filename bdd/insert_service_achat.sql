@@ -118,15 +118,6 @@ VALUES
 (4, 3, 4, 8, 'Besoin pour le département Marketing', 1, '2023-11-30', 3),
 (1, 4, 1, 3, 'Besoin pour le département HR', 1, '2023-12-10', 4);
 
-INSERT INTO besoin_achat (id_employe, id_article, id_departement, quantite, raison, etat, date_limite, priorite)
-VALUES
-(1, 5, 4, 10, 'Besoin Marketing', 1, '2023-12-01', 2),
-(1, 5, 4, 10, 'Besoin Marketing', 1, '2023-12-01', 1),
-(1, 5, 4, 10, 'Besoin Marketing', 1, '2023-12-01', 3),
-(3, 3, 2, 75, 'Besoin Finance', 1, '2023-11-24', 1),
-(3, 2, 2, 35, 'Besoin Finance', 1, '2023-11-24', 1),
-
-
 -- Insert besoin_achat_final
 INSERT INTO besoin_achat_final (idbesoin_achat, id_employe, date_finale)
 VALUES
