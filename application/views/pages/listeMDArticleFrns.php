@@ -1,4 +1,4 @@
-<?php if(!isset($besoinAchat)) $besoinAchat = array(); ?>
+<?php if(!isset($listmd)) $listmd = array(); ?>
 <!DOCTYPE html>
 <html lang="en">
  
@@ -18,12 +18,12 @@
               </div>
             </div>
           </div>
-          <?php ?>
+          <?php foreach ($listmd as $fournisseurNom => $articles) { ?>
           <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Liste des moins disant</h4>
+                  <h4 class="card-title"><?php echo $fournisseurNom; ?></h4>
                   <div class="table-responsive">
                     <table class="table">
                       <thead>
@@ -36,15 +36,15 @@
                         </tr>
                       </thead>
                       <tbody>
-                      <?php foreach ($besoinAchat as $besoin) { ?>
+                      <?php foreach ($articles as $article) { ?>
                         <tr>
-                          <td><?php echo isset($besoin->nom_employe) ? $besoin->nom_employe : '';?></td>
-                          <td><?php echo isset($besoin->nom_article) ? $besoin->nom_article : '';?></td>
-                          <td><?php echo isset($besoin->quantite) ? $besoin->quantite : '';?></td>
-                          <td><?php echo isset($besoin->raison) ? $besoin->raison : '';?></td>
-                          <td><?php echo isset($besoin->date_limite) ? $besoin->date_limite : '';?></td>
+                          <td><?php echo isset($article['nom_article']) ? $article['nom_article'] : ''; ?></td>
+                          <td><?php echo isset($article['pu']) ? $article['pu'] : ''; ?></td>
+                          <td><?php echo isset($article['tva']) ? $article['tva'] : ''; ?></td>
+                          <td><?php echo isset($article['remise']) ? $article['remise'] : ''; ?></td>
+                          <td><?php echo isset($article['qtt']) ? $article['qtt'] : ''; ?></td>
                         </tr>
-                    <?php } ?>
+                      <?php } ?>
                       </tbody>
                     </table>
                   </div>
@@ -52,6 +52,7 @@
               </div>
             </div>
           </div>
+          <?php } ?>
         <!-- content-wrapper ends -->
         <!-- partial:../../partials/_footer.html -->
         <!-- partial -->
