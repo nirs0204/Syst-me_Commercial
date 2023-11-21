@@ -33,7 +33,7 @@
                                         <div class="form-group row">
                                             <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Quantité</label>
                                             <div class="col-sm-9">
-                                                <input type="number" class="form-control" id="quantite" placeholder="quantite" name="quantite" min="1" max="100">
+                                                <input type="number" class="form-control" id="quantite" placeholder="quantite" name="quantite" min="1" max="10000">
                                             </div>
                                         </div>
                                         

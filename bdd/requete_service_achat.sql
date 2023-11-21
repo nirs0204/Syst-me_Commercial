@@ -140,7 +140,7 @@ FROM besoin_achat ba
 JOIN employe e ON ba.id_employe = e.id_employe
 JOIN article a ON ba.id_article = a.id_article;
 
-SELECT ba.idbesoin_achat, e.nom AS nom_employe, a.nom AS nom_article, d.nom as nom_departement, ba.quantite, ba.raison, ba.etat, ba.date_limite, ba.priorite
+SELECT count(*) 
 FROM besoin_achat ba
 LEFT JOIN besoin_achat_final baf ON ba.idbesoin_achat = baf.idbesoin_achat
 JOIN employe e ON ba.id_employe = e.id_employe
@@ -155,6 +155,14 @@ JOIN employe e ON ba.id_employe = e.id_employe
 JOIN article a ON ba.id_article = a.id_article
 Join departement d ON ba.id_departement = d.id_departement
 WHERE ba.etat = 1;
+
+
+SELECT count(*)
+FROM besoin_achat ba
+JOIN employe e ON ba.id_employe = e.id_employe
+JOIN article a ON ba.id_article = a.id_article
+Join departement d ON ba.id_departement = d.id_departement
+WHERE  d.id_departement =1  AND ba.etat = 1;
 
 
 -- proforma && besoin_achat valid
@@ -274,6 +282,22 @@ AND p.id_article = 2;
 
 --------------
 ----SELECT----
+--------------
+
+--------------
+----UPDATE----
+--------------
+
+ update demande_proforma set etat=0 where id_demande = 1;
+ update demande_proforma set etat=0 where id_demande = 2;
+ update demande_proforma set etat=0 where id_demande = 3;
+
+ update proforma set stock=4 where id_proforma = 3;
+ update proforma set stock=2 where id_proforma = 2;
+ update proforma set stock=3 where id_proforma = 1;
+
+ --------------
+----UPDATE----
 --------------
 
 

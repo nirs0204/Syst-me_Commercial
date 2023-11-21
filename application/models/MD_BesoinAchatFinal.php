@@ -42,6 +42,37 @@ class MD_BesoinAchatFinal extends CI_Model {
             return array(); 
         }
     }
+    public function notify_Resp($etat,$id_dept){
+        $this->db->select('COUNT(*) as total');
+        $this->db->from('besoin_achat ba');
+        $this->db->join('employe e', 'ba.id_employe = e.id_employe');
+        $this->db->join('article a', 'ba.id_article = a.id_article');
+        $this->db->join('departement d', 'ba.id_departement = d.id_departement');
+        $this->db->where('d.id_departement',$id_dept);
+        $this->db->where('ba.etat', $etat);
+
+        $query = $this->db->get();
+        $result = $query->row();
+
+        $total = $result->total;
+        return $total;
+    }
+    public function notify_Shop($etat){
+        $this->db->select('COUNT(*) as total');
+        $this->db->from('besoin_achat ba');
+        $this->db->join('employe e', 'ba.id_employe = e.id_employe');
+        $this->db->join('article a', 'ba.id_article = a.id_article');
+        $this->db->join('departement d', 'ba.id_departement = d.id_departement');
+        $this->db->join('besoin_achat_final baf', 'ba.idbesoin_achat = baf.idbesoin_achat', 'left');
+        $this->db->where('baf.id_besoin_achat_final IS NULL', null, false); // Utilisation du troisième paramètre de where pour éviter l'auto-échappement
+        $this->db->where('ba.etat', $etat);
+
+        $query = $this->db->get();
+        $result = $query->row();
+
+        $total = $result->total;
+        return $total;
+    }
 
     // Mise à jour de l'état de besoin_achat
     public function updateStatusNeedBuy($id_besoin_achat, $etat){

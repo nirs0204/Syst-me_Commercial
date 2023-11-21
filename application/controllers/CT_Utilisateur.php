@@ -7,18 +7,21 @@ class CT_Utilisateur extends CI_Controller {
         parent::__construct();
         $this->load->model('MD_Utilisateur');
         $this->load->model('MD_Employe');
+        $this->load->model('MD_BesoinAchatFinal');
         $this->load->library('session');
 
     }
-    
 	private function viewer($page, $data){
         if(isset($_SESSION['user'])){
             $userId = $_SESSION['user']['id_employe'];
-            $tab = $this->MD_Employe->get_admin( $userId);
+            $tab = $this->MD_Employe->get_admin(  $_SESSION['user']['id_employe']);
+            $dept = $this->MD_Utilisateur->getIdDeptByUser($_SESSION['user']['id_utilisateur']);
             $v = array(
                 'page' => $page,
                 'data' => $data
             );
+            $v['notify'] =  $this->MD_BesoinAchatFinal->notify_Shop(3);
+            $v['notifyr'] =  $this->MD_BesoinAchatFinal->notify_Resp(1,$dept);
             $v['isAllDirector']=$tab[0];
             $v['isShopDirector']=$tab[1];
             $this->load->view('template/basepage', $v);
@@ -63,6 +66,11 @@ class CT_Utilisateur extends CI_Controller {
         $user = $_SESSION['user'];
         $data['user'] = $user;
         $this->viewer('/index',$data);
+    }
+    //DECONNEXION
+    public function deconnect()	{
+        $this->session->unset_userdata('user');
+        redirect('CT_Utilisateur/');
     }
    
 }

@@ -1,4 +1,5 @@
-<i class="typcn typcn-delete-outline" id="bannerClose"></i>
+<?php if(!isset($notify)){ $notify = array();}  ?>
+ <i class="typcn typcn-delete-outline" id="bannerClose"></i>
     <div class="container-scroller">
       <!-- partial:partials/_navbar.html -->
       <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -28,9 +29,18 @@
             </li>
           </ul>
           <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item dropdown  d-flex">
+              <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center" id="notificationDropdown" href="#" data-toggle="dropdown">
+                <i class="typcn typcn-bell mr-0"></i>
+                <?php if($notifyr !=0) { ?>
+                        <span class="count bg-danger"><?php echo $notifyr; ?></span>
+                    <?php } else { } ?>
+              </a>
+            </li>
             <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle  pl-0 pr-0" href="#" data-toggle="dropdown" id="profileDropdown">
-                <i class="typcn typcn-user-outline mr-0"></i> 
+                <i class="typcn typcn-user-outline mr-0"></i>
+                <span class="nav-profile-name">Evan Morales</span>
               </a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
                 <a class="dropdown-item">
