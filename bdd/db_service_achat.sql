@@ -34,11 +34,13 @@ CREATE TABLE categorie(
     id_categorie serial primary key,
     categorie varchar(255)
 );
+
 CREATE TABLE responsable (
     id_responsable serial primary key,
     id_departement int references departement(id_departement),
     id_poste int references poste(id_poste)
 );
+
 create table article(
     id_article serial primary key,
     id_categorie int references categorie(id_categorie),
@@ -116,12 +118,24 @@ create table proforma (
 );
 
 
-
 create table proforma_final(
     id_final serial primary key,
     id_proforma int references proforma(id_proforma),
-    id_besoin_achat_final int references besoin_achat_final(id_besoin_achat_final)
+    id_article int references article(id_article),
+    qtt double precision,
+    date_demande date
 );
+
+create view get_achat as (SELECT a.id_article, a.nom, a.id_categorie , c.categorie, sum(ba.quantite) as qtt, min(ba.date_limite) as min_date , max(date_limite) as max_date
+FROM besoin_achat ba
+JOIN article a ON ba.id_article = a.id_article
+JOIN categorie c ON a.id_categorie = c.id_categorie
+JOIN besoin_achat_final baf ON ba.idbesoin_achat = baf.idbesoin_achat
+WHERE ba.etat = 3 AND ba.idbesoin_achat in (baf.idbesoin_achat)
+GROUP BY a.id_article,c.id_categorie );
+
+
+update proforma set stock =5 where id_proforma = 5;
 
 CREATE TABLE condition_achat (
     id_condition_achat SERIAL PRIMARY KEY,

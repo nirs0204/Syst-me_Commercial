@@ -10,7 +10,7 @@ class CT_Proforma extends CI_Controller {
         $this->load->model('MD_Article');
         $this->load->model('MD_Fournisseur');
         $this->load->library('session');
-        $this->load->library('MD_Employe');
+        $this->load->model('MD_Employe');
 
     }
     
@@ -36,8 +36,16 @@ class CT_Proforma extends CI_Controller {
 	}		
     //VUE PROFORMA
 	public function index(){
+      $date = $_GET['date_demande'];
+      $qtt = $_GET['qtt'];
+      $article = $_GET['article'];
+      $data['error'] = $this->MD_Proforma->get_moins_disant($article, $date, $qtt);
+      $this->MD_Demande_proforma->update($date,$qtt,$article,2);
+      $data['date_actuel'] = $date;
+      redirect('CT_Demande/request_detail/'.$date);
+	}	
       
-	}
+
     
     public function proformaForm(){
         $data['articleList'] = $this->MD_Article->listAll();
