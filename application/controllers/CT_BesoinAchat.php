@@ -9,6 +9,7 @@
             parent::__construct();
             $this->load->model('MD_Article');
             $this->load->model('MD_Besoin_Achat');
+            $this->load->model('MD_Utilisateur');
             $this->load->model('MD_BesoinAchatFinal');
             $this->load->model('MD_Employe');
             $this->load->model('MD_Departement');
