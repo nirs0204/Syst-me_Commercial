@@ -118,7 +118,6 @@ VALUES
 (4, 3, 4, 8, 'Besoin pour le département Marketing', 1, '2023-11-30', 3),
 (1, 4, 1, 3, 'Besoin pour le département HR', 1, '2023-12-10', 4);
 
-
 -- Insert besoin_achat_final
 INSERT INTO besoin_achat_final (idbesoin_achat, id_employe, date_finale)
 VALUES
