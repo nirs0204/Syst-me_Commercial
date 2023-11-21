@@ -15,15 +15,17 @@
             $this->load->model('MD_Utilisateur');
             
         }
-
         private function viewer($page, $data){
             if(isset($_SESSION['user'])){
                 $userId = $_SESSION['user']['id_employe'];
-                $tab = $this->MD_Employe->get_admin( $userId);
+                $tab = $this->MD_Employe->get_admin(  $_SESSION['user']['id_employe']);
+                $dept = $this->MD_Utilisateur->getIdDeptByUser($_SESSION['user']['id_utilisateur']);
                 $v = array(
                     'page' => $page,
                     'data' => $data
                 );
+                $v['notify'] =  $this->MD_BesoinAchatFinal->notify_Shop(3);
+                $v['notifyr'] =  $this->MD_BesoinAchatFinal->notify_Resp(1,$dept);
                 $v['isAllDirector']=$tab[0];
                 $v['isShopDirector']=$tab[1];
                 $this->load->view('template/basepage', $v);
@@ -35,8 +37,7 @@
                 );
                 $this->load->view('template/basepage', $v);
             }  
-        }
-
+        }	
         // Formulaire de demande de besoin
         public function create() {
 
@@ -51,12 +52,9 @@
         // Insertion des données de demande de besoin dans la BD
         public function storeDemandeBesoin() {
 
-            $employe = $_SESSION['user']['id_employe'];
+            $employe = $_SESSION['user']['id_utilisateur'];
             $dept = $this->MD_Utilisateur->getIdDeptByUser($employe);
-            //$departement = $_SESSION['user']['id_departement'];
-
-            //$id_emp = $this->input->post('employe');
-            //$service = $this->input->post('departement');
+           
             $item = $this->input->post('article');
             $quantite = $this->input->post('quantite');
             $raison = $this->input->post('raison');

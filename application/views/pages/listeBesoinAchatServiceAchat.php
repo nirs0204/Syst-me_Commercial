@@ -22,7 +22,7 @@
                           <th>Employe</th>
                           <th>Article</th>
                           <th>Quantité</th>
-                          <th>Date limite</th>
+                          <th>Date_limite</th>
                           <th></th>
                           <th></th>
                         </tr>

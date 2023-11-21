@@ -38,9 +38,9 @@
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="<?php echo site_url("CT_BesoinAchat/create"); ?>">Création BA</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Demande en attente</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Demande approuvée</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Demande rejetée</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo site_url("CT_BesoinAchat/listeEnAttente"); ?>">Demande en attente</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo site_url("CT_BesoinAchat/listeApprouve"); ?>">Demande approuvée</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo site_url("CT_BesoinAchat/listRejete"); ?>">Demande rejetée</a></li>
               </ul>
             </div>
           </li>
