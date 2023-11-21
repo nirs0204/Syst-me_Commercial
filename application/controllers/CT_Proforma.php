@@ -9,6 +9,7 @@ class CT_Proforma extends CI_Controller {
         $this->load->model('MD_Employe');
         $this->load->model('MD_Article');
         $this->load->model('MD_Fournisseur');
+        $this->load->model('MD_Utilisateur');
         $this->load->model('MD_BesoinAchatFinal');
         $this->load->library('session');
         $this->load->model('MD_Employe');

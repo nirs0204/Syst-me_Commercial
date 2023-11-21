@@ -1,5 +1,6 @@
-<?php if(!isset($demande)) $demande=array(); ?>
-<?php if(!isset($date_actuel)) $date_actuel="Aucune Demande en attente de proforma"; ?>
+<?php if(count($demande) == 0) $demande="Aucune Demande en attente de proforma"; ?>
+
+<?php if(!isset($date_actuel)) $date_actuel=""; ?>
 <!DOCTYPE html>
 <html lang="en">
 

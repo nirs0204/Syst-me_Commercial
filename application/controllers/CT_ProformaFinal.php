@@ -12,7 +12,6 @@ class CT_ProformaFinal extends CI_Controller {
         $this->load->model('MD_Utilisateur');
         $this->load->model('MD_BesoinAchatFinal');
         $this->load->library('session');
-
         
     }
 
@@ -27,6 +26,7 @@ class CT_ProformaFinal extends CI_Controller {
             );
             $v['notify'] =  $this->MD_BesoinAchatFinal->notify_Shop(3);
             $v['notifyr'] =  $this->MD_BesoinAchatFinal->notify_Resp(1,$dept);
+
             $v['isAllDirector']=$tab[0];
             $v['isShopDirector']=$tab[1];
             $this->load->view('template/basepage', $v);
