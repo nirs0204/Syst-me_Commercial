@@ -9,6 +9,7 @@ class CT_BesoinAchatFinal extends CI_Controller {
         $this->load->model('MD_Utilisateur');
         $this->load->model('MD_BesoinAchatFinal');
         $this->load->model('MD_Article');
+        $this->load->model('MD_Utilisateur');
         $this->load->model('MD_Fournisseur');
         $this->load->library('session');
     }
