@@ -201,7 +201,7 @@ where dp.etat = 0 AND date_actuel = '2023-11-20' AND dp.id_article =1;
 SELECT dp.id_fournisseur
 FROM demande_proforma dp
 JOIN fournisseur f ON dp.id_fournisseur = f.id_fournisseur
-where dp.etat = 0 AND date_actuel = '2023-11-20' AND dp.id_article =1;
+where dp.etat = 0 AND date_actuel = '2023-11-21' AND dp.id_article =1;
 
 SELECT f.nom AS nom_fournisseur, a.nom AS nom_article, p.pu, p.tva, p.remise, pf.qtt
 FROM proforma_final pf
@@ -255,7 +255,7 @@ where dp. ;
 
  -----
  SELECT p.* FROM Proforma p 
- where p.id_article = 1 AND p.date_demande = '2023-11-20'
+ where p.id_article = 1 AND p.date_demande = '2023-11-21'
  ORDER BY p.ttc ASC ;
 
  
