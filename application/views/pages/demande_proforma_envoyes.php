@@ -1,6 +1,7 @@
-<?php if(count($demande) == 0) $demande="Aucune Demande en attente de proforma"; ?>
 
-<?php if(!isset($date_actuel)) $date_actuel=""; ?>
+<?php if(!isset($demande)) $demande=array(); ?>
+<?php if(!isset($date_actuel)) $date_actuel=array(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +10,6 @@
     <!-- partial -->
     <div class="main-panel">
         <div class="content-wrapper">
-          <h1><?php echo $date_actuel; ?></h1>
 
         <?php foreach ($demande as $val) { ?>
             <div class="row">

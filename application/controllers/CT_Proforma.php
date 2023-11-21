@@ -9,6 +9,7 @@ class CT_Proforma extends CI_Controller {
         $this->load->model('MD_Employe');
         $this->load->model('MD_Article');
         $this->load->model('MD_Fournisseur');
+        $this->load->model('MD_Demande_proforma');
         $this->load->model('MD_Utilisateur');
         $this->load->model('MD_BesoinAchatFinal');
         $this->load->library('session');
@@ -44,7 +45,7 @@ class CT_Proforma extends CI_Controller {
       $qtt = $_GET['qtt'];
       $article = $_GET['article'];
       $data['error'] = $this->MD_Proforma->get_moins_disant($article, $date, $qtt);
-      $this->MD_Demande_proforma->update($date,$qtt,$article,2);
+      $this->MD_Demande_proforma->update($date,$qtt,$article,6);
       $data['date_actuel'] = $date;
       redirect('CT_Demande/request_detail/'.$date);
 	}	

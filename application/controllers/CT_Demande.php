@@ -70,7 +70,7 @@ class CT_Demande extends CI_Controller {
         $data['date_actuel']=$date;
         foreach ($articles as $article) {
             $frns = $this->MD_Fournisseur->list_request_providers(0, $date, $article->id_article);
-            $proforma = $this->MD_Proforma->list_by_article(0, $date, $article->id_article);
+            $proforma = $this->MD_Proforma->list_by_article(0,$date, $article->id_article);
             $p = count($proforma);
         
             if ($p < 3) {

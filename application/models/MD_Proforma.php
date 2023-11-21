@@ -15,6 +15,7 @@ class MD_Proforma extends CI_Model {
     function insert($id_proforma ,$qtt , $date , $article ) {
         $sql = "insert into proforma_final(id_proforma ,qtt, date_demande,id_article)  values ( %s,%s, %s, %s) ";
         $sql = sprintf($sql,$this->db->escape($id_proforma),$this->db->escape($qtt),$this->db->escape($date),$this->db->escape($article));
+        echo $this->db->last_query();
         $this->db->query($sql);
 
       }
@@ -44,24 +45,28 @@ class MD_Proforma extends CI_Model {
         $query = $this->db->get();
         return $query->result();
     }
-    public function get_moins_disant($article, $date, $qtt) {
+  public function get_moins_disant($article, $date, $qtt) {
     $proformas = $this->get_ttc($article, $date);
 
     foreach ($proformas as $proforma) {
         if ($proforma->stock >= $qtt) {
+            $quantite_restante = $proforma->stock - $qtt;
             $this->insert($proforma->id_proforma, $qtt, $date, $article);
-            $this->update($proforma->id_proforma, $proforma->stock - $qtt);
+            $this->update($proforma->id_proforma, $quantite_restante);
+            return;
         } elseif ($proforma->stock > 0) {
+            $quantite_restante = -($proforma->stock - $qtt);
             $this->insert($proforma->id_proforma, $proforma->stock, $date, $article);
             $this->update($proforma->id_proforma, 0);
-            $qtt -= $proforma->stock; 
+            $qtt -= $proforma->stock;
+        }
+        if ($qtt <= 0) {
+            return;
         }
     }
-
-    if ($qtt > 0) {
-        return "Insuffisance de stock pour votre commande, les autres commandes sont effectuées avec les quantités en stock de chaque fournisseur";
-    }
+    return "Insuffisance de stock pour votre commande, les autres commandes sont effectuées avec les quantités en stock de chaque fournisseur";
 }
+
 
      
     
@@ -86,6 +91,7 @@ class MD_Proforma extends CI_Model {
     public function update($id,$stock) {
         $sql = "update proforma set stock = %s  where id_proforma =%s";
         $sql = sprintf($sql,$this->db->escape($stock),$this->db->escape($id));
+        echo $this->db->last_query();
         $this->db->query($sql);
     }
     //DELETE
