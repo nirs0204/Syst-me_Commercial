@@ -30,7 +30,7 @@
                         <h4 class="card-title"><?php echo $article_info['nom']; ?> :<?php echo $article_info['quantite']; ?></h4>
                         <?php  foreach ($article_info['fournisseurs'] as $fournisseur) { ?>
                             <ul class="sidebar-legend">
-                                <li class="nav-item"><?php echo $fournisseur->nom; ?> : <?php echo $fournisseur->email; ?></li>
+                                <li class="nav-item"><?php echo $fournisseur->nom; ?> : <?php echo $fournisseur->email; ?>  <?php echo $article_info['upload']; ?></li>
                             </ul>
                          <?php  } ?>
                       </div>
