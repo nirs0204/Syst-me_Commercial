@@ -66,6 +66,11 @@ class CT_Demande extends CI_Controller {
         $data = array();
         $articles = $this->MD_Article->list_request(0, $date);
         $data['fpa'] = array();
+        $csv = '<form action="' . site_url("CT_Demande/toImport") . '?date=' . urlencode($date) . '" method="post" enctype="multipart/form-data">
+        <input type="file" class="form-control-file" id="file" name="file">
+          <br>
+      <button type="submit" class="btn btn-primary">Envoyer</button>
+    </form>';
         
         $data['date_actuel']=$date;
         foreach ($articles as $article) {
@@ -75,7 +80,9 @@ class CT_Demande extends CI_Controller {
         
             if ($p < 3) {
                 $data['fpa'][$article->id_article]['button'] = "";
+                $data['fpa'][$article->id_article]['upload'] = $csv;
             } else {
+                $data['fpa'][$article->id_article]['upload'] = "";
                 $data['fpa'][$article->id_article]['button'] = '<a href="' . site_url("CT_Proforma/") . '?qtt=' . $article->quantite . '&&article=' . $article->id_article . '&&date_demande=' . $date . '" class="btn btn-inverse-secondary btn-fw">Moins disant</a>';
             }
         
@@ -88,6 +95,48 @@ class CT_Demande extends CI_Controller {
         $data['date_actuel'] = $date;
         $this->viewer('detail_demande_envoyes', $data);         
     }
+    public function toImport(){
+        $date_actuel = urldecode($this->input->get('date'));
+        if(isset($_FILES['file']) && $_FILES['file']['error'] == UPLOAD_ERR_OK) {
+            $upload_directory = 'C:/Z-ITU/WEB/UwAmp_2.2.1/UwAmp/www/Syst-me_Commercial/proforma/';
+            $file_name = basename($_FILES['file']['name']);
+            $target_path = $upload_directory . $file_name;
+            if(move_uploaded_file($_FILES['file']['tmp_name'], $target_path)) {
+                $csv_content = file_get_contents($target_path);
+                redirect('CT_Demande/insertCSV/'.$_FILES['file']['name']);
+            } else {
+                echo 'Erreur';
+            }
+        } else {
+            echo 'Aucun fichier à importer ou erreur lors du téléchargement.';
+        }
+    }
+    public function insertCSV($filename) {
+        $file_path = 'C:/Z-ITU/WEB/UwAmp_2.2.1/UwAmp/www/Syst-me_Commercial/proforma/' . $filename;
+        if (($handle = fopen($file_path, 'r')) !== FALSE) {
+            // Loop through each row of the CSV file
+            while (($data = fgetcsv($handle, 1000, ',')) !== FALSE) {
+                // Extract data from the CSV row
+                $id_fournisseur = $data[0];
+                $id_article = $data[1];
+                $date_demande = $data[2];
+                $pu = $data[4];
+                $tva = $data[5];
+                $remise = $data[6];
+                $ttc = $data[7];
+                $stock = $data[8];
+
+                // Insert data into the Proforma table
+                $this->MD_Proforma->save($id_fournisseur, $id_article, $date_demande, $pu, $tva, $remise, $ttc, $stock);
+            }
+
+            fclose($handle);
+            echo 'Importation réussie.';
+        } else {
+            echo 'Erreur lors de l\'ouverture du fichier CSV.';
+        }
+    }
+    
 
 }
         
