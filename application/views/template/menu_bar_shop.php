@@ -64,14 +64,14 @@
             </a>
             <div class="collapse" id="charts">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html">Insertion PF</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html">Proforma existante</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo site_url("CT_Proforma/proformaForm"); ?>">Insertion PF</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo site_url("CT_Proforma/listProforma"); ?>">Proforma existante</a></li>
               </ul>
             </div>
           </li>
          
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo site_url("CT_ProformaFinal/listBonCommande2"); ?>"">
+            <a class="nav-link" href="<?php echo site_url("CT_ProformaFinal/listBonCommande2"); ?>">
               <i class="typcn typcn-document-text menu-icon"></i>
               <span class="menu-title">Bon de commande</span>
             </a>
