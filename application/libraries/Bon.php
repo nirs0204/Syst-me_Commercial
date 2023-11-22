@@ -1,7 +1,10 @@
 <?php 
-require('../fpdf.php');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-class PDF extends FPDF {
+require(APPPATH . 'third_party/fpdf.php');
+
+
+class Bon extends FPDF {
     function Header()
     {
         // A propos de la societe
@@ -135,16 +138,16 @@ class PDF extends FPDF {
     }
 }
 
-$pdf = new PDF();
-$header = array('Designation', 'Unite', 'PU HT', 'Quantite', '% TVA', 'Total TVA', 'Total TTC');
-$data = array();
-$ht = 6789;
-$tva = 647;
-$ttc = 9365;
-$ttcLettre = 'vingt million';
-$pdf->AddPage();
-$pdf->detailBonCommande1('2023-10-23', '123', 'Cheque', '30 jours', 'Paiement dans 60 jours', 'Super U', '020 23 456 78', 'email@example.com', 'Rakoto');
-$pdf->tableau($header,$data);
-$pdf->montantTotal($ht, $tva, $ttc, $ttcLettre);
-$pdf->Output();
-?>4
+// $pdf = new PDF();
+//$header = array('Designation', 'Unite', 'PU HT', 'Quantite', '% TVA', 'Total TVA', 'Total TTC');
+// $data = array();
+// $ht = 6789;
+// $tva = 647;
+// $ttc = 9365;
+// $ttcLettre = 'vingt million';
+// $pdf->AddPage();
+// $pdf->detailBonCommande1('2023-10-23', '123', 'Cheque', '30 jours', 'Paiement dans 60 jours', 'Super U', '020 23 456 78', 'email@example.com', 'Rakoto');
+// $pdf->tableau($header,$data);
+// $pdf->montantTotal($ht, $tva, $ttc, $ttcLettre);
+// $pdf->Output();
+?>

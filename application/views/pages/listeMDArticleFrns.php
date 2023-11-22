@@ -18,12 +18,12 @@
               </div>
             </div>
           </div>
-          <?php foreach ($listmd as $fournisseurNom => $articles) { ?>
+          <?php  foreach ($listBC as $id_fournisseur => $fournisseur) { ?>
           <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title"><?php echo $fournisseurNom; ?></h4>
+                  <h4 class="card-title"><?php echo $fournisseur['nom_fournisseur']; ?></h4>
                   <div class="table-responsive">
                     <table class="table">
                       <thead>
@@ -36,7 +36,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                      <?php foreach ($articles as $article) { ?>
+                      <?php foreach ($fournisseur['articles'] as $article) {  ?>
                         <tr>
                           <td><?php echo isset($article['nom_article']) ? $article['nom_article'] : ''; ?></td>
                           <td><?php echo isset($article['pu']) ? $article['pu'] : ''; ?></td>
@@ -47,6 +47,8 @@
                       <?php } ?>
                       </tbody>
                     </table>
+
+                    <a href="<?php echo site_url('CT_ProformaFinal/importPDF'); ?>" type="button" class="btn btn-outline-secondary btn-fw">voir PDF</a>
                   </div>
                 </div>
               </div>

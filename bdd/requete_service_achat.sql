@@ -203,13 +203,14 @@ FROM demande_proforma dp
 JOIN fournisseur f ON dp.id_fournisseur = f.id_fournisseur
 where dp.etat = 0 AND date_actuel = '2023-11-21' AND dp.id_article =1;
 
-SELECT f.nom AS nom_fournisseur, a.nom AS nom_article, p.pu, p.tva, p.remise, pf.qtt
+SELECT  f.id_fournisseur, f.nom AS nom_fournisseur, a.nom AS nom_article, p.pu, p.tva, p.remise, pf.qtt
 FROM proforma_final pf
 JOIN proforma p ON pf.id_proforma = p.id_proforma
 JOIN demande_proforma dp ON pf.id_article = p.id_article
 JOIN fournisseur f ON p.id_fournisseur = f.id_fournisseur
 JOIN article a ON pf.id_article = a.id_article
-WHERE dp.etat = 6;
+WHERE dp.etat = 6
+GROUP BY f.id_fournisseur, f.nom , a.nom , p.pu, p.tva, p.remise, pf.qtt ;
 
 
 --hierarchie 

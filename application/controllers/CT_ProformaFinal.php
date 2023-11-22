@@ -45,23 +45,38 @@ class CT_ProformaFinal extends CI_Controller {
         $this->viewer('/listeMDArticleFrns', $data);
     }
 
+    // Contrôleur
     public function listBonCommande2(){
         $listmd = $this->MD_ProformaFinal->getToTellLessByArticle(6);
-        $data['listBC'] = array();
-        foreach ($listmd as $besoin) {
-            $fournisseurNom = $besoin->nom_fournisseur;
-            if (!isset($data['listBC'][$fournisseurNom])) {
-                $data['listBC'][$fournisseurNom] = array();
-            }
-            $data['listBC'][$fournisseurNom][] = array(
-                'nom_article' => $besoin->nom_article,
-                'pu' => $besoin->pu,
-                'tva' => $besoin->tva,
-                'remise' => $besoin->remise,
-                'qtt' => $besoin->qtt
-            );
-        }
-        $this->viewer('/listeMDArticleFrns', $data);
+        $data['listBC'] = $listmd;
+            $this->viewer('/listeMDArticleFrns', $data);
+    }
+    public function importPDF(){
+
+        ob_start(); 
+        $this->load->library('Bon');
+        $pdf = new Bon();
+        $header = array('Designation', 'Unite', 'PU HT', 'Quantite', '% TVA', 'Total TVA', 'Total TTC');
+        $data = array();
+        $ht = 6789;
+        $tva = 647;
+        $ttc = 9365;
+        $ttcLettre = 'vingt million';
+        $pdf->AddPage();
+        $pdf->detailBonCommande1('2023-10-23', '123', 'Cheque', '30 jours', 'Paiement dans 60 jours', 'Super U', '020 23 456 78', 'email@example.com', 'Rakoto'); 
+        $pdf->tableau($header,$data);
+        $pdfData = $pdf->Output('','S'); 
+        ob_end_clean(); 
+    
+        $pdfData = base64_encode($pdfData); 
+
+
+        
+        echo '<script>';
+        echo 'var win = window.open();';
+        echo 'win.document.write(\'<iframe width="100%" height="100%" src="data:application/pdf;base64,' . $pdfData . '"></iframe>\');'; 
+        echo 'window.location.href = "' . base_url() . 'CT_ProformaFinal/listBonCommande2";'; 
+        echo '</script>'; 
     }
 }
 ?>
