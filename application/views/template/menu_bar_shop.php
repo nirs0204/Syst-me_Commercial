@@ -57,6 +57,12 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="<?php echo site_url("CT_BesoinAchat/request"); ?>">
+              <i class="typcn typcn-document-text menu-icon"></i>
+              <span class="menu-title">Detail Besoin Achat</span>
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
               <i class="typcn typcn-chart-pie-outline menu-icon"></i>
               <span class="menu-title">Proforma  Fournisseur</span>

@@ -268,7 +268,7 @@ JOIN article a ON ba.id_article = a.id_article
 JOIN categorie c ON a.id_categorie = c.id_categorie
 JOIN besoin_achat_final baf ON ba.idbesoin_achat = baf.idbesoin_achat
 LEFT JOIN demande_proforma dp ON a.id_article = dp.id_article
-WHERE dp.etat = 6 AND dp.date_actuel= '2023-11-21' AND ba.idbesoin_achat in (baf.idbesoin_achat)
+WHERE  dp.date_actuel= '2023-11-22' AND ba.idbesoin_achat in (baf.idbesoin_achat)
 GROUP BY ba.idbesoin_achat, e.nom , d.nom , a.nom , ba.raison ,  ba.quantite , ba.date_limite;
 
 
