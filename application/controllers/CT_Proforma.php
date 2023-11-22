@@ -71,5 +71,8 @@ class CT_Proforma extends CI_Controller {
         redirect('CT_Proforma/proformaForm');
     }
     
-    
+    public function listProforma(){
+        $data['listBC'] = $this->MD_Proforma->getAllProforma();
+        $this->viewer('/listeProforma', $data);
+    }
 }
