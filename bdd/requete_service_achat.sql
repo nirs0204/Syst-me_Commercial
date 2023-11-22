@@ -233,7 +233,7 @@ WHERE e.id_poste IN (
 );
 
 --CHANGE GET ACHAT
-SELECT ba.idbesoin_achat,  ba.quantite , ba.date_limite
+SELECT ba.idbesoin_achat, e.nom , d.nom, a.nom , ba.raison ,  ba.quantite , ba.date_limite
 FROM besoin_achat ba
 JOIN employe e ON e.id_employe = ba.id_employe
 JOIN poste p ON p.id_poste = e.id_poste
@@ -243,7 +243,7 @@ JOIN categorie c ON a.id_categorie = c.id_categorie
 JOIN besoin_achat_final baf ON ba.idbesoin_achat = baf.idbesoin_achat
 LEFT JOIN demande_proforma dp ON a.id_article = dp.id_article
 WHERE dp.etat = 6 AND dp.date_actuel= '2023-11-21' AND ba.idbesoin_achat in (baf.idbesoin_achat)
-GROUP BY ba.idbesoin_achat,  ba.quantite , ba.date_limite;
+GROUP BY ba.idbesoin_achat, e.nom , d.nom , a.nom , ba.raison ,  ba.quantite , ba.date_limite;
 
 
 SELECT  ba.idbesoin_achat , baf.idbesoin_achat 
