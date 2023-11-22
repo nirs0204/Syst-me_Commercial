@@ -234,6 +234,7 @@ WHERE e.id_poste IN (
 );
 
 --CHANGE GET ACHAT
+
 SELECT ba.idbesoin_achat, e.nom , d.nom, a.nom , ba.raison ,  ba.quantite , ba.date_limite
 FROM besoin_achat ba
 JOIN employe e ON e.id_employe = ba.id_employe
