@@ -68,7 +68,7 @@ class MD_Proforma extends CI_Model {
 }
 
     public function getAllProforma(){
-        $this->db->select('p.id_proforma, f.nom as nom_fournisseur, a.nom as nom_article, p.pu, p.tva, p.remise, p.stock');
+        $this->db->select('p.id_proforma,f.id_fournisseur,f.nom as nom_fournisseur, a.nom as nom_article, p.pu, p.tva, p.remise, p.stock');
         $this->db->from('proforma p');
         $this->db->join('fournisseur f', 'p.id_fournisseur = f.id_fournisseur');
         $this->db->join('article a', 'p.id_article = a.id_article');
@@ -76,6 +76,7 @@ class MD_Proforma extends CI_Model {
         $query = $this->db->get();
         $result = array();
         foreach ($query->result() as $row) {
+            $result[$row->id_fournisseur]['id_fournisseur'] = $row->id_fournisseur;
             $result[$row->id_fournisseur]['nom_fournisseur'] = $row->nom_fournisseur;
             $result[$row->id_fournisseur]['articles'][] = array(
                 'nom_article' => $row->nom_article,
