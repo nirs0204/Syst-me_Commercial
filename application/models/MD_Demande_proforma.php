@@ -31,6 +31,13 @@ class MD_Demande_proforma extends CI_Model {
         $query = $this->db->get();
         return $query->result();
     }
+    public function list_request() {
+        $this->db->select("dp.date_actuel");
+        $this->db->from('demande_proforma dp');
+        $this->db->group_by('dp.date_actuel');
+        $query = $this->db->get();
+        return $query->result();
+    }
     public function listOne($id) {
         $this->db->where('id_demande', $id);
         $query = $this->db->get('demande_proforma'); 
