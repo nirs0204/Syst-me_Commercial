@@ -48,7 +48,7 @@
                       </tbody>
                     </table>
 
-                    <a href="<?php echo site_url('CT_ProformaFinal/importPDF'); ?>" type="button" class="btn btn-outline-secondary btn-fw">voir PDF</a>
+                    <a href="<?php echo site_url('CT_ProformaFinal/importPDF'); ?>?id=<?php echo $fournisseur['id_fournisseur']; ?>" type="button" class="btn btn-outline-secondary btn-fw">voir PDF</a>
                   </div>
                 </div>
               </div>

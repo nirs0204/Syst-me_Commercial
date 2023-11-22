@@ -18,7 +18,7 @@ class Bon extends FPDF {
         $this->Ln(5);
         $this->SetFont('Arial','',10);
         $this->Cell(10);
-        $this->Cell(10,5,'Nom de notre societe',0,0,'L');
+        $this->Cell(10,5,'Company Celestial',0,0,'L');
         $this->Ln(25);
     }
 
@@ -86,21 +86,21 @@ class Bon extends FPDF {
     function tableau($header, $data)
     {
         // Largeurs des colonnes
-        $w = array(40, 15, 30, 15, 30, 30, 30);
+        $w = array(55, 30, 15, 30, 30, 30);
         // En-t�te
         for($i=0;$i<count($header);$i++)
             $this->Cell($w[$i],7,$header[$i],1,0,'C');
         $this->Ln();
         // Donn�es
+        $fill = false;
         foreach($data as $row)
         {
-            $this->Cell($w[0],6,$row[0],'LR',0,'L',$fill);
-            $this->Cell($w[1],6,$row[1],'LR',0,'L',$fill);
-            $this->Cell($w[2],6,number_format($row[2],0,',',' '),'LR',0,'R',$fill);
-            $this->Cell($w[3],6,number_format($row[3],0,',',' '),'LR',0,'R',$fill);
-            $this->Cell($w[4],6,number_format($row[4],0,',',' '),'LR',0,'R',$fill);
-            $this->Cell($w[5],6,number_format($row[5],0,',',' '),'LR',0,'R',$fill);
-            $this->Cell($w[6],6,number_format($row[6],0,',',' '),'LR',0,'R',$fill);
+            $this->Cell($w[0],6,$row->nom_article,'LR',0,'L',$fill);
+            $this->Cell($w[1],6,number_format($row->pu,0,',',' '),'LR',0,'R',$fill);
+            $this->Cell($w[2],6,number_format($row->qtt,0,',',' '),'LR',0,'R',$fill);
+            $this->Cell($w[3],6,number_format($row->tva,0,',',' '),'LR',0,'R',$fill);
+            $this->Cell($w[4],6,number_format($row->ttl_tva,0,',',' '),'LR',0,'R',$fill);
+            $this->Cell($w[5],6,number_format($row->ttl_ttc,0,',',' '),'LR',0,'R',$fill);
             $this->Ln();
         }
         // Trait de terminaison
