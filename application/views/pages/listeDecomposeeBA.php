@@ -10,31 +10,27 @@
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Liste des demandes par date</h4>
+                  <h4 class="card-title">Liste des besoins d'achat rejetés</h4>
                   <p class="card-description">
-                    Liste <code>.décomposée</code>
+                    Liste <code>.rejetée</code>
                   </p>
                   <div class="table-responsive">
                     <table class="table">
                       <thead>
                         <tr>
                           <th>Employe</th>
+                          <th>Departement</th>
                           <th>Article</th>
                           <th>Quantité</th>
-                          <th>Raison</th>
-                          <th>Date limite</th>
-                          <th></th>
                         </tr>
                       </thead>
                       <tbody>
                       <?php foreach ($besoinAchat as $besoin) { ?>
                         <tr>
-                          <td><?php echo isset($besoin->nom_employe) ? $besoin->nom_employe : '';?></td>
-                          <td><?php echo isset($besoin->nom_article) ? $besoin->nom_article : '';?></td>
+                          <td><?php echo isset($besoin->employe_nom) ? $besoin->employe_nom : '';?></td>
+                          <td><?php echo isset($besoin->departement_nom) ? $besoin->departement_nom : '';?></td>
+                          <td><?php echo isset($besoin->article_nom) ? $besoin->article_nom : '';?></td>
                           <td><?php echo isset($besoin->quantite) ? $besoin->quantite : '';?></td>
-                          <td><?php echo isset($besoin->raison) ? $besoin->raison : '';?></td>
-                          <td><?php echo isset($besoin->date_limite) ? $besoin->date_limite : '';?></td>
-                          <td><label class="badge badge-danger">Rejeté</label></td>
                         </tr>
                     <?php } ?>
                       </tbody>
