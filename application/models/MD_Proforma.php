@@ -123,6 +123,7 @@ class MD_Proforma extends CI_Model {
         $this->db->query($sql);
     }
 
+
     public function montantTTC($pu, $tva, $remise){
         $montantTVA = ($pu * $tva)/100;
         $montantTTC = $pu + $montantTVA;
