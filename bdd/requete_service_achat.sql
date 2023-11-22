@@ -307,6 +307,11 @@ JOIN fournisseur f ON dp.id_fournisseur = f.id_fournisseur
 where dp.etat = 0 AND date_actuel = '2023-11-20' AND dp.id_article =2)
 AND p.id_article = 2;
 
+select p.id_proforma, f.nom as nom_fournisseur, a.nom as nom_article, p.pu, p.tva, p.remise, p.stock
+from proforma p
+join fournisseur f on p.id_fournisseur = f.id_fournisseur
+join article a on p.id_article = a.id_article;
+
 --DISPACTH
 
 SELECT  * FROM proforma_final
