@@ -67,6 +67,28 @@ class MD_Proforma extends CI_Model {
     return "Insuffisance de stock pour votre commande, les autres commandes sont effectuées avec les quantités en stock de chaque fournisseur";
 }
 
+    public function getAllProforma(){
+        $this->db->select('p.id_proforma, f.nom as nom_fournisseur, a.nom as nom_article, p.pu, p.tva, p.remise, p.stock');
+        $this->db->from('proforma p');
+        $this->db->join('fournisseur f', 'p.id_fournisseur = f.id_fournisseur');
+        $this->db->join('article a', 'p.id_article = a.id_article');
+
+        $query = $this->db->get();
+        $result = array();
+        foreach ($query->result() as $row) {
+            $result[$row->id_fournisseur]['nom_fournisseur'] = $row->nom_fournisseur;
+            $result[$row->id_fournisseur]['articles'][] = array(
+                'nom_article' => $row->nom_article,
+                'pu' => $row->pu,
+                'tva' => $row->tva,
+                'remise' => $row->remise,
+                'stock' => $row->stock  
+            );
+        }
+
+        return $result;
+    }
+
 
      
     
@@ -100,6 +122,7 @@ class MD_Proforma extends CI_Model {
         $sql = sprintf($sql,$this->db->escape($id));
         $this->db->query($sql);
     }
+
 
     public function montantTTC($pu, $tva, $remise){
         $montantTVA = ($pu * $tva)/100;
