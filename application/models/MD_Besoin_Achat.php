@@ -69,6 +69,26 @@
             $this->db->query($sql);
 
         }
+        // Décomposition des demandes de besoin achat
+        public function decomposition_demande_besoin_achat($date){
+            $this->db->select('ba.idbesoin_achat, e.nom as employe_nom, d.nom as departement_nom, a.nom as article_nom, ba.raison, ba.quantite, ba.date_limite');
+            $this->db->from('besoin_achat ba');
+            $this->db->join('employe e', 'e.id_employe = ba.id_employe');
+            $this->db->join('poste p', 'p.id_poste = e.id_poste');
+            $this->db->join('departement d', 'd.id_departement = p.id_departement');
+            $this->db->join('article a', 'ba.id_article = a.id_article');
+            $this->db->join('categorie c', 'a.id_categorie = c.id_categorie');
+            $this->db->join('besoin_achat_final baf', 'ba.idbesoin_achat = baf.idbesoin_achat');
+            $this->db->join('demande_proforma dp', 'a.id_article = dp.id_article', 'left');
+            $this->db->where('dp.date_actuel', $date);
+            $this->db->where("ba.idbesoin_achat IN (SELECT idbesoin_achat FROM besoin_achat_final)", null, false); // Utilisez null, false pour éviter l'échappement
+            
+            $this->db->group_by('ba.idbesoin_achat, e.nom, d.nom, a.nom, ba.raison, ba.quantite, ba.date_limite');
+            
+            $query = $this->db->get();
+            return $query->result();
+        }
+        
 
     }
 ?>

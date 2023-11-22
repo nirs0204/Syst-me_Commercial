@@ -7,8 +7,8 @@ class CT_ProformaFinal extends CI_Controller {
         parent::__construct();
         $this->load->model('MD_ProformaFinal');
         $this->load->model('MD_Employe');
-        // $this->load->model('MD_Article');
-        // $this->load->model('MD_Fournisseur');
+         $this->load->model('MD_Article');
+         $this->load->model('MD_Fournisseur');
         $this->load->model('MD_Utilisateur');
         $this->load->model('MD_BesoinAchatFinal');
         $this->load->library('session');
@@ -52,19 +52,22 @@ class CT_ProformaFinal extends CI_Controller {
             $this->viewer('/listeMDArticleFrns', $data);
     }
     public function importPDF(){
-
+        $id = $_GET['id'];
+        $frns = $this->MD_Fournisseur->listOne($id); 
+        $cmd = $this->MD_ProformaFinal->somValeur($id); 
+        $ttcLettre = $this->MD_ProformaFinal->numberToWords($cmd->ttc);
         ob_start(); 
         $this->load->library('Bon');
         $pdf = new Bon();
-        $header = array('Designation', 'Unite', 'PU HT', 'Quantite', '% TVA', 'Total TVA', 'Total TTC');
-        $data = array();
+        $header = array('Designation', 'PU HT', 'Quantite', '% TVA', 'Total TVA', 'Total TTC');
+        $data =  $this->MD_ProformaFinal->getcmd(6,$id);
         $ht = 6789;
         $tva = 647;
         $ttc = 9365;
-        $ttcLettre = 'vingt million';
         $pdf->AddPage();
-        $pdf->detailBonCommande1('2023-10-23', '123', 'Cheque', '30 jours', 'Paiement dans 60 jours', 'Super U', '020 23 456 78', 'email@example.com', 'Rakoto'); 
+        $pdf->detailBonCommande1('2023-10-23', '123', 'Cheque', '30 jours', 'Paiement dans 60 jours',$frns->nom,$frns->contact,$frns->email,$frns->adresse); 
         $pdf->tableau($header,$data);
+        $pdf->montantTotal($cmd->ht,$cmd->tva,$cmd->ttc, $ttcLettre);
         $pdfData = $pdf->Output('','S'); 
         ob_end_clean(); 
     

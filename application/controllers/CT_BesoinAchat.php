@@ -13,6 +13,7 @@
             $this->load->model('MD_BesoinAchatFinal');
             $this->load->model('MD_Employe');
             $this->load->model('MD_Departement');
+            $this->load->model('MD_Demande_proforma');
             $this->load->model('MD_Utilisateur');
             
         }
@@ -88,6 +89,20 @@
             $idDept = $this->MD_Utilisateur->getIdDeptByUser($user['id_utilisateur']);
             $data['besoinAchat'] = $this->MD_BesoinAchatFinal->getAllNeedBuyByDeptByStatus($idDept, 5);
             $this->viewer('/listeBesoinAchatRejete', $data);
+        }
+
+        public function list_decomposee(){
+            $user = $_SESSION['user'];
+            $date = $_GET['date'];
+            $idDept = $this->MD_Utilisateur->getIdDeptByUser($user['id_utilisateur']);
+            $data['article'] = $this->MD_Article->list_detail($date);
+            $date = $this->input->get('date');
+            $data['besoinAchat'] = $this->MD_Besoin_Achat->decomposition_demande_besoin_achat($date);
+            $this->viewer('/listeDecomposeeBA', $data);
+        }
+        public function request() {
+            $data['demande'] = $this->MD_Demande_proforma->list_request() ;
+            $this->viewer('decomposition',$data);
         }
 
     }

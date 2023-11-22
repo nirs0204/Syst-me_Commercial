@@ -213,6 +213,30 @@ WHERE dp.etat = 6
 GROUP BY f.id_fournisseur, f.nom , a.nom , p.pu, p.tva, p.remise, pf.qtt ;
 
 
+SELECT  f.id_fournisseur, f.nom AS nom_fournisseur, a.nom AS nom_article, p.pu, p.tva, p.remise, pf.qtt, ((p.pu * pf.qtt * p.tva) /100 ) as ttl_tva,((p.pu * pf.qtt ) + ((p.pu * pf.qtt * p.tva) /100 ) ) as ttl_ttc
+FROM proforma_final pf
+JOIN proforma p ON pf.id_proforma = p.id_proforma
+JOIN demande_proforma dp ON pf.id_article = p.id_article
+JOIN fournisseur f ON p.id_fournisseur = f.id_fournisseur
+JOIN article a ON pf.id_article = a.id_article
+WHERE dp.etat = 6 AND f.id_fournisseur = 7
+GROUP BY f.id_fournisseur, f.nom , a.nom , p.pu, p.tva, p.remise, pf.qtt ;
+
+create view cmd as (
+    SELECT  f.id_fournisseur, f.nom AS nom_fournisseur, a.nom AS nom_article, p.pu, p.tva, p.remise, pf.qtt, ((p.pu * pf.qtt * p.tva) /100 ) as ttl_tva,((p.pu * pf.qtt ) + ((p.pu * pf.qtt * p.tva) /100 ) ) as ttl_ttc
+FROM proforma_final pf
+JOIN proforma p ON pf.id_proforma = p.id_proforma
+JOIN demande_proforma dp ON pf.id_article = p.id_article
+JOIN fournisseur f ON p.id_fournisseur = f.id_fournisseur
+JOIN article a ON pf.id_article = a.id_article
+WHERE dp.etat = 6 
+GROUP BY f.id_fournisseur, f.nom , a.nom , p.pu, p.tva, p.remise, pf.qtt 
+);
+
+select sum(pu*qtt) as ht , sum(ttl_tva) as tva , sum(ttl_ttc) as ttc from cmd where id_fournisseur = 7;
+
+
+
 --hierarchie 
 
 SELECT e.id_employe , d.id_departement , p.id_poste FROM responsable r
@@ -244,7 +268,7 @@ JOIN article a ON ba.id_article = a.id_article
 JOIN categorie c ON a.id_categorie = c.id_categorie
 JOIN besoin_achat_final baf ON ba.idbesoin_achat = baf.idbesoin_achat
 LEFT JOIN demande_proforma dp ON a.id_article = dp.id_article
-WHERE dp.etat = 6 AND dp.date_actuel= '2023-11-21' AND ba.idbesoin_achat in (baf.idbesoin_achat)
+WHERE  dp.date_actuel= '2023-11-22' AND ba.idbesoin_achat in (baf.idbesoin_achat)
 GROUP BY ba.idbesoin_achat, e.nom , d.nom , a.nom , ba.raison ,  ba.quantite , ba.date_limite;
 
 
@@ -282,6 +306,11 @@ FROM demande_proforma dp
 JOIN fournisseur f ON dp.id_fournisseur = f.id_fournisseur
 where dp.etat = 0 AND date_actuel = '2023-11-20' AND dp.id_article =2)
 AND p.id_article = 2;
+
+select p.id_proforma, f.nom as nom_fournisseur, a.nom as nom_article, p.pu, p.tva, p.remise, p.stock
+from proforma p
+join fournisseur f on p.id_fournisseur = f.id_fournisseur
+join article a on p.id_article = a.id_article;
 
 --DISPACTH
 

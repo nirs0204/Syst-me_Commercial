@@ -10,9 +10,9 @@
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Liste des moins disant</h4>
+                  <h4 class="card-title">Liste Proforma</h4>
                   <p class="card-description">
-                    Bon de commande <code>.A Envoyé</code>
+                    Liste Proforma <code>.Reçu</code>
                   </p>
                 </div>
               </div>
@@ -32,7 +32,7 @@
                           <th>PU (HT)</th>
                           <th>Taux de TVA</th>
                           <th>Remise (%)</th>
-                          <th>Quantité</th>
+                          <th>Stock</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -42,13 +42,11 @@
                           <td><?php echo isset($article['pu']) ? $article['pu'] : ''; ?></td>
                           <td><?php echo isset($article['tva']) ? $article['tva'] : ''; ?></td>
                           <td><?php echo isset($article['remise']) ? $article['remise'] : ''; ?></td>
-                          <td><?php echo isset($article['qtt']) ? $article['qtt'] : ''; ?></td>
+                          <td><?php echo isset($article['stock']) ? $article['stock'] : ''; ?></td>
                         </tr>
                       <?php } ?>
                       </tbody>
                     </table>
-
-                    <a href="<?php echo site_url('CT_ProformaFinal/importPDF'); ?>?id=<?php echo $fournisseur['id_fournisseur']; ?>" type="button" class="btn btn-outline-secondary btn-fw">voir PDF</a>
                   </div>
                 </div>
               </div>
