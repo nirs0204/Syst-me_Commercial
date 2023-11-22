@@ -90,6 +90,14 @@
             $this->viewer('/listeBesoinAchatRejete', $data);
         }
 
+        public function list_decomposee(){
+            $user = $_SESSION['user'];
+            $idDept = $this->MD_Utilisateur->getIdDeptByUser($user['id_utilisateur']);
+            $date = $this->input->post('date');
+            $data['besoinAchat'] = $this->MD_BesoinAchat->decomposition_demande_besoin_achat($date);
+            $this->viewer('/listeDecomposeeBA', $data);
+        }
+
     }
 
 ?>
