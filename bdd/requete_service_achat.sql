@@ -201,15 +201,16 @@ where dp.etat = 0 AND date_actuel = '2023-11-20' AND dp.id_article =1;
 SELECT dp.id_fournisseur
 FROM demande_proforma dp
 JOIN fournisseur f ON dp.id_fournisseur = f.id_fournisseur
-where dp.etat = 0 AND date_actuel = '2023-11-20' AND dp.id_article =1;
+where dp.etat = 0 AND date_actuel = '2023-11-21' AND dp.id_article =1;
 
-SELECT f.nom AS nom_fournisseur, a.nom AS nom_article, p.pu, p.tva, p.remise, pf.qtt
+SELECT  f.id_fournisseur, f.nom AS nom_fournisseur, a.nom AS nom_article, p.pu, p.tva, p.remise, pf.qtt
 FROM proforma_final pf
 JOIN proforma p ON pf.id_proforma = p.id_proforma
 JOIN demande_proforma dp ON pf.id_article = p.id_article
 JOIN fournisseur f ON p.id_fournisseur = f.id_fournisseur
 JOIN article a ON pf.id_article = a.id_article
-WHERE dp.etat = 6;
+WHERE dp.etat = 6
+GROUP BY f.id_fournisseur, f.nom , a.nom , p.pu, p.tva, p.remise, pf.qtt ;
 
 
 --hierarchie 
@@ -233,13 +234,18 @@ WHERE e.id_poste IN (
 );
 
 --CHANGE GET ACHAT
-SELECT  a.id_categorie , c.categorie, sum(ba.quantite) as qtt, min(ba.date_limite) as min_date , max(date_limite) as max_date
+
+SELECT ba.idbesoin_achat, e.nom , d.nom, a.nom , ba.raison ,  ba.quantite , ba.date_limite
 FROM besoin_achat ba
+JOIN employe e ON e.id_employe = ba.id_employe
+JOIN poste p ON p.id_poste = e.id_poste
+JOIN departement d ON d.id_departement = p.id_departement
 JOIN article a ON ba.id_article = a.id_article
 JOIN categorie c ON a.id_categorie = c.id_categorie
 JOIN besoin_achat_final baf ON ba.idbesoin_achat = baf.idbesoin_achat
-WHERE ba.etat = 3 AND ba.idbesoin_achat in (baf.idbesoin_achat)
-GROUP BY c.id_categorie ;
+LEFT JOIN demande_proforma dp ON a.id_article = dp.id_article
+WHERE dp.etat = 6 AND dp.date_actuel= '2023-11-21' AND ba.idbesoin_achat in (baf.idbesoin_achat)
+GROUP BY ba.idbesoin_achat, e.nom , d.nom , a.nom , ba.raison ,  ba.quantite , ba.date_limite;
 
 
 SELECT  ba.idbesoin_achat , baf.idbesoin_achat 
@@ -255,7 +261,7 @@ where dp. ;
 
  -----
  SELECT p.* FROM Proforma p 
- where p.id_article = 1 AND p.date_demande = '2023-11-20'
+ where p.id_article = 1 AND p.date_demande = '2023-11-21'
  ORDER BY p.ttc ASC ;
 
  
@@ -277,7 +283,9 @@ JOIN fournisseur f ON dp.id_fournisseur = f.id_fournisseur
 where dp.etat = 0 AND date_actuel = '2023-11-20' AND dp.id_article =2)
 AND p.id_article = 2;
 
---PROFORMA
+--DISPACTH
+
+SELECT  * FROM proforma_final
 
 
 --------------

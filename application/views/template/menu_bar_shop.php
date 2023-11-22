@@ -69,18 +69,12 @@
               </ul>
             </div>
           </li>
+         
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
-              <i class="typcn typcn-film menu-icon"></i>
+            <a class="nav-link" href="<?php echo site_url("CT_ProformaFinal/listBonCommande2"); ?>"">
+              <i class="typcn typcn-document-text menu-icon"></i>
               <span class="menu-title">Bon de commande</span>
-              <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="form-elements">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Création BD</a></li>
-                <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Validation BD</a></li>
-              </ul>
-            </div>
           </li>
           </ul>
       </nav>

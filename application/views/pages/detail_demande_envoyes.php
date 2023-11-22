@@ -9,15 +9,31 @@
     <div class="main-panel">
         <div class="content-wrapper">
 
-        
+        <div class="row">
+                  <div class="col-lg-12 grid-margin stretch-card">
+                    <div class="card">
+                      <div class="card-body">
+                          <h4 class="card-title">Detail Demande envoyées: (<?php echo $date_actuel; ?>)</h4>
+                            <p class="card-description">
+                              Liste des <code>.détails d'article + fournisseur</code>
+                            </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+          
+                
+
                 <div class="row">
                   <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                       <div class="card-body">
-                        <h4 class="card-title">Detail Demande envoyées: (<?php echo $date_actuel; ?>)</h4>
-                        <p class="card-description">
-                          Liste des <code>.détails d'article + fournisseur</code>
-                        </p>
+                      <h4 class="card-title">Import proforma</h4>
+                      <form action="<?php echo site_url("CT_Demande/toImport"); ?>?date=<?php echo $date_actuel; ?>" method="post" enctype="multipart/form-data">
+                          <input type="file" class="form-control-file" id="file" name="file">
+                            <br>
+                        <button type="submit" class="btn btn-primary">Envoyer</button>
+                      </form>
                       </div>
                     </div>
                   </div>
