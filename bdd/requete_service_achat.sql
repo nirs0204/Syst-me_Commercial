@@ -45,15 +45,16 @@ DELETE FROM  bon_commande;
 -------------------
 ----DROP TABLE ----
 -------------------
+DROP VIEW cmd;
+DROP TABLE proforma_final;
+DROP TABLE proforma;
 DROP VIEW get_Achat;
 DROP TABLE  company;
 DROP TABLE responsable;
 DROP TABLE  condition_achat;
-DROP TABLE  proforma_final;
 DROP TABLE  bon_commande;
 DROP TABLE  utilisateur;
 DROP TABLE demande_proforma;
-DROP TABLE  proforma;
 DROP TABLE  fournisseur;
 DROP TABLE  besoin_achat_final;
 DROP TABLE  besoin_achat;

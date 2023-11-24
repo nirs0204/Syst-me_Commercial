@@ -81,8 +81,6 @@ class CT_Demande extends CI_Controller {
                 $data['fpa'][$article->id_article]['upload'] = "";
                 $data['fpa'][$article->id_article]['button'] = '<a href="' . site_url("CT_Proforma/") . '?qtt=' . $article->quantite . '&&article=' . $article->id_article . '&&date_demande=' . $date . '" class="btn btn-inverse-secondary btn-fw">Moins disant</a>';
             }
-        
-            // Ajouter le nom et la quantité de l'article au tableau $fpa
             $data['fpa'][$article->id_article]['id_article'] = $article->id_article;
             $data['fpa'][$article->id_article]['nom'] = $article->nom;
             $data['fpa'][$article->id_article]['quantite'] = $article->quantite;
@@ -110,19 +108,15 @@ class CT_Demande extends CI_Controller {
     public function insertCSV($filename,$date) {
         $file_path = 'C:/Z-ITU/WEB/UwAmp_2.2.1/UwAmp/www/Syst-me_Commercial/proforma/' . $filename;
         if (($handle = fopen($file_path, 'r')) !== FALSE) {
-            // Loop through each row of the CSV file
             while (($data = fgetcsv($handle, 1000, ',')) !== FALSE) {
-                // Extract data from the CSV row
                 $id_fournisseur = $data[0];
                 $id_article = $data[1];
-                $date_demande = $data[2];
+                $date_demande = $date;
                 $pu = $data[4];
                 $tva = $data[5];
                 $remise = $data[6];
                 $ttc = $data[7];
                 $stock = $data[8];
-
-                // Insert data into the Proforma table
                 $this->MD_Proforma->save($id_fournisseur, $id_article, $date_demande, $pu, $tva, $remise, $ttc, $stock);
             }
 
