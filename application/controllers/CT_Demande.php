@@ -20,13 +20,14 @@ class CT_Demande extends CI_Controller {
         if(isset($_SESSION['user'])){
             $userId = $_SESSION['user']['id_employe'];
             $tab = $this->MD_Employe->get_admin(  $_SESSION['user']['id_employe']);
-            $dept = $this->MD_Utilisateur->getIdDeptByUser($_SESSION['user']['id_utilisateur']);
+            $dept = $this->MD_Utilisateur->getAll_ByUser($_SESSION['user']['id_utilisateur']);
             $v = array(
                 'page' => $page,
                 'data' => $data
             );
+            $v['finance'] = $dept->id_poste;
             $v['notify'] =  $this->MD_BesoinAchatFinal->notify_Shop(3);
-            $v['notifyr'] =  $this->MD_BesoinAchatFinal->notify_Resp(1,$dept);
+            $v['notifyr'] =  $this->MD_BesoinAchatFinal->notify_Resp(1,$dept->id_departement);
             $v['isAllDirector']=$tab[0];
             $v['isShopDirector']=$tab[1];
             $this->load->view('template/basepage', $v);
