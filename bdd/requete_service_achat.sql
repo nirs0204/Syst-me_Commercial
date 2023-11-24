@@ -45,6 +45,7 @@ DELETE FROM  bon_commande;
 -------------------
 ----DROP TABLE ----
 -------------------
+
 DROP VIEW cmd;
 DROP TABLE proforma_final;
 DROP TABLE proforma;
@@ -63,6 +64,7 @@ DROP TABLE categorie;
 DROP TABLE  employe;
 DROP TABLE  poste;
 DROP TABLE  departement;
+
 
 
 
