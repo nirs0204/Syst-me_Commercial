@@ -14,7 +14,6 @@ class CT_ProformaFinal extends CI_Controller {
         $this->load->library('session');
         
     }
-
     private function viewer($page, $data){
         if(isset($_SESSION['user'])){
             $userId = $_SESSION['user']['id_employe'];
@@ -30,7 +29,6 @@ class CT_ProformaFinal extends CI_Controller {
             $v['isAllDirector']=$tab[0];
             $v['isShopDirector']=$tab[1];
             $this->load->view('template/basepage', $v);
-
         }else{
             $v = array(
                 'page' => $page,
@@ -43,7 +41,6 @@ class CT_ProformaFinal extends CI_Controller {
         $data['listBC'] = $this->MD_ProformaFinal->getToTellLessByArticle(6);
         $this->viewer('/listeMDArticleFrns', $data);
     }
-
     // Contrôleur
     public function listBonCommande2(){
         $listmd = $this->MD_ProformaFinal->getToTellLessByArticle(8);
