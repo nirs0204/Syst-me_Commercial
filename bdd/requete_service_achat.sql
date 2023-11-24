@@ -45,23 +45,26 @@ DELETE FROM  bon_commande;
 -------------------
 ----DROP TABLE ----
 -------------------
-DROP VIEW get_Achat CASCADE;
-DROP TABLE  company CASCADE;
-DROP TABLE responsable CASCADE;
-DROP TABLE  condition_achat CASCADE;
-DROP TABLE  proforma_final CASCADE;
-DROP TABLE  bon_commande CASCADE;
-DROP TABLE  utilisateur CASCADE;
-DROP TABLE demande_proforma CASCADE;
-DROP TABLE  proforma CASCADE;
-DROP TABLE  fournisseur CASCADE;
-DROP TABLE  besoin_achat_final CASCADE;
-DROP TABLE  besoin_achat CASCADE;
-DROP TABLE  article CASCADE;
-DROP TABLE categorie CASCADE;
-DROP TABLE  employe CASCADE;
-DROP TABLE  poste CASCADE;
-DROP TABLE  departement CASCADE;
+
+DROP VIEW cmd;
+DROP TABLE proforma_final;
+DROP TABLE proforma;
+DROP VIEW get_Achat;
+DROP TABLE  company;
+DROP TABLE responsable;
+DROP TABLE  condition_achat;
+DROP TABLE  bon_commande;
+DROP TABLE  utilisateur;
+DROP TABLE demande_proforma;
+DROP TABLE  fournisseur;
+DROP TABLE  besoin_achat_final;
+DROP TABLE  besoin_achat;
+DROP TABLE  article;
+DROP TABLE categorie;
+DROP TABLE  employe;
+DROP TABLE  poste;
+DROP TABLE  departement;
+
 
 
 
@@ -203,17 +206,17 @@ FROM demande_proforma dp
 JOIN fournisseur f ON dp.id_fournisseur = f.id_fournisseur
 where dp.etat = 0 AND date_actuel = '2023-11-21' AND dp.id_article =1;
 
-SELECT  f.id_fournisseur, f.nom AS nom_fournisseur, a.nom AS nom_article, p.pu, p.tva, p.remise, pf.qtt
+SELECT f.id_fournisseur, dp.etat ,f.nom AS nom_fournisseur, a.nom AS nom_article, p.pu, p.tva, p.remise, pf.qtt
 FROM proforma_final pf
 JOIN proforma p ON pf.id_proforma = p.id_proforma
 JOIN demande_proforma dp ON pf.id_article = p.id_article
 JOIN fournisseur f ON p.id_fournisseur = f.id_fournisseur
 JOIN article a ON pf.id_article = a.id_article
 WHERE dp.etat = 6
-GROUP BY f.id_fournisseur, f.nom , a.nom , p.pu, p.tva, p.remise, pf.qtt ;
+GROUP BY f.id_fournisseur,dp.etat , f.nom , a.nom , p.pu, p.tva, p.remise, pf.qtt ;
 
 
-SELECT  f.id_fournisseur, f.nom AS nom_fournisseur, a.nom AS nom_article, p.pu, p.tva, p.remise, pf.qtt, ((p.pu * pf.qtt * p.tva) /100 ) as ttl_tva,((p.pu * pf.qtt ) + ((p.pu * pf.qtt * p.tva) /100 ) ) as ttl_ttc
+SELECT  f.id_fournisseur, f.nom AS nom_fournisseur, a.nom AS nom_article, p.pu, p.tva, p.remise, pf.qtt, ((p.pu * pf.qtt * p.tva) /100 ) as ttl_tva,((p.pu * pf.qtt ) + ((p.pu * pf.qtt * p.tva) /100 ) ) as ttl_ttc , 
 FROM proforma_final pf
 JOIN proforma p ON pf.id_proforma = p.id_proforma
 JOIN demande_proforma dp ON pf.id_article = p.id_article
@@ -221,6 +224,9 @@ JOIN fournisseur f ON p.id_fournisseur = f.id_fournisseur
 JOIN article a ON pf.id_article = a.id_article
 WHERE dp.etat = 6 AND f.id_fournisseur = 7
 GROUP BY f.id_fournisseur, f.nom , a.nom , p.pu, p.tva, p.remise, pf.qtt ;
+
+--+remise:
+,((p.pu * pf.qtt ) + ((p.pu * pf.qtt * p.tva) /100  ) -  ((p.pu * pf.qtt * p.remise) /100 ) ) as ttl_ttc 
 
 create view cmd as (
     SELECT  f.id_fournisseur, f.nom AS nom_fournisseur, a.nom AS nom_article, p.pu, p.tva, p.remise, pf.qtt, ((p.pu * pf.qtt * p.tva) /100 ) as ttl_tva,((p.pu * pf.qtt ) + ((p.pu * pf.qtt * p.tva) /100 ) ) as ttl_ttc
@@ -315,6 +321,55 @@ join article a on p.id_article = a.id_article;
 --DISPACTH
 
 SELECT  * FROM proforma_final
+
+
+-----
+
+SELECT
+    f.id_fournisseur,
+    f.nom AS nom_fournisseur,
+    a.nom AS nom_article,
+    p.pu,
+    p.tva,
+    p.remise,
+    pf.qtt,
+    ((p.pu * pf.qtt * p.tva) / 100) AS ttl_tva,
+    ((p.pu * pf.qtt) + ((p.pu * pf.qtt * p.tva) / 100)) AS ttl_ttc
+FROM
+    proforma_final pf
+JOIN proforma p ON pf.id_proforma = p.id_proforma
+JOIN demande_proforma dp ON p.id_fournisseur = dp.id_fournisseur
+JOIN fournisseur f ON dp.id_fournisseur = f.id_fournisseur
+JOIN article a ON dp.id_article = a.id_article
+WHERE
+    dp.etat = 8
+    and f.id_fournisseur=1
+GROUP BY f.id_fournisseur, f.nom , a.nom , p.pu, p.tva, p.remise, pf.qtt ;
+
+
+SELECT
+    f.id_fournisseur,
+    pf.id_final,
+    f.nom AS nom_fournisseur,
+    a.nom AS nom_article,
+    p.pu,
+    p.tva,
+    p.remise,
+    pf.qtt,
+    ((p.pu * pf.qtt * p.tva) / 100) AS ttl_tva,
+    ((p.pu * pf.qtt) + ((p.pu * pf.qtt * p.tva) / 100)) AS ttl_ttc
+FROM
+    proforma_final pf
+JOIN proforma p ON pf.id_proforma = p.id_proforma
+JOIN demande_proforma dp ON p.id_fournisseur = dp.id_fournisseur AND p.id_article = dp.id_article
+JOIN fournisseur f ON dp.id_fournisseur = f.id_fournisseur
+JOIN article a ON dp.id_article = a.id_article
+WHERE
+    dp.etat = 8;
+
+SELECT id_fournisseur, nom_fournisseur,id_article,id_final, nom_article, pu, tva, remise, qtt ,ttl_tva, ttl_ttc,date_actuel from cmd
+WHERE id_fournisseur = 7
+GROUP BY id_fournisseur, nom_fournisseur,id_article,id_final, nom_article, pu, tva, remise, qtt ,ttl_tva, ttl_ttc,date_actuel;
 
 
 --------------

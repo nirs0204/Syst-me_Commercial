@@ -83,7 +83,7 @@ create table besoin_achat(
     id_departement int references departement(id_departement),
     quantite int,
     raison varchar(255),
-    etat int,
+    etat int,--1: au debut , 3:valider_achat et fournisseur , 5:rejeter
     date_limite date,
     priorite int
 );
@@ -99,10 +99,19 @@ CREATE TABLE demande_proforma(
     id_demande serial primary key,
     id_article int references article(id_article),
     id_fournisseur int references fournisseur(id_fournisseur),
-    etat int default 0,
+    etat int default 0,--0:au debut , 6:valider_achat , 8:valider_finance , 10:rejeter
     quantite int,
     date_actuel date default CURRENT_DATE
 );
+
+create view get_achat as (SELECT a.id_article, a.nom, a.id_categorie , c.categorie, sum(ba.quantite) as qtt, min(ba.date_limite) as min_date , max(date_limite) as max_date
+FROM besoin_achat ba
+JOIN article a ON ba.id_article = a.id_article
+JOIN categorie c ON a.id_categorie = c.id_categorie
+JOIN besoin_achat_final baf ON ba.idbesoin_achat = baf.idbesoin_achat
+WHERE ba.etat = 3 AND ba.idbesoin_achat in (baf.idbesoin_achat)
+GROUP BY a.id_article,c.id_categorie );
+
 
 create table proforma (
     id_proforma serial primary key ,
@@ -126,35 +135,34 @@ create table proforma_final(
     date_demande date
 );
 
-create view get_achat as (SELECT a.id_article, a.nom, a.id_categorie , c.categorie, sum(ba.quantite) as qtt, min(ba.date_limite) as min_date , max(date_limite) as max_date
-FROM besoin_achat ba
-JOIN article a ON ba.id_article = a.id_article
-JOIN categorie c ON a.id_categorie = c.id_categorie
-JOIN besoin_achat_final baf ON ba.idbesoin_achat = baf.idbesoin_achat
-WHERE ba.etat = 3 AND ba.idbesoin_achat in (baf.idbesoin_achat)
-GROUP BY a.id_article,c.id_categorie );
+
 
 create view cmd as (
-    SELECT  f.id_fournisseur, f.nom AS nom_fournisseur, a.nom AS nom_article, p.pu, p.tva, p.remise, pf.qtt, ((p.pu * pf.qtt * p.tva) /100 ) as ttl_tva,((p.pu * pf.qtt ) + ((p.pu * pf.qtt * p.tva) /100 ) ) as ttl_ttc
-FROM proforma_final pf
+SELECT  pf.id_final,p.id_proforma,p.id_fournisseur ,p.id_article,
+        p.date_demande,p.date_proforma,f.nom AS nom_fournisseur,a.nom AS nom_article,
+        p.pu, p.tva, p.remise, pf.qtt, ((p.pu * pf.qtt * p.tva) /100 ) as ttl_tva,((p.pu * pf.qtt ) + ((p.pu * pf.qtt * p.tva) /100  ) -  ((p.pu * pf.qtt * p.remise) /100 ) ) as ttl_ttc ,
+        dp.etat,dp.date_actuel
+        FROM
+    proforma_final pf
 JOIN proforma p ON pf.id_proforma = p.id_proforma
-JOIN demande_proforma dp ON pf.id_article = p.id_article
-JOIN fournisseur f ON p.id_fournisseur = f.id_fournisseur
-JOIN article a ON pf.id_article = a.id_article
-WHERE dp.etat = 6 
-GROUP BY f.id_fournisseur, f.nom , a.nom , p.pu, p.tva, p.remise, pf.qtt 
+JOIN demande_proforma dp ON p.id_fournisseur = dp.id_fournisseur AND p.id_article = dp.id_article
+JOIN fournisseur f ON dp.id_fournisseur = f.id_fournisseur
+JOIN article a ON dp.id_article = a.id_article
+WHERE
+    dp.etat = 8
 );
 
 
 update proforma set stock =5 where id_proforma = 5;
 
-CREATE TABLE condition_achat (
+CREATE TABLE condition_paiement (
     id_condition_achat SERIAL PRIMARY KEY,
+    id_fournisseur INTEGER REFERENCES fournisseur(id_fournisseur),
     payement DECIMAL(20,3),
     livraison DECIMAL(20,3),
     payement_livraison DECIMAL(20,3),
     payement_reste DECIMAL(20,3),
-    id_fournisseur INTEGER REFERENCES fournisseur(id_fournisseur)
+    date_limit date
 );
 
 CREATE TABLE bon_commande (
@@ -162,6 +170,9 @@ CREATE TABLE bon_commande (
     date_emmission DATE,
     id_fournisseur INTEGER REFERENCES fournisseur(id_fournisseur)
 );
+
+
+
 
 
 
