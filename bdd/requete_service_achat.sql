@@ -45,23 +45,23 @@ DELETE FROM  bon_commande;
 -------------------
 ----DROP TABLE ----
 -------------------
-DROP VIEW get_Achat;
-DROP TABLE  company;
-DROP TABLE responsable;
-DROP TABLE  condition_achat;
-DROP TABLE  proforma_final;
-DROP TABLE  bon_commande;
-DROP TABLE  utilisateur;
-DROP TABLE demande_proforma;
-DROP TABLE  proforma;
-DROP TABLE  fournisseur;
-DROP TABLE  besoin_achat_final;
-DROP TABLE  besoin_achat;
-DROP TABLE  article;
-DROP TABLE categorie;
-DROP TABLE  employe;
-DROP TABLE  poste;
-DROP TABLE  departement;
+DROP VIEW get_Achat CASCADE;
+DROP TABLE  company CASCADE;
+DROP TABLE responsable CASCADE;
+DROP TABLE  condition_achat CASCADE;
+DROP TABLE  proforma_final CASCADE;
+DROP TABLE  bon_commande CASCADE;
+DROP TABLE  utilisateur CASCADE;
+DROP TABLE demande_proforma CASCADE;
+DROP TABLE  proforma CASCADE;
+DROP TABLE  fournisseur CASCADE;
+DROP TABLE  besoin_achat_final CASCADE;
+DROP TABLE  besoin_achat CASCADE;
+DROP TABLE  article CASCADE;
+DROP TABLE categorie CASCADE;
+DROP TABLE  employe CASCADE;
+DROP TABLE  poste CASCADE;
+DROP TABLE  departement CASCADE;
 
 
 
