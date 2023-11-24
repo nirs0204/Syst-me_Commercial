@@ -65,7 +65,7 @@ class CT_ProformaFinal extends CI_Controller {
         $tva = 647;
         $ttc = 9365;
         $pdf->AddPage();
-        $pdf->detailBonCommande1('2023-10-23', '123', 'Cheque', '30 jours', 'Paiement dans 60 jours',$frns->nom,$frns->contact,$frns->email,$frns->adresse); 
+        $pdf->detailBonCommande1('2023-10-23', 'BD00123', 'Cheque', '30 jours', 'Paiement dans 60 jours',$frns->nom,$frns->contact,$frns->email,$frns->adresse); 
         $pdf->tableau($header,$data);
         $pdf->montantTotal($cmd->ht,$cmd->tva,$cmd->ttc, $ttcLettre);
         $pdfData = $pdf->Output('','S'); 
