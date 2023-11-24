@@ -64,6 +64,19 @@ class MD_Utilisateur extends CI_Model {
             return null;
         }
     }
+    public function getAll_ByUser($id_utilisateur) {
+        $this->db->select('d.id_departement,p.id_poste');
+        $this->db->from('utilisateur u');
+        $this->db->join('employe e', 'u.id_employe = e.id_employe');
+        $this->db->join('poste p', 'e.id_poste = p.id_poste');
+        $this->db->join('departement d', 'p.id_departement = d.id_departement');
+        $this->db->where('u.id_utilisateur', $id_utilisateur);
+
+        $query = $this->db->get();
+        return $query->row();
+
+
+    }
 
 }
 ?>

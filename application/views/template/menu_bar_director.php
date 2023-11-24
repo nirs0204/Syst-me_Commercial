@@ -50,11 +50,13 @@
               <span class="menu-title" >Validation Besoin achat</span>
             </a>
           </li>
+          <?php if($_SESSION['user']['id_employe'] == 3) { ?>
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="<?php echo site_url("CT_Valid_cmd/"); ?>">
               <i class="typcn typcn-th-small-outline menu-icon"></i>
               <span class="menu-title">Validation bon de commande</span>
             </a>
           </li>
+          <?php } ?>
         </ul>
       </nav>

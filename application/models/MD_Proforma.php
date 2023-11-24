@@ -16,6 +16,7 @@ class MD_Proforma extends CI_Model {
         $sql = "insert into proforma_final(id_proforma ,qtt, date_demande,id_article)  values ( %s,%s, %s, %s) ";
         $sql = sprintf($sql,$this->db->escape($id_proforma),$this->db->escape($qtt),$this->db->escape($date),$this->db->escape($article));
         echo $this->db->last_query();
+        echo $sql;
         $this->db->query($sql);
 
       }
