@@ -5,19 +5,8 @@ class MD_ProformaFinal extends CI_Model {
  // Modèle MD_ProformaFinal
 
     public function getToTellLessByArticle($etat) {
-        $this->db->select('
-                f.id_fournisseur,f.nom AS nom_fournisseur,a.nom AS nom_article,p.pu,
-                p.tva,p.remise,pf.qtt,((p.pu * pf.qtt * p.tva) / 100) AS ttl_tva,
-                ((p.pu * pf.qtt) + ((p.pu * pf.qtt * p.tva) / 100)) AS ttl_ttc');
-
-            $this->db->from('proforma_final pf');
-            $this->db->join('proforma p', 'pf.id_proforma = p.id_proforma');
-            $this->db->join('demande_proforma dp', 'p.id_fournisseur = dp.id_fournisseur AND p.id_article = dp.id_article');
-            $this->db->join('fournisseur f', 'dp.id_fournisseur = f.id_fournisseur');
-            $this->db->join('article a', 'dp.id_article = a.id_article');
-            
-            $this->db->where('dp.etat', $etat);
-
+            $this->db->select('*');
+            $this->db->from('cmd');
             $query = $this->db->get();
         
         // Organiser les résultats par fournisseur
@@ -47,10 +36,28 @@ class MD_ProformaFinal extends CI_Model {
         return $query->result();
     }
     public function getcmd2() {
-        $this->db->select('*');
-        $this->db->from('cmd');
-       $query = $this->db->get();
-      return $query->result();
+        $this->db->select(' f.id_fournisseur,a.id_article,
+        pf.id_final,
+        f.nom AS nom_fournisseur,
+        a.nom AS nom_article,
+        dp.date_actuel,
+        p.pu,
+        p.tva,
+        p.remise,
+        pf.qtt,
+        ((p.pu * pf.qtt * p.tva) / 100) AS ttl_tva,
+        ((p.pu * pf.qtt) + ((p.pu * pf.qtt * p.tva) / 100)) AS ttl_ttc');
+
+    $this->db->from('proforma_final pf');
+    $this->db->join('proforma p', 'pf.id_proforma = p.id_proforma');
+    $this->db->join('fournisseur f', 'f.id_fournisseur =  p.id_fournisseur');
+    $this->db->join('article a', 'a.id_article =  pf.id_article');
+    $this->db->join('demande_proforma dp', 'p.id_fournisseur = dp.id_fournisseur AND p.id_article = dp.id_article');
+    
+    $this->db->where('dp.etat', 6);
+
+    $query = $this->db->get();
+    return $query->result();
     }     
 
     public function somValeur ($id){

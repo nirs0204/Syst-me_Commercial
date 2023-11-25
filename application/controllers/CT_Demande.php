@@ -93,7 +93,7 @@ class CT_Demande extends CI_Controller {
     public function toImport(){
         $date_actuel = $this->input->get('date');
         if(isset($_FILES['file']) && $_FILES['file']['error'] == UPLOAD_ERR_OK) {
-            $upload_directory = 'D:/Etudes/Projet_Perso/SiK/S5/Mr-Tovo/UwAmp/www/Syst-me_Commercial/proforma/';
+            $upload_directory = 'C:/Syst-me_Commercial/proforma/';
             $file_name = basename($_FILES['file']['name']);
             $target_path = $upload_directory . $file_name;
             if(move_uploaded_file($_FILES['file']['tmp_name'], $target_path)) {
@@ -107,17 +107,17 @@ class CT_Demande extends CI_Controller {
         }
     }
     public function insertCSV($filename,$date) {
-        $file_path = 'D:/Etudes/Projet_Perso/SiK/S5/Mr-Tovo/UwAmp/www/Syst-me_Commercial/proforma/' . $filename;
+        $file_path = 'C:/Syst-me_Commercial/proforma/' . $filename;
         if (($handle = fopen($file_path, 'r')) !== FALSE) {
             while (($data = fgetcsv($handle, 1000, ',')) !== FALSE) {
                 $id_fournisseur = $data[0];
                 $id_article = $data[1];
-                $date_demande = $date;
-                $pu = $data[4];
-                $tva = $data[5];
-                $remise = $data[6];
-                $ttc = $data[7];
-                $stock = $data[8];
+                $date_demande = $data[2];
+                $pu = $data[3];
+                $tva = $data[4];
+                $remise = $data[5];
+                $ttc = $data[6];
+                $stock = $data[7];
                 $this->MD_Proforma->save($id_fournisseur, $id_article, $date_demande, $pu, $tva, $remise, $ttc, $stock);
             }
 

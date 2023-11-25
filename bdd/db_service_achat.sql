@@ -117,7 +117,6 @@ create table proforma (
     id_proforma serial primary key ,
     id_fournisseur int references fournisseur(id_fournisseur),
     id_article int references article(id_article),
-    date_demande date,
     date_proforma date,
     pu double precision,
     tva double precision,
@@ -139,7 +138,7 @@ create table proforma_final(
 
 create view cmd as (
 SELECT  pf.id_final,p.id_proforma,p.id_fournisseur ,p.id_article,
-        p.date_demande,p.date_proforma,f.nom AS nom_fournisseur,a.nom AS nom_article,
+        pf.date_demande,p.date_proforma,f.nom AS nom_fournisseur,a.nom AS nom_article,
         p.pu, p.tva, p.remise, pf.qtt, ((p.pu * pf.qtt * p.tva) /100 ) as ttl_tva,((p.pu * pf.qtt ) + ((p.pu * pf.qtt * p.tva) /100  ) -  ((p.pu * pf.qtt * p.remise) /100 ) ) as ttl_ttc ,
         dp.etat,dp.date_actuel
         FROM
