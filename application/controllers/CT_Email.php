@@ -20,7 +20,7 @@ class CT_Email extends CI_Controller {
         date_default_timezone_set('Indian/Antananarivo'); 
         // Configurer les paramètres d'upload
         $config['upload_path'] = 'D:\Etudes\Projet_Perso\SiK\S5\Mr-Tovo\UwAmp\www\Syst-me_Commercial\uploads';
-        $config['allowed_types'] = 'jpg';
+        $config['allowed_types'] = '*';
         $this->upload->initialize($config);
     
         // Vérifier si le fichier a été correctement téléchargé
@@ -32,8 +32,8 @@ class CT_Email extends CI_Controller {
             // $this->load->library('email');
     
             // Configurer les paramètres de l'email
-            $this->email->from('kotodevon@gmail.com', 'test24projetLol');
-            $this->email->to('ralambo20@gmail.com');
+            $this->email->from('kotodevon@gmail.com', 'Nosoloiko ilay teto fa lasa mot de passe anle compte');
+            $this->email->to('ralambo40@gmail.com');
             $this->email->subject('Sujet de l\'email');
             $this->email->message('Corps de l\'email.');
     
