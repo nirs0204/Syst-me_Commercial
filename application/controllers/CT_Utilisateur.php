@@ -66,7 +66,7 @@ class CT_Utilisateur extends CI_Controller {
     public function welcome(){
         $user = $_SESSION['user'];
         $data['user'] = $user;
-        $this->viewer('/index',$data);
+        $this->viewer('/formulaire_demande_besoinachat', $data);
     }
     //DECONNEXION
     public function deconnect()	{

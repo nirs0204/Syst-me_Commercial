@@ -109,7 +109,7 @@ INSERT INTO besoin_achat (id_employe, id_article, id_departement, quantite, rais
 VALUES
 (2, 1, 3, 10, 'Besoin pour le département IT', 1, '2023-12-01', 2),
 (3, 2, 2, 5, 'Besoin pour le département Finance', 1, '2023-11-24', 1),
-(3, 1, 2, 5, 'Besoin pour le département Finance', 1, '2023-11-24', 1),
+(3, 1, 2, 5, 'Besoin pour le département Finance', 3, '2023-11-24', 1),
 (4, 3, 4, 8, 'Besoin pour le département Marketing', 1, '2023-11-30', 3),
 (1, 4, 1, 3, 'Besoin pour le département HR', 1, '2023-12-10', 4);
 
