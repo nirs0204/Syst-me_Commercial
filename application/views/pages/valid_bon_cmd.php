@@ -30,7 +30,6 @@
                       <table class="table">
                         <thead>
                           <tr>
-                            <th>Date demande</th>
                             <th>Fournisseur</th>
                             <th>Article</th>
                             <th>Quantité</th>
