@@ -69,7 +69,8 @@ create table fournisseur (
     nom varchar(255),
     email varchar(255),
     contact varchar(255),
-    adresse varchar(255)    
+    adresse varchar(255),
+    mdp varchar(100)
 );
 
 -- etat : 

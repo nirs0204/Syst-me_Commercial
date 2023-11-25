@@ -41,10 +41,43 @@ class CT_Fournisseur extends CI_Controller {
         }  
 	}
     
-    public function index(){
-        // $this->load->view('fournisseur_form');
-        $this->viewer('fournisseur_form');
+    //VUE LOGIN
+	public function index(){
+        $data = array();
+        if($this->input->get('error') != null  )
+        {
+            $data['error'] = $this->input->get('error');
+        }
+		$this->load->view('login_frns',$data);
+	}	
+    //CONTROL LOGIN
+    public function tosignIn(){
+        $pseudo = $this->input->post('pseudo');
+        $mdp = $this->input->post('mdp');
+        $user = $this->MD_Fournisseur->verify($pseudo, $mdp);
+
+        echo $pseudo; echo '<br>'; echo $mdp;
+        echo $user['id_fournisseur'];
+        if ($user){
+            $this->session->set_userdata('user', $user);
+            redirect('CT_Fournisseur/welcome');
+            return;
+        }
+        else{
+            $data['error'] = 'pseudo ou mot de passe invalide';
+        }
+        redirect('CT_Fournisseur/index?error=' . urlencode($data['error']));
     }
-    
+    //ACCUEIL
+    public function welcome(){
+        $user = $_SESSION['user'];
+        $data['user'] = $user;
+        $this->viewer('/fournisseur_form', $data);
+    }
+    //DECONNEXION
+    public function deconnect()	{
+        $this->session->unset_userdata('user');
+        redirect('CT_Fournisseur/');
+    }
 
 }

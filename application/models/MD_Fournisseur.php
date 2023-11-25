@@ -62,6 +62,10 @@ class MD_Fournisseur extends CI_Model {
         $this->db->query($sql);
     }
 
-
+    function verify($nom, $mdp) {
+        $query = $this->db->get_where('fournisseur', array('nom' => $nom, 'mdp' => $mdp));
+        $client = $query->row_array();
+        return $client;
+    }
 }
 ?>
