@@ -393,3 +393,24 @@ GROUP BY id_fournisseur, nom_fournisseur,id_article,id_final, nom_article, pu, t
 --------------
 
 
+SELECT
+    pf.id_final,
+    p.id_proforma,
+    p.id_fournisseur,
+    p.id_article,
+    pf.date_demande,
+    p.date_proforma,
+    p.pu,
+    p.tva,
+    p.remise,
+    p.ttc,
+    p.stock,
+    dp.etat,
+    dp.quantite,
+    dp.date_actuel
+FROM
+    proforma_final pf
+JOIN proforma p ON pf.id_proforma = p.id_proforma
+JOIN demande_proforma dp ON p.id_fournisseur = dp.id_fournisseur AND p.id_article = dp.id_article
+WHERE
+    dp.etat = 6;
