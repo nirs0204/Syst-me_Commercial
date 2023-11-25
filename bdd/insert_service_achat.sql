@@ -75,33 +75,33 @@ INSERT INTO utilisateur (id_employe, pseudo, mdp) VALUES
 
 -- Insert fournisseur
 INSERT INTO fournisseur (id_categorie,nom, email, contact, adresse) VALUES
-(1,'FRNS A', 'supplierA@example.com', 'Supplier A Contact', '123 Supplier St'),
-(2,'FRNS B', 'supplierB@example.com', 'Supplier B Contact', '456 Supplier St'),
-(3,'FRNS C', 'supplierC@example.com', 'Supplier C Contact', '789 Supplier St'),
-(4,'FRNS D', 'supplierD@example.com', 'Supplier D Contact', '101 Supplier St'),
-(5,'FRNS E', 'supplierE@example.com', 'Supplier E Contact', '734 Supplier St'),
-(6,'FRNS F', 'supplierF@example.com', 'Supplier F Contact', '203 Supplier St'),
+(1,'FRNS A', 'supplierA@example.com', 'Supplier A Contact', '123 Supplier St', '123'),
+(2,'FRNS B', 'supplierB@example.com', 'Supplier B Contact', '456 Supplier St', '123'),
+(3,'FRNS C', 'supplierC@example.com', 'Supplier C Contact', '789 Supplier St', '123'),
+(4,'FRNS D', 'supplierD@example.com', 'Supplier D Contact', '101 Supplier St', '123'),
+(5,'FRNS E', 'supplierE@example.com', 'Supplier E Contact', '734 Supplier St', '123'),
+(6,'FRNS F', 'supplierF@example.com', 'Supplier F Contact', '203 Supplier St', '123'),
 
-(1, 'FRNS G', 'supplierG@example.com', 'Supplier G Contact', '456 Supplier St'),
-(2, 'FRNS H', 'supplierH@example.com', 'Supplier H Contact', '789 Supplier St'),
-(3, 'FRNS I', 'supplierI@example.com', 'Supplier I Contact', '101 Supplier St'),
-(4, 'FRNS J', 'supplierJ@example.com', 'Supplier J Contact', '222 Supplier St'),
-(5, 'FRNS K', 'supplierK@example.com', 'Supplier K Contact', '333 Supplier St'),
-(6, 'FRNS L', 'supplierL@example.com', 'Supplier L Contact', '444 Supplier St'),
+(1, 'FRNS G', 'supplierG@example.com', 'Supplier G Contact', '456 Supplier St', '123'),
+(2, 'FRNS H', 'supplierH@example.com', 'Supplier H Contact', '789 Supplier St', '123'),
+(3, 'FRNS I', 'supplierI@example.com', 'Supplier I Contact', '101 Supplier St', '123'),
+(4, 'FRNS J', 'supplierJ@example.com', 'Supplier J Contact', '222 Supplier St', '123'),
+(5, 'FRNS K', 'supplierK@example.com', 'Supplier K Contact', '333 Supplier St', '123'),
+(6, 'FRNS L', 'supplierL@example.com', 'Supplier L Contact', '444 Supplier St', '123'),
 
-(1, 'FRNS M', 'supplierM@example.com', 'Supplier M Contact', '555 Supplier St'),
-(2, 'FRNS N', 'supplierN@example.com', 'Supplier N Contact', '666 Supplier St'),
-(3, 'FRNS O', 'supplierO@example.com', 'Supplier O Contact', '777 Supplier St'),
-(4, 'FRNS P', 'supplierP@example.com', 'Supplier P Contact', '888 Supplier St'),
-(5, 'FRNS Q', 'supplierQ@example.com', 'Supplier Q Contact', '999 Supplier St'),
-(6, 'FRNS R', 'supplierR@example.com', 'Supplier R Contact', '123 Supplier St'),
+(1, 'FRNS M', 'supplierM@example.com', 'Supplier M Contact', '555 Supplier St', '123'),
+(2, 'FRNS N', 'supplierN@example.com', 'Supplier N Contact', '666 Supplier St', '123'),
+(3, 'FRNS O', 'supplierO@example.com', 'Supplier O Contact', '777 Supplier St', '123'),
+(4, 'FRNS P', 'supplierP@example.com', 'Supplier P Contact', '888 Supplier St', '123'),
+(5, 'FRNS Q', 'supplierQ@example.com', 'Supplier Q Contact', '999 Supplier St', '123'),
+(6, 'FRNS R', 'supplierR@example.com', 'Supplier R Contact', '123 Supplier St', '123'),
 
-(1, 'FRNS S', 'supplierS@example.com', 'Supplier S Contact', '456 Supplier St'),
-(2, 'FRNS T', 'supplierT@example.com', 'Supplier T Contact', '789 Supplier St'),
-(3, 'FRNS U', 'supplierU@example.com', 'Supplier U Contact', '101 Supplier St'),
-(4, 'FRNS V', 'supplierV@example.com', 'Supplier V Contact', '222 Supplier St'),
-(5, 'FRNS W', 'supplierW@example.com', 'Supplier W Contact', '333 Supplier St'),
-(5, 'FRNS Z', 'supplierZ@example.com', 'Supplier Z Contact', '333 Supplier St');
+(1, 'FRNS S', 'supplierS@example.com', 'Supplier S Contact', '456 Supplier St', '123'),
+(2, 'FRNS T', 'supplierT@example.com', 'Supplier T Contact', '789 Supplier St', '123'),
+(3, 'FRNS U', 'supplierU@example.com', 'Supplier U Contact', '101 Supplier St', '123'),
+(4, 'FRNS V', 'supplierV@example.com', 'Supplier V Contact', '222 Supplier St', '123'),
+(5, 'FRNS W', 'supplierW@example.com', 'Supplier W Contact', '333 Supplier St', '123'),
+(5, 'FRNS Z', 'supplierZ@example.com', 'Supplier Z Contact', '333 Supplier St', '123');
 
 
 -- Insert besoin_achat ::: 1 ATTENTE , 3 APPROUVES , 5 REJETES , 
