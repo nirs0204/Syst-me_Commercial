@@ -8,7 +8,8 @@ class CT_FormCsv extends CI_Controller {
 
     public function __construct() {        
         parent::__construct();
-        $this->load->library('phpspreadsheet');
+        //$this->load->library('PhpSpreadsheet');
+        //require_once APPPATH . 'third_party/PhpSpreadsheet/autoload.php';
     }
 
     public function index() {
