@@ -18,16 +18,16 @@ class CT_Fournisseur extends CI_Controller {
     }
     private function viewer($page, $data){
         if(isset($_SESSION['user'])){
-            $userId = $_SESSION['user']['id_employe'];
-            $tab = $this->MD_Employe->get_admin(  $_SESSION['user']['id_employe']);
-            $dept = $this->MD_Utilisateur->getAll_ByUser($_SESSION['user']['id_utilisateur']);
+            $userId = $_SESSION['user']['id_fournisseur'];
+            $tab = $this->MD_Employe->get_admin($_SESSION['user']['id_fournisseur']);
+            $dept = $this->MD_Utilisateur->getAll_ByUser($_SESSION['user']['id_fournisseur']);
             $v = array(
                 'page' => $page,
                 'data' => $data
             );
-            $v['finance'] = $dept->id_poste;
+            //$v['finance'] = $dept->id_poste;
             $v['notify'] =  $this->MD_BesoinAchatFinal->notify_Shop(3);
-            $v['notifyr'] =  $this->MD_BesoinAchatFinal->notify_Resp(1,$dept->id_departement);
+            //$v['notifyr'] =  $this->MD_BesoinAchatFinal->notify_Resp(1,$dept->id_departement);
             $v['isAllDirector']=$tab[0];
             $v['isShopDirector']=$tab[1];
             $this->load->view('template/basepage', $v);

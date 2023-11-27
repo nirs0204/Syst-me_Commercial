@@ -74,7 +74,7 @@ INSERT INTO utilisateur (id_employe, pseudo, mdp) VALUES
 (6, 'fnicolas', '204');
 
 -- Insert fournisseur
-INSERT INTO fournisseur (id_categorie,nom, email, contact, adresse) VALUES
+INSERT INTO fournisseur (id_categorie,nom, email, contact, adresse, mdp) VALUES
 (1,'FRNS A', 'supplierA@example.com', 'Supplier A Contact', '123 Supplier St', '123'),
 (2,'FRNS B', 'supplierB@example.com', 'Supplier B Contact', '456 Supplier St', '123'),
 (3,'FRNS C', 'supplierC@example.com', 'Supplier C Contact', '789 Supplier St', '123'),
