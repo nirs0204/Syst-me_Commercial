@@ -14,7 +14,7 @@ if(!isset($fournisseurList)) $fournisseurList = array();?>
                   <p class="card-description">
                     Horizontal form layout
                   </p>
-                  <form class="forms-sample" method="post" action="<?php echo site_url('CT_FormCsv/save'); ?>">
+                  <form class="forms-sample" method="post" action="<?php echo site_url('CT_FormCsv/pass'); ?>">
                     <div class="form-group row">
                       <label for="exampleFormControlSelect1" class="col-sm-3 col-form-label">Fournisseur</label>
                     </div>
@@ -79,7 +79,24 @@ if(!isset($fournisseurList)) $fournisseurList = array();?>
                         <input type="text" name="email_sd" class="form-control" id="exampleInputMobile" placeholder="mail">
                       </div>
                     </div>
-
+                    <div class="form-group row">
+                      <label for="exampleInputMobile" class="col-sm-3 col-form-label">Description</label>
+                      <div class="col-sm-9">
+                        <input type="text" name="description" class="form-control" id="exampleInputMobile" placeholder="description">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="exampleInputMobile" class="col-sm-3 col-form-label">Quantite</label>
+                      <div class="col-sm-9">
+                        <input type="number" name="quantite" class="form-control" id="exampleInputMobile" placeholder="quantite">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="exampleInputMobile" class="col-sm-3 col-form-label">Prix umitaire</label>
+                      <div class="col-sm-9">
+                        <input type="number" name="prix_unitaire" class="form-control" id="exampleInputMobile" placeholder="prix_unitaire">
+                      </div>
+                    </div>
                     <button type="submit" class="btn btn-primary mr-2">Submit</button>
                   </form>
                 </div>

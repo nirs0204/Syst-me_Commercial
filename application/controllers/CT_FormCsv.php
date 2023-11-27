@@ -12,21 +12,20 @@ class CT_FormCsv extends CI_Controller {
         //require_once APPPATH . 'third_party/PhpSpreadsheet/autoload.php';
     }
 
-    
     private function viewer($page, $data){
         if(isset($_SESSION['user'])){
             $userId = $_SESSION['user']['id_fournisseur'];
-            $tab = $this->MD_Employe->get_admin($_SESSION['user']['id_fournisseur']);
-            $dept = $this->MD_Utilisateur->getAll_ByUser($_SESSION['user']['id_fournisseur']);
+            //$tab = $this->MD_Employe->get_admin($_SESSION['user']['id_fournisseur']);
+           // $dept = $this->MD_Utilisateur->getAll_ByUser($_SESSION['user']['id_fournisseur']);
             $v = array(
                 'page' => $page,
                 'data' => $data
             );
             //$v['finance'] = $dept->id_poste;
-            $v['notify'] =  $this->MD_BesoinAchatFinal->notify_Shop(3);
+           // $v['notify'] =  $this->MD_BesoinAchatFinal->notify_Shop(3);
             //$v['notifyr'] =  $this->MD_BesoinAchatFinal->notify_Resp(1,$dept->id_departement);
-            $v['isAllDirector']=$tab[0];
-            $v['isShopDirector']=$tab[1];
+            //$v['isAllDirector']=$tab[0];
+            //$v['isShopDirector']=$tab[1];
             $this->load->view('template/basepage', $v);
 
         }else{
@@ -40,7 +39,25 @@ class CT_FormCsv extends CI_Controller {
 
 
     public function index() {
-        $this->viewer('/creationProforma', 0);
+        $this->load->view('pages/creationProforma');
+    }
+
+    public function pass() {
+        $data['nom_societe']= $this->input->post('nom_societe');
+        $data['adresse_societe']= $this->input->post('adresse_societe');
+        $data['telephone']= $this->input->post('telephone');
+        $data['mail']= $this->input->post('mail');
+        $data['ref_proforma']= $this->input->post('ref_proforma');
+        $data['date_proforma']= $this->input->post('date_proforma');
+        $data['nom_societe_demandeur']= $this->input->post('nom_societe_demandeur');
+        $data['adresse_sd']= $this->input->post('adresse_sd');
+        $data['telephone_sd']= $this->input->post('telephone_sd');
+        $data['email_sd']= $this->input->post('email_sd');
+        $data['description']= $this->input->post('description');
+        $data['quantite']= $this->input->post('quantite');
+        $data['prix_unitaire']= $this->input->post('prix_unitaire');
+        $this->viewer('/set_pdf_proforma', $data);
+
     }
 
     public function save() {
