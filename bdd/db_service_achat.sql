@@ -118,6 +118,7 @@ create table proforma (
     id_proforma serial primary key ,
     id_fournisseur int references fournisseur(id_fournisseur),
     id_article int references article(id_article),
+    date_demande date,
     date_proforma date,
     pu double precision,
     tva double precision,

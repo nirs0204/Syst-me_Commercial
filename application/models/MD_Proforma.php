@@ -3,9 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MD_Proforma extends CI_Model {
     // CREATE
-    function save($id_fournisseur,$id_article,$dd,$pu,$tva,$remise, $ttc,$stock ) {
-        $sql = "insert into proforma(id_fournisseur, id_article,date_proforma,pu, tva, remise, ttc,stock)  values ( %s, %s, %s, %s, %s,%s, %s,%s) ";
-        $sql = sprintf($sql,$this->db->escape($id_fournisseur),$this->db->escape($id_article),$this->db->escape($dd),$this->db->escape($pu),$this->db->escape($tva),$this->db->escape($remise), $this->db->escape($ttc),$this->db->escape($stock));
+    function save($id_fournisseur,$id_article,$dd,$dp,$pu,$tva,$remise, $ttc,$stock ) {
+        $sql = "insert into proforma(id_fournisseur, id_article,date_demande,date_proforma,pu, tva, remise, ttc,stock)  values ( %s, %s, %s,%s, %s, %s,%s, %s,%s) ";
+        $sql = sprintf($sql,$this->db->escape($id_fournisseur),$this->db->escape($id_article),$this->db->escape($dd),$this->db->escape($dp),$this->db->escape($pu),$this->db->escape($tva),$this->db->escape($remise), $this->db->escape($ttc),$this->db->escape($stock));
         $this->db->query($sql);
         echo $this->db->last_query();
 
@@ -42,6 +42,7 @@ class MD_Proforma extends CI_Model {
         $this->db->select('*');
         $this->db->from('proforma p');
         $this->db->where('p.id_article', $artcile);
+        $this->db->where('p.date_demande', $date);
         $this->db->order_by('p.ttc', 'ASC');
         $query = $this->db->get();
         return $query->result();

@@ -118,7 +118,7 @@ class CT_Demande extends CI_Controller {
                 $remise = $data[5];
                 $ttc = $data[6];
                 $stock = $data[7];
-                $this->MD_Proforma->save($id_fournisseur, $id_article, $date_demande, $pu, $tva, $remise, $ttc, $stock);
+                $this->MD_Proforma->save($id_fournisseur, $id_article,$date, $date_demande, $pu, $tva, $remise, $ttc, $stock);
             }
 
             fclose($handle);
