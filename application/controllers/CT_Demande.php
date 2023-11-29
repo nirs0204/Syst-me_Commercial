@@ -14,6 +14,10 @@ class CT_Demande extends CI_Controller {
         $this->load->model('MD_Utilisateur');
         $this->load->model('MD_Article');
         $this->load->library('session');
+        if($this->session->userdata('user') === null) 
+		{
+			redirect('CT_Utilisateur/index?error=' . urlencode('Vous n`êtes pas connectée!'));
+		}
 
     }
     private function viewer($page, $data){

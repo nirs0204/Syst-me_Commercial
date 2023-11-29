@@ -13,6 +13,10 @@ class CT_Valid_cmd extends CI_Controller {
         $this->load->model('MD_BesoinAchatFinal');
         $this->load->model('MD_Demande_proforma');
         $this->load->library('session');
+        if($this->session->userdata('user') === null) 
+		{
+			redirect('CT_Utilisateur/index?error=' . urlencode('Vous n`êtes pas connectée!'));
+		}
 
     }
 	private function viewer($page, $data){

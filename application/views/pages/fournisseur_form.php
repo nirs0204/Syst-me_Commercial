@@ -14,6 +14,17 @@ if(!isset($fournisseurList)) $fournisseurList = array();?>
                   <p class="card-description">
                     Email de <code>.proforma</code>
                   </p>
+
+                  <?php if(isset($success)){ ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong> <?php echo $success ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+              <?php } ?>
+
+              
                   <?php echo form_open_multipart('CT_Fournisseur/upload_fichier'); ?>
                   
                   <div class="form-group row">

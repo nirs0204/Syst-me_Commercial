@@ -12,6 +12,10 @@ class CT_BesoinAchatFinal extends CI_Controller {
         $this->load->model('MD_Utilisateur');
         $this->load->model('MD_Fournisseur');
         $this->load->library('session');
+        if($this->session->userdata('user') === null) 
+		{
+			redirect('CT_Utilisateur/index?error=' . urlencode('Vous n`êtes pas connectée!'));
+		}
     }
 	private function viewer($page, $data){
         if(isset($_SESSION['user'])){

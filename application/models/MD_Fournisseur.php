@@ -48,11 +48,12 @@ class MD_Fournisseur extends CI_Model {
         $query = $this->db->get();
         return $query->result();
     }
-    function getDemande($state){
+    function getDemande($state,$id){
         $this->db->select('dp.id_article, a.nom, dp.quantite, dp.date_actuel');
         $this->db->from('demande_proforma dp');
         $this->db->join('article a', 'a.id_article = dp.id_article');
         $this->db->where('dp.etat', $state);
+        $this->db->where('dp.id_fournisseur', $id);
         $this->db->group_by('dp.id_article, a.nom, dp.quantite, dp.date_actuel');
         $query = $this->db->get();
         return $query->result();
