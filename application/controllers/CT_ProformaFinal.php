@@ -12,7 +12,10 @@ class CT_ProformaFinal extends CI_Controller {
         $this->load->model('MD_Utilisateur');
         $this->load->model('MD_BesoinAchatFinal');
         $this->load->library('session');
-        
+        if($this->session->userdata('user') === null) 
+		{
+			redirect('CT_Utilisateur/index?error=' . urlencode('Vous n`êtes pas connectée!'));
+		}
     }
     private function viewer($page, $data){
         if(isset($_SESSION['user'])){

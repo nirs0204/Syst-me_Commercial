@@ -414,3 +414,11 @@ JOIN proforma p ON pf.id_proforma = p.id_proforma
 JOIN demande_proforma dp ON p.id_fournisseur = dp.id_fournisseur AND p.id_article = dp.id_article
 WHERE
     dp.etat = 6;
+
+-----------------------
+
+SELECT dp.id_article,a.nom,dp.quantite,dp.date_actuel 
+FROM demande_proforma dp
+JOIN article a ON a.id_article = dp.id_article
+WHERE etat=0
+GROUP BY dp.id_article,a.nom,dp.quantite,dp.date_actuel ;

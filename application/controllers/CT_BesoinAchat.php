@@ -15,6 +15,10 @@
             $this->load->model('MD_Departement');
             $this->load->model('MD_Demande_proforma');
             $this->load->model('MD_Utilisateur');
+            if($this->session->userdata('user') === null) 
+            {
+                redirect('CT_Utilisateur/index?error=' . urlencode('Vous n`êtes pas connectée!'));
+            }
             
         }
         private function viewer($page, $data){

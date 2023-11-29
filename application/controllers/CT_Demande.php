@@ -14,6 +14,10 @@ class CT_Demande extends CI_Controller {
         $this->load->model('MD_Utilisateur');
         $this->load->model('MD_Article');
         $this->load->library('session');
+        if($this->session->userdata('user') === null) 
+		{
+			redirect('CT_Utilisateur/index?error=' . urlencode('Vous n`êtes pas connectée!'));
+		}
 
     }
     private function viewer($page, $data){
@@ -118,7 +122,7 @@ class CT_Demande extends CI_Controller {
                 $remise = $data[5];
                 $ttc = $data[6];
                 $stock = $data[7];
-                $this->MD_Proforma->save($id_fournisseur, $id_article, $date_demande, $pu, $tva, $remise, $ttc, $stock);
+                $this->MD_Proforma->save($id_fournisseur, $id_article,$date, $date_demande, $pu, $tva, $remise, $ttc, $stock);
             }
 
             fclose($handle);

@@ -9,6 +9,7 @@ class CT_Utilisateur extends CI_Controller {
         $this->load->model('MD_Employe');
         $this->load->model('MD_BesoinAchatFinal');
         $this->load->library('session');
+        
 
     }
 	private function viewer($page, $data){
