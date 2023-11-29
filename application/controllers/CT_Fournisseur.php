@@ -15,6 +15,11 @@ class CT_Fournisseur extends CI_Controller {
         $this->load->model('MD_Article');
         $this->load->library('session');
 
+        $this->load->helper('form');
+        $this->load->helper('email');
+        $this->load->library('upload');
+        $this->load->library('email');
+
     }
     private function viewer($page, $data){
         if(isset($_SESSION['user'])){
@@ -30,7 +35,7 @@ class CT_Fournisseur extends CI_Controller {
             //$v['notifyr'] =  $this->MD_BesoinAchatFinal->notify_Resp(1,$dept->id_departement);
             $v['isAllDirector']=$tab[0];
             $v['isShopDirector']=$tab[1];
-            $this->load->view('template/basepage', $v);
+            $this->load->view('template/basepage_frns', $v);
 
         }else{
             $v = array(
@@ -74,10 +79,53 @@ class CT_Fournisseur extends CI_Controller {
         $data['user'] = $user;
         $this->viewer('/fournisseur_form', $data);
     }
+    public function demande(){
+        $user = $_SESSION['user'];
+        $data['user'] = $user;
+        $data['demande'] = $this->MD_Fournisseur->getDemande(0);
+        $this->viewer('/demande', $data);
+    }
     //DECONNEXION
     public function deconnect()	{
         $this->session->unset_userdata('user');
         redirect('CT_Fournisseur/');
+    }
+    //
+    
+    public function upload_fichier() {
+        date_default_timezone_set('Indian/Antananarivo'); 
+        // Configurer les paramètres d'upload
+        $config['upload_path'] = 'C:\Syst-me_Commercial\uploads';
+        $config['allowed_types'] = '*';
+        $this->upload->initialize($config);
+    
+        // Vérifier si le fichier a été correctement téléchargé
+        if ($this->upload->do_upload('fichier')) {
+            // Récupérer les informations sur le fichier téléchargé
+            $fichier_info = $this->upload->data();
+    
+            // Charger la bibliothèque d'email ici si ce n'est pas déjà fait dans le constructeur
+            // $this->load->library('email');
+    
+            // Configurer les paramètres de l'email
+            $this->email->from('kotodevon@gmail.com', 'Proforma de Fournisseurssss');
+            $this->email->to('ravmihary@gmail.com');
+            $this->email->subject($_POST['titre']);
+            $this->email->message($_POST['objet']);
+    
+            // Joindre le fichier
+            $this->email->attach($fichier_info['full_path']);
+    
+            // Envoyer l'email
+            if ($this->email->send()) {
+                echo 'Email envoyé avec succès avec le fichier joint.';
+            } else {
+                show_error($this->email->print_debugger());
+            }
+        } else {
+            // Afficher les erreurs d'upload s'il y en a
+            echo $this->upload->display_errors();
+        }
     }
 
 }
