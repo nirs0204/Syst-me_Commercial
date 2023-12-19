@@ -93,7 +93,7 @@ class CT_Fournisseur extends CI_Controller {
     public function upload_fichier() {
         date_default_timezone_set('Indian/Antananarivo'); 
         // Configurer les paramètres d'upload
-        $config['upload_path'] = 'C:\Syst-me_Commercial\uploads';
+        $config['upload_path'] = 'D:\Etudes\Projet_Perso\SiK\S5\Mr-Tovo\UwAmp\www\Syst-me_Commercial\uploads';
         $config['allowed_types'] = '*';
         $this->upload->initialize($config);
     
@@ -107,7 +107,7 @@ class CT_Fournisseur extends CI_Controller {
     
             // Configurer les paramètres de l'email
             $this->email->from('kotodevon@gmail.com', 'Proforma de Fournisseurssss');
-            $this->email->to('ravmihary@gmail.com');
+            $this->email->to('ralambo20@gmail.com');
             $this->email->subject($_POST['titre']);
             $this->email->message($_POST['objet']);
     
